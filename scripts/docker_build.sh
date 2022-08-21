@@ -1,0 +1,1 @@
+docker build -t Beneficiaries:latest -f MamisSolidarias.WebAPI.Beneficiaries/Dockerfile .
