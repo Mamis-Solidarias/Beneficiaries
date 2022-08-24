@@ -7,17 +7,19 @@ namespace MamisSolidarias.WebAPI.Beneficiaries.Utils;
 
 internal static class DataFactory
 {
-    private static readonly Faker<User> UserGenerator = new Faker<User>()
-        .RuleFor(t => t.Id, f => f.Random.Int())
-        .RuleFor(t => t.Name, f => f.Name.FindName());
+    private static readonly Faker<Community> UserGenerator = new Faker<Community>()
+        .RuleFor(t=> t.Address, f=> f.Address.FullAddress())
+        .RuleFor(t => t.Name, f => f.Address.City())
+        .RuleFor(t => t.Id, f => f.Random.AlphaNumeric(4))
+        ;
     
-    public static User GetUser()
+    public static Community GetCommunity()
     {
         return UserGenerator.Generate();
     }
 
-    public static IEnumerable<User> GetUsers(int n)
+    public static IEnumerable<Community> GetCommunities(int n)
     {
-        return Enumerable.Range(0, n).Select(_ => GetUser());
+        return Enumerable.Range(0, n).Select(_ => GetCommunity());
     }
 }

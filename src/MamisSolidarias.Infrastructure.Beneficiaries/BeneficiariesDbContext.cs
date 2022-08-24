@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MamisSolidarias.Infrastructure.Beneficiaries;
 
-public class BeneficiariesDbContext: DbContext
+internal class BeneficiariesDbContext: DbContext
 {
-    public DbSet<User> Users { get; set; }
+    public DbSet<Community> Communities { get; set; }
     public BeneficiariesDbContext(DbContextOptions<BeneficiariesDbContext> options) : base(options)
     {
     }
@@ -13,14 +13,19 @@ public class BeneficiariesDbContext: DbContext
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<User>(
+        modelBuilder.Entity<Community>(
             model =>
             {
                 model.HasKey(t => t.Id);
-                model.Property(t => t.Id).ValueGeneratedOnAdd();
+                model.Property(t => t.Id).HasValueGenerator<CommunityIdGenerator>();
                 model.Property(t => t.Name)
                     .IsRequired()
                     .HasMaxLength(500);
+                model.Property(t => t.Address)
+                    .IsRequired()
+                    .HasMaxLength(500);
+                model.Property(t => t.Description)
+                    .HasMaxLength(1000);
 
             }
         );

@@ -2,6 +2,7 @@ using FastEndpoints;
 using FastEndpoints.Security;
 using FastEndpoints.Swagger;
 using MamisSolidarias.Infrastructure.Beneficiaries;
+using MamisSolidarias.Utils.Security;
 using Microsoft.EntityFrameworkCore;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
@@ -39,6 +40,11 @@ internal static class ServiceRegistrator
         });        
         builder.Services.AddFastEndpoints();
         builder.Services.AddAuthenticationJWTBearer(builder.Configuration["JWT:Key"]);
+        builder.Services.AddAuthorization(t =>
+        {
+           t.ConfigurePolicies(Services.Beneficiaries);
+        });
+        
         builder.Services.AddDbContext<BeneficiariesDbContext>(
             t => 
                 t.UseNpgsql(connectionString, r=> r.MigrationsAssembly("MamisSolidarias.WebAPI.Beneficiaries"))
