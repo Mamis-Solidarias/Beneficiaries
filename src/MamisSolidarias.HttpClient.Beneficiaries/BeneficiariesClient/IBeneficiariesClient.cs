@@ -13,4 +13,13 @@ public interface IBeneficiariesClient
         CreateCommunities(MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.POST.Request request,
             CancellationToken token
         );
+
+    /// <summary>
+    /// It retrieves all the communities generated
+    /// </summary>
+    /// <param name="token">Cancellation token/param>
+    /// <returns>List of communities</returns>
+    Task<MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.GET.Response?>
+        GetCommunities(CancellationToken token
+        );
 }
