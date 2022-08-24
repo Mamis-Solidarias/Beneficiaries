@@ -8,9 +8,9 @@ namespace MamisSolidarias.WebAPI.Beneficiaries.Utils;
 internal static class DataFactory
 {
     private static readonly Faker<Community> UserGenerator = new Faker<Community>()
-        .RuleFor(t=> t.Address, f=> f.Address.Direction())
+        .RuleFor(t=> t.Address, f=> f.Address.FullAddress())
         .RuleFor(t => t.Name, f => f.Address.City())
-        .RuleFor(t => t.Id, (_,w) => w.Name[..2])
+        .RuleFor(t => t.Id, f => f.Random.AlphaNumeric(4))
         ;
     
     public static Community GetCommunity()

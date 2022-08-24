@@ -43,6 +43,7 @@ internal class Communities_Post
     {
         // Arrange
         var communities = DataFactory.GetCommunities(3).ToArray();
+        _dbContext.ChangeTracker.Clear();
         
         // Act
         await _dbAccess.CreateCommunities(communities, default);
