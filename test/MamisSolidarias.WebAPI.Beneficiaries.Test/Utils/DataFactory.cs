@@ -1,25 +1,32 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Bogus;
+using MamisSolidarias.Infrastructure.Beneficiaries;
 using MamisSolidarias.Infrastructure.Beneficiaries.Models;
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.Utils;
 
-internal static class DataFactory
+internal class DataFactory : IDisposable
 {
-    private static readonly Faker<Community> UserGenerator = new Faker<Community>()
-        .RuleFor(t=> t.Address, f=> f.Address.FullAddress())
-        .RuleFor(t => t.Name, f => f.Address.City())
-        .RuleFor(t => t.Id, f => f.Random.AlphaNumeric(4))
-        ;
-    
-    public static Community GetCommunity()
+    private readonly BeneficiariesDbContext? _dbContext;
+    public DataFactory(BeneficiariesDbContext? dbContext)
     {
-        return UserGenerator.Generate();
+        _dbContext = dbContext;
     }
+    
+    public CommunityBuilder GenerateCommunity() => new (_dbContext);
+    public CommunityBuilder GetCommunity() => new ();
 
-    public static IEnumerable<Community> GetCommunities(int n)
+    
+    public IEnumerable<CommunityBuilder> GenerateCommunities(int n)
+    =>  Enumerable.Range(0, n).Select(_ => GenerateCommunity());
+
+
+    public IEnumerable<CommunityBuilder> GetCommunities(int n) => Enumerable.Range(0, n).Select(_ => GetCommunity());
+
+    public void Dispose()
     {
-        return Enumerable.Range(0, n).Select(_ => GetCommunity());
+        _dbContext?.Dispose();
     }
 }
