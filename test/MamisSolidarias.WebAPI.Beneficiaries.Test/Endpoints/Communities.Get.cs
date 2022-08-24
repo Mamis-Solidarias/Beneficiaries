@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Threading.Tasks.Dataflow;
 using FluentAssertions;
 using MamisSolidarias.Infrastructure.Beneficiaries.Models;
 using MamisSolidarias.Utils.Test;
@@ -13,7 +12,7 @@ using NUnit.Framework;
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints;
 
-internal class Communities_Get
+internal class CommunitiesGet
 {
     private Endpoint _endpoint = null!;
     private readonly Mock<Communities.GET.DbAccess> _mockDbAccess = new();

@@ -10,7 +10,7 @@ using NUnit.Framework;
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.DbAccess;
 
-internal class Communities_Post
+internal class CommunitiesPost
 {
     
     private const string InMemoryConnectionString = "DataSource=:memory:";
@@ -62,7 +62,7 @@ internal class Communities_Post
                         t.Address == community.Address &&
                         t.Description == community.Description &&
                         t.Name == community.Name
-                    , default);
+                    );
             res.Should().NotBeNull();
         }
     }
@@ -72,7 +72,7 @@ internal class Communities_Post
     {
         // Arrange
         var communities = _dataFactory.GetCommunities(3)
-            .Select((t,i)=> t.WithId(null).Build())
+            .Select(t=> t.WithId(null).Build())
             .ToArray();
 
         
@@ -89,7 +89,7 @@ internal class Communities_Post
                         t.Address == community.Address &&
                         t.Description == community.Description &&
                         t.Name == community.Name
-                    , default);
+                    );
             res.Should().NotBeNull();
         }
     }

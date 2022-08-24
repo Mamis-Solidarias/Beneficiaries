@@ -3,17 +3,15 @@ using FluentAssertions;
 using MamisSolidarias.Infrastructure.Beneficiaries;
 using MamisSolidarias.Infrastructure.Beneficiaries.Models;
 using MamisSolidarias.WebAPI.Beneficiaries.Utils;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
-using Moq;
 using NUnit.Framework;
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.DbAccess;
 
-internal class Communities_Id_Get
+internal class CommunitiesIdGet
 {
-    private Endpoints.Communities.Id.GET.DbAccess _dbAccess = null;
+    private Endpoints.Communities.Id.GET.DbAccess _dbAccess = null!;
     private const string InMemoryConnectionString = "DataSource=:memory:";
     private BeneficiariesDbContext _dbContext = null!;
     private DataFactory _dataFactory = null!;

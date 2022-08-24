@@ -1,4 +1,3 @@
-using MamisSolidarias.HttpClient.Beneficiaries.Models;
 using MamisSolidarias.HttpClient.Beneficiaries.Services;
 using MamisSolidarias.Utils.Http;
 using Microsoft.AspNetCore.Http;

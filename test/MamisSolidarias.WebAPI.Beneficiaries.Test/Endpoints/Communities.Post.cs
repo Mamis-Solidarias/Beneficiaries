@@ -13,7 +13,7 @@ using NUnit.Framework;
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints;
 
-internal class Communities_Post
+internal class CommunitiesPost
 {
     private Endpoint _endpoint = null!;
     private DataFactory _dataFactory = new(null);
@@ -106,7 +106,6 @@ internal class Communities_Post
         
         // Act
         await _endpoint.HandleAsync(request,default);
-        var response = _endpoint.Response;
         
         // Assert
         _endpoint.HttpContext.Response.StatusCode.Should().Be(409);

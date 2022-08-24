@@ -11,7 +11,7 @@ internal class Description : Summary<Endpoint>
         {
             Id = "MI"
         };
-        Response<Response>(200);
+        Response<Response>();
         Response(401, "The user is not authenticated");
         Response(403, "The user does not have the necessary permissions");
         Response(404,"The community does not exist");
