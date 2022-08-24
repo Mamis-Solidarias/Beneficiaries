@@ -1,6 +1,6 @@
 namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.POST;
 
-internal class Response
+public class Response
 {
     /// <summary>
     /// Set of the IDs of the created communities
