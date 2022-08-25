@@ -1,7 +1,6 @@
 using FastEndpoints;
 using MamisSolidarias.Infrastructure.Beneficiaries;
 using MamisSolidarias.Infrastructure.Beneficiaries.Models;
-using MamisSolidarias.Utils.Security;
 using Microsoft.EntityFrameworkCore;
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.POST;
