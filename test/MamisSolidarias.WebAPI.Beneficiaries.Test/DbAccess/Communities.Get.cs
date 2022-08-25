@@ -9,7 +9,7 @@ using NUnit.Framework;
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.DbAccess;
 
-internal class Communities_Get
+internal class CommunitiesGet
 {
     private const string InMemoryConnectionString = "DataSource=:memory:";
     

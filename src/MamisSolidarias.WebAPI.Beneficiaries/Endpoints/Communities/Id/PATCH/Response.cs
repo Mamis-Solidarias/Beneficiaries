@@ -1,4 +1,4 @@
-namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.GET;
+namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.PATCH;
 
 /// <summary>
 /// 

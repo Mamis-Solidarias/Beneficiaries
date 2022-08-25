@@ -1,13 +1,12 @@
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.ValueGeneration;
-using Npgsql;
 
 namespace MamisSolidarias.Infrastructure.Beneficiaries.Models;
 
 internal class Community
 {
-    public string Name { get; set; }
-    public string Address { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public string Address { get; set; } = string.Empty;
     public string? Description { get; set; }
     public string? Id { get; set; }
 }

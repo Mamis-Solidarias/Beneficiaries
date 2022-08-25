@@ -6,7 +6,9 @@ namespace MamisSolidarias.Infrastructure.Beneficiaries;
 internal class BeneficiariesDbContext: DbContext
 {
     public DbSet<Community> Communities { get; set; }
+#pragma warning disable CS8618
     public BeneficiariesDbContext(DbContextOptions<BeneficiariesDbContext> options) : base(options)
+#pragma warning restore CS8618
     {
     }
     

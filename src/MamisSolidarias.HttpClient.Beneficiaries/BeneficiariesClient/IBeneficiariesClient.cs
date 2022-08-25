@@ -33,4 +33,10 @@ public interface IBeneficiariesClient
         GetCommunity(MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.GET.Request request,
             CancellationToken token
         );
+
+    Task<MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.PATCH.Response?>
+        UpdateCommunity(
+            MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.PATCH.Request request,
+            CancellationToken token
+        );
 }

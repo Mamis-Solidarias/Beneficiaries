@@ -24,6 +24,7 @@ internal static class ServiceRegistrator
         {
             tracerProviderBuilder
                 .AddConsoleExporter()
+                .AddJaegerExporter()
                 // .AddOtlpExporter(opt =>
                 // {
                 //     opt.Endpoint = new Uri("https://otlp.nr-data.net");
@@ -35,8 +36,8 @@ internal static class ServiceRegistrator
                     ResourceBuilder.CreateDefault()
                         .AddService(serviceName: builder.Configuration["Service:Name"], serviceVersion: builder.Configuration["Service:Version"]))
                 .AddHttpClientInstrumentation()
-                .AddAspNetCoreInstrumentation()
-                .AddEntityFrameworkCoreInstrumentation();
+                .AddAspNetCoreInstrumentation(t=> t.RecordException = true)
+                .AddEntityFrameworkCoreInstrumentation(t=> t.SetDbStatementForText = true);
         });        
         builder.Services.AddFastEndpoints();
         builder.Services.AddAuthenticationJWTBearer(builder.Configuration["JWT:Key"]);

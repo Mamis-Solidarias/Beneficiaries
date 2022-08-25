@@ -1,6 +1,5 @@
 using System.Threading;
 using System.Threading.Tasks;
-using Castle.Components.DictionaryAdapter.Xml;
 using FluentAssertions;
 using MamisSolidarias.Infrastructure.Beneficiaries.Models;
 using MamisSolidarias.Utils.Test;
@@ -11,7 +10,7 @@ using NUnit.Framework;
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints;
 
-internal class Communities_Id_Get
+internal class CommunitiesIdGet
 {
     private Endpoint _endpoint = null!;
     private readonly Mock<Communities.Id.GET.DbAccess> _mockDbAccess = new();
@@ -37,7 +36,7 @@ internal class Communities_Id_Get
     {
         // Arrange
         Community community = _dataFactory.GetCommunity();
-        var request = new Request {Id = community.Id};
+        var request = new Request {Id = community.Id!};
 
         _mockDbAccess.Setup(t =>
                 t.GetCommunityFromId(It.Is<string>(r => r == community.Id),
@@ -70,7 +69,6 @@ internal class Communities_Id_Get
         
         // Act
         await _endpoint.HandleAsync(request, default);
-        var response = _endpoint.Response;
         
         // Assert
         _endpoint.HttpContext.Response.StatusCode.Should().Be(404);

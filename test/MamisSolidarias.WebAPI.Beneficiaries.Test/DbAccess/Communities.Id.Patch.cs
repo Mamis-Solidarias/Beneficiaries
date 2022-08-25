@@ -9,12 +9,13 @@ using NUnit.Framework;
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.DbAccess;
 
-internal class CommunitiesIdGet
+internal class CommunitiesIdPatch
 {
-    private Endpoints.Communities.Id.GET.DbAccess _dbAccess = null!;
     private const string InMemoryConnectionString = "DataSource=:memory:";
+
     private BeneficiariesDbContext _dbContext = null!;
     private DataFactory _dataFactory = null!;
+    private Endpoints.Communities.Id.PATCH.DbAccess _dbAccess = null!;
 
     [SetUp]
     public void TestWithSqlite()
@@ -28,14 +29,14 @@ internal class CommunitiesIdGet
         _dbContext = new BeneficiariesDbContext(options);
         _dbContext.Database.EnsureCreated();
 
-        _dbAccess = new Endpoints.Communities.Id.GET.DbAccess(_dbContext);
+        _dbAccess = new Endpoints.Communities.Id.PATCH.DbAccess(_dbContext);
         _dataFactory = new DataFactory(_dbContext);
     }
 
     [TearDown]
     public void Dispose()
     {
-        _dbContext.Dispose();
+        _dataFactory.Dispose();
     }
 
     [Test]
@@ -47,7 +48,7 @@ internal class CommunitiesIdGet
             .WithId(id);
         
         // Act
-        var value = await _dbAccess.GetCommunityFromId(id, default);
+        var value = await _dbAccess.GetCommunityById(id, default);
         
         // Assert
         value.Should().NotBeNull();
@@ -62,12 +63,9 @@ internal class CommunitiesIdGet
     {
         // Arrange
         // Act
-        var value = await _dbAccess.GetCommunityFromId("123", default);
+        var value = await _dbAccess.GetCommunityById("123", default);
         
         // Assert
         value.Should().BeNull();
     }
-
-
-
 }
