@@ -10,10 +10,10 @@ using NUnit.Framework;
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints;
 
-internal class Communities_Id_Patch
+internal class CommunitiesIdPatch
 {
     private Endpoint _endpoint = null!;
-    private DataFactory _dataFactory = new(null);
+    private readonly DataFactory _dataFactory = new(null);
     private readonly Mock<Communities.Id.PATCH.DbAccess> _mockDb = new();
     
     [SetUp]

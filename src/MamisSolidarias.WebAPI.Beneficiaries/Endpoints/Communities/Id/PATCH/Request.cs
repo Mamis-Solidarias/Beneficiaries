@@ -1,6 +1,5 @@
 using FastEndpoints;
 using FluentValidation;
-using MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.POST;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.PATCH;

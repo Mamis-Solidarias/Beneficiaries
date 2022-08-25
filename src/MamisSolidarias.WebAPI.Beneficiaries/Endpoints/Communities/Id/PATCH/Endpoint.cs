@@ -15,7 +15,7 @@ internal class Endpoint : Endpoint<Request,Response>
     public override void Configure()
     {
         Patch("communities/{id}");
-        Policies(Services.Beneficiaries.WritePermission());
+        Policies(Utils.Security.Policies.CanWrite);
     }
 
     public override async Task HandleAsync(Request req, CancellationToken ct)

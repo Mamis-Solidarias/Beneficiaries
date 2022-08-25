@@ -17,7 +17,7 @@ internal class Endpoint : Endpoint<Request,Response>
     public override void Configure()
     {
         Get("communities/{id}");
-        Policies(Services.Beneficiaries.ReadPermission());
+        Policies(Utils.Security.Policies.CanRead);
     }
 
     public override async Task HandleAsync(Request req, CancellationToken ct)
