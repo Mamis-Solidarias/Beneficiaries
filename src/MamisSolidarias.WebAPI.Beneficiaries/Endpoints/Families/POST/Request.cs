@@ -31,14 +31,14 @@ internal class RequestValidator : Validator<Request>
 /// <summary>
 /// Family Model
 /// </summary>
-/// <param name="Id">Optional. Allows the possibility of implementing custom IDs</param>
+/// <param name="FamilyNumber">Optional. Allows the possibility of implementing custom IDs</param>
 /// <param name="Name">Name of the family</param>
 /// <param name="Address">Address of the family</param>
-/// <param name="CommunityId">Id of the community they live in</param>
+/// <param name="CommunityId">FamilyNumber of the community they live in</param>
 /// <param name="Details">Extra details about the family</param>
 /// <param name="Contacts">A set of ways to contact the family</param>
 public record FamilyRequest(
-    string? Id,
+    int? FamilyNumber,
     string Name,
     string Address,
     string CommunityId,
@@ -82,8 +82,8 @@ internal class FamilyRequestValidation : Validator<FamilyRequest>
         RuleFor(t => t.Details)
             .MaximumLength(500).WithMessage("Los comentarios no pueden tener mas de 500 caracteres");
 
-        RuleFor(t => t.Id)
-            .MaximumLength(5).WithMessage("El identifiacdor no puede tener mas de 5 caracteres");
+        RuleFor(t => t.FamilyNumber)
+            .LessThan(99999 + 1).WithMessage("El identifiacdor no puede tener mas de 5 caracteres");
 
         RuleFor(t => t.Name)
             .NotEmpty().WithMessage("La familia debe tener un nombre")

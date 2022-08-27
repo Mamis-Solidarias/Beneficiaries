@@ -18,13 +18,13 @@ internal class Description : Summary<Endpoint>
 
                     }),
                 new FamilyRequest(
-                    "123", "Gonzales", "Figueroa Alcorta 1232", "FG", "Todo ok",
+                    123, "Gonzales", "Figueroa Alcorta 1232", "FG", "Todo ok",
                     ArraySegment<ContactRequest>.Empty
                 )
             }
         };
         
-        Response<Response>(201);
+        Response(201,"The families were created");
         Response(400, "Invalid parameters");
         Response(401, "The user is not logged in");
         Response(403, "The user does not have the required permissions");
