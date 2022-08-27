@@ -1,35 +1,61 @@
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Microsoft.EntityFrameworkCore.ValueGeneration;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace MamisSolidarias.Infrastructure.Beneficiaries.Models;
 
 internal class Family
 {
-    public string? Id { get; set; }
-    
-    internal int FamilyNumber { get; set; }
 
-    public string Name { get; set; }
-
-    public string Address { get; set; }
-
-    public Community Community { get; set; }
-
+    internal int InternalId { get; set; }
+    public string Id { get; set; } = string.Empty;
+    public int FamilyNumber { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public string Address { get; set; } = string.Empty;
+    public string CommunityId { get; set; } = string.Empty;
+    public Community Community { get; set; } = null!;
     public string? Details { get; set; }
-    
-    public IEnumerable<Contact> Contacts { get; set; }
+    public ICollection<Contact> Contacts { get; set; } = ArraySegment<Contact>.Empty;
 }
 
-internal class FamilyIdGenerator : ValueGenerator<string>
+internal class FamilyModelBuilder : IEntityTypeConfiguration<Family>
 {
-    public override bool GeneratesTemporaryValues => false;
-    public override string Next(EntityEntry entry)
+    public void Configure(EntityTypeBuilder<Family> model)
     {
-        if (entry.Entity is Family family)
-        {
-            return family.Id ?? string.Concat(family.Community.Id,"-",family.FamilyNumber);
-        }
+        model.Property(t => t.FamilyNumber)
+            .IsRequired();
 
-        throw new ArgumentException("Entity is not of type Community");
+        model.HasIndex(t => t.FamilyNumber);
+
+        model.HasKey(t=> t.InternalId);
+        model.Property(t => t.InternalId)
+            .ValueGeneratedOnAdd();
+
+        model.HasIndex(t => t.Id)
+            .IsUnique();
+        
+        model.Property(t => t.Id)
+            .IsRequired();
+        
+        
+        model.Property(t => t.Address)
+            .IsRequired()
+            .HasMaxLength(500);
+
+        model.Property(t => t.Details)
+            .HasMaxLength(500);
+
+        model.Property(t => t.Name)
+            .IsRequired()
+            .HasMaxLength(100);
+        
+
+        model.HasMany(t => t.Contacts);
+
+        model.HasOne(t => t.Community)
+            .WithMany(t => t.Families)
+            .HasForeignKey(t => t.CommunityId)
+            .HasPrincipalKey(t => t.Id);
     }
 }
+
+
