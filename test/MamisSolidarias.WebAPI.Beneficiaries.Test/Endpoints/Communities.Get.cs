@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -47,7 +48,8 @@ internal class CommunitiesGet
         
         // Assert
         _endpoint.HttpContext.Response.StatusCode.Should().Be(200);
-        response.Communities.Should().BeEquivalentTo(communities);
+        response.Communities.Should().BeEquivalentTo(communities.Select(t=>
+            new CommunityResponse(t.Id ?? string.Empty,t.Name,t.Description,t.Address)));
     }
 
     [Test]
@@ -64,6 +66,6 @@ internal class CommunitiesGet
         
         // Assert
         _endpoint.HttpContext.Response.StatusCode.Should().Be(200);
-        response.Communities.Should().BeEquivalentTo(communities);
+        response.Communities.Should().BeEquivalentTo(Enumerable.Empty<CommunityResponse>());
     }
 }

@@ -105,7 +105,7 @@ internal class FamiliesPost
             t.CreateFamilies(
                 It.Is<IEnumerable<Family>>(r => 
                     // ReSharper disable PossibleMultipleEnumeration
-                    r.DistinctBy(f=> new {f.FamilyNumber, f.CommunityId}).Count() == r.Count()),
+                    r.DistinctBy(f=> new {f.FamilyNumber, f.CommunityId}).Count() != r.Count()),
                     // ReSharper enable PossibleMultipleEnumeration
                 It.IsAny<CancellationToken>()
             )
