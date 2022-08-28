@@ -25,7 +25,7 @@ namespace MamisSolidarias.WebAPI.Beneficiaries.Migrations
 
             modelBuilder.Entity("MamisSolidarias.Infrastructure.Beneficiaries.Models.Community", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<string>("FamilyNumber")
                         .HasColumnType("text");
 
                     b.Property<string>("Address")
@@ -42,7 +42,7 @@ namespace MamisSolidarias.WebAPI.Beneficiaries.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("character varying(500)");
 
-                    b.HasKey("Id");
+                    b.HasKey("FamilyNumber");
 
                     b.ToTable("Communities");
                 });
