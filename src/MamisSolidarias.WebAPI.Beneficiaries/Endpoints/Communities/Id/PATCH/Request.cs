@@ -32,6 +32,5 @@ internal class RequestValidator : Validator<Request>
 
         RuleFor(t => t.Description)
             .MaximumLength(500).WithMessage("La descripcion no puede tener mas de 500 caracteres");
-        
     }
 }
