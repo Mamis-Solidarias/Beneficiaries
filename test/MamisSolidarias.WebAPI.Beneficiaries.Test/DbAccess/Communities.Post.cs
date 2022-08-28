@@ -12,7 +12,6 @@ namespace MamisSolidarias.WebAPI.Beneficiaries.DbAccess;
 
 internal class CommunitiesPost
 {
-    
     private const string InMemoryConnectionString = "DataSource=:memory:";
 
     private BeneficiariesDbContext _dbContext = null!;

@@ -25,7 +25,7 @@ internal class Endpoint : Endpoint<Request>
         {
             var families = req.Families.Select(Map).ToList();
             await _db.CreateFamilies(families, ct);
-            await SendOkAsync(ct);
+            await SendAsync(new{},201,ct);
         }
         catch (DbUpdateException)
         {
