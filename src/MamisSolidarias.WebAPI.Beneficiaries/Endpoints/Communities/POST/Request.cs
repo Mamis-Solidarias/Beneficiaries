@@ -44,6 +44,9 @@ internal class CommunityValidator : Validator<CommunityRequest>
         RuleFor(t=> t.Name)
             .MaximumLength(500).WithMessage("El nombre no puede tener mas de 500 caracteres")
             .MinimumLength(5).WithMessage("El nombre no puede tener menos de 5 caracteres");
-        
+
+        RuleFor(t => t.CommunityCode)
+            .MaximumLength(5).WithMessage("El codigo de la comunidad no puede tener mas de 5 caracteres");
+
     }
 }
