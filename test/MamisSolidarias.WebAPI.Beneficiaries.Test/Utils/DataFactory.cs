@@ -15,7 +15,6 @@ internal class DataFactory : IDisposable
     
     public CommunityBuilder GenerateCommunity() => new (_dbContext);
     public FamilyBuilder GenerateFamily() => new(_dbContext);
-    public ContactBuilder GenerateContact() => new(_dbContext);
     public CommunityBuilder GetCommunity() => new ();
     public FamilyBuilder GetFamily() => new();
     public ContactBuilder GetContact() => new();
@@ -27,9 +26,6 @@ internal class DataFactory : IDisposable
     public IEnumerable<FamilyBuilder> GenerateFamilies(int n)
     =>  Enumerable.Range(0, n).Select(_ => GenerateFamily());
     
-    public IEnumerable<ContactBuilder> GenerateContacts(int n)
-    =>  Enumerable.Range(0, n).Select(_ => GenerateContact());
-
 
     public IEnumerable<CommunityBuilder> GetCommunities(int n) 
         => Enumerable.Range(0, n).Select(_ => GetCommunity());

@@ -1,10 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Bogus;
 using MamisSolidarias.Infrastructure.Beneficiaries;
 using MamisSolidarias.Infrastructure.Beneficiaries.Models;
-using MamisSolidarias.WebAPI.Beneficiaries.Migrations;
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.Utils;
 
@@ -15,10 +13,10 @@ internal class FamilyBuilder
             .RuleFor(t => t.Name, f => f.Address.City())
             .RuleFor(t=> t.Community, _ => new CommunityBuilder().Build())
             .RuleFor(t => t.InternalId, f => f.Random.Int())
-            .RuleFor(t=> t.CommunityId, (w,f) =>f.Community.Id)
+            .RuleFor(t=> t.CommunityId, (_,f) =>f.Community.Id)
             .RuleFor(t=> t.FamilyNumber, f=> f.IndexFaker)
             .RuleFor(t=> t.Details,f=> f.Lorem.Lines(1))
-            .RuleFor(t=> t.Id, (f,w)=> $"{w.CommunityId}-{w.FamilyNumber}")
+            .RuleFor(t=> t.Id, (_,w)=> $"{w.CommunityId}-{w.FamilyNumber}")
             .RuleFor(t=>t.Contacts, (f) => Enumerable
                 .Range(0,f.Random.Int(0,3))
                 .Select(_=>new ContactBuilder().Build())

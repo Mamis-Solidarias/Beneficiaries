@@ -1,6 +1,5 @@
 using System;
 using Bogus;
-using MamisSolidarias.Infrastructure.Beneficiaries;
 using MamisSolidarias.Infrastructure.Beneficiaries.Models;
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.Utils;
@@ -28,15 +27,9 @@ internal class ContactBuilder
         };
 
     private Contact Contact { get; set; }
-    private BeneficiariesDbContext? _dbContext;
 
     public ContactBuilder() => Contact = ContactGenerator.Generate();
     
-    public ContactBuilder(BeneficiariesDbContext? dbContext)
-    {
-        Contact = ContactGenerator.Generate();
-        _dbContext = dbContext;
-    }
 
     public ContactBuilder(Contact contact) => Contact = contact;
 
@@ -47,6 +40,7 @@ internal class ContactBuilder
 
     public ContactBuilder WithId(int id)
     {
+        
         Contact.Id = id;
         return this;
     }

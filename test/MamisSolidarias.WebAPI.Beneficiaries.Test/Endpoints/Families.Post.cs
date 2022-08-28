@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,7 +15,7 @@ using ContactType = MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Families.POST
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints;
 
-internal class Families_Post
+internal class FamiliesPost
 {
     private Endpoint _endpoint = null!;
     private DataFactory _dataFactory = new(null);
@@ -104,7 +103,10 @@ internal class Families_Post
 
         _mockDb.Setup(t =>
             t.CreateFamilies(
-                It.Is<IEnumerable<Family>>(r => r.Count() >1 && r.DistinctBy(f=> new {f.FamilyNumber, f.CommunityId}).Count() == 1),
+                It.Is<IEnumerable<Family>>(r => 
+                    // ReSharper disable PossibleMultipleEnumeration
+                    r.DistinctBy(f=> new {f.FamilyNumber, f.CommunityId}).Count() == r.Count()),
+                    // ReSharper enable PossibleMultipleEnumeration
                 It.IsAny<CancellationToken>()
             )
         ).ThrowsAsync(new DbUpdateException());
