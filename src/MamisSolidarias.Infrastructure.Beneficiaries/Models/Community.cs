@@ -12,7 +12,7 @@ internal class Community
     public string? Description { get; set; }
     public string? Id { get; set; }
     
-    public ICollection<Family> Families { get; set; } = ArraySegment<Family>.Empty;
+    public ICollection<Family> Families { get; set; } = new List<Family>();
 }
 
 internal class CommunityModelBuilder : IEntityTypeConfiguration<Community>

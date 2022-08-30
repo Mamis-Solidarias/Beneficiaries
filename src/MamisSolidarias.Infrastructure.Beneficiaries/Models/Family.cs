@@ -14,7 +14,7 @@ internal class Family
     public string CommunityId { get; set; } = string.Empty;
     public Community Community { get; set; } = null!;
     public string? Details { get; set; }
-    public ICollection<Contact> Contacts { get; set; } = ArraySegment<Contact>.Empty;
+    public ICollection<Contact> Contacts { get; set; } = new List<Contact>();
 }
 
 internal class FamilyModelBuilder : IEntityTypeConfiguration<Family>
