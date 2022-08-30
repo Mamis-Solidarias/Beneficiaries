@@ -22,8 +22,7 @@ internal class CommunitiesGet
     public void SetUp()
     {
         _endpoint = EndpointFactory
-            .CreateEndpoint<Endpoint>(null, _mockDbAccess.Object)
-            .Build();
+            .CreateEndpoint<Endpoint>(null, _mockDbAccess.Object);
         
     }
 

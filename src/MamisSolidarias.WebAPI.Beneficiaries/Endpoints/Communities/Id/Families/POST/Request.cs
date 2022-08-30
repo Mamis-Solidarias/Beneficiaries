@@ -17,7 +17,7 @@ public class Request
     /// <summary>
     /// Families to create
     /// </summary>
-    public IEnumerable<FamilyRequest> Families { get; set; } = ArraySegment<FamilyRequest>.Empty;
+    public IEnumerable<FamilyRequest> Families { get; set; } = new List<FamilyRequest>();
 }
 
 internal class RequestValidator : Validator<Request>

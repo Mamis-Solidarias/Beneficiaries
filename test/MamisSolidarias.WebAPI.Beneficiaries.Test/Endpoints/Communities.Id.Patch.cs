@@ -19,8 +19,7 @@ internal class CommunitiesIdPatch
     [SetUp]
     public void Setup()
     {
-        _endpoint = EndpointFactory.CreateEndpoint<Endpoint>(null, _mockDb.Object)
-            .Build();
+        _endpoint = EndpointFactory.CreateEndpoint<Endpoint>(null, _mockDb.Object);
         
     }
 

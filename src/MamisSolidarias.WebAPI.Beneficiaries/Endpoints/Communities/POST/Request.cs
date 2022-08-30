@@ -8,7 +8,7 @@ public class Request
     /// <summary>
     /// Communities to create
     /// </summary>
-    public IEnumerable<CommunityRequest> Communities { get; set; } = ArraySegment<CommunityRequest>.Empty;
+    public IEnumerable<CommunityRequest> Communities { get; set; } = new List<CommunityRequest>();
 }
 
 /// <summary>

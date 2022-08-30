@@ -20,7 +20,7 @@ internal class Description : Summary<Endpoint>
                     }),
                 new FamilyRequest(
                     123, "Gonzales", "Figueroa Alcorta 1232", "Todo ok",
-                    ArraySegment<ContactRequest>.Empty
+                    new List<ContactRequest>()
                 )
             }
         };
