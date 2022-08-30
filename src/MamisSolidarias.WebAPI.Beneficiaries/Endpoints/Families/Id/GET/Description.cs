@@ -1,6 +1,6 @@
 using FastEndpoints;
 
-namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.Id.GET;
+namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Families.Id.GET;
 
 internal class Description : Summary<Endpoint>
 {
@@ -9,7 +9,6 @@ internal class Description : Summary<Endpoint>
         Summary = "It retrieves a single family";
         ExampleRequest = new Request
         {
-            CommunityId = "TXT",
             FamilyId = "TXT-123"
         };
         

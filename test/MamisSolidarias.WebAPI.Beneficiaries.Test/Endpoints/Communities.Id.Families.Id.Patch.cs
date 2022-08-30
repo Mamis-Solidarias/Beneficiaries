@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using MamisSolidarias.Infrastructure.Beneficiaries.Models;
 using MamisSolidarias.Utils.Test;
-using MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.Id.PATCH;
+using MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Families.Id.PATCH;
 using MamisSolidarias.WebAPI.Beneficiaries.Utils;
 using Moq;
 using NUnit.Framework;
@@ -15,7 +15,7 @@ internal class CommunitiesIdFamiliesIdPatch
 {
     private Endpoint _endpoint = null!;
     private readonly DataFactory _dataFactory = new(null);
-    private readonly Mock<Communities.Id.Families.Id.PATCH.DbAccess> _mockDb = new();
+    private readonly Mock<Families.Id.PATCH.DbAccess> _mockDb = new();
     
     [SetUp]
     public void Setup()
@@ -44,7 +44,6 @@ internal class CommunitiesIdFamiliesIdPatch
         {
             FamilyId = family.Id,
             Name = "New name",
-            CommunityId = family.CommunityId,
             Address = "New address",
             Details = "New details",
             Contacts = new List<ContactRequest>(),
@@ -77,7 +76,6 @@ internal class CommunitiesIdFamiliesIdPatch
         var request = new Request
         {
             FamilyId = family.Id,
-            CommunityId = family.CommunityId,
             Address = "New address",
         };
         
@@ -109,7 +107,6 @@ internal class CommunitiesIdFamiliesIdPatch
         {
             FamilyId = family.Id,
             Name = "New name",
-            CommunityId = family.CommunityId,
         };
         
         // Act
@@ -139,7 +136,6 @@ internal class CommunitiesIdFamiliesIdPatch
         var request = new Request
         {
             FamilyId = family.Id,
-            CommunityId = family.CommunityId,
             Details = "New details",
         };
         
@@ -170,7 +166,6 @@ internal class CommunitiesIdFamiliesIdPatch
         var request = new Request
         {
             FamilyId = family.Id,
-            CommunityId = family.CommunityId,
             Contacts = new []
             {
                 new ContactRequest("Facebook","carlos","Facebook Profile",false),
@@ -205,7 +200,6 @@ internal class CommunitiesIdFamiliesIdPatch
 
         var request = new Request
         {
-            CommunityId = "CT",
             FamilyId = familyId,
             Name = "new name"
         };

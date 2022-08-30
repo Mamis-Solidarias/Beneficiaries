@@ -1,5 +1,5 @@
-
-using MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.POST;
+using MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Families.Id.PATCH;
+using Request = MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.POST.Request;
 
 namespace MamisSolidarias.HttpClient.Beneficiaries.BeneficiariesClient;
 
@@ -77,9 +77,9 @@ public interface IBeneficiariesClient
     /// <param name="request">Parameters</param>
     /// <param name="token">Cancellation token</param>
     /// <returns></returns>
-    Task<MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.Id.PATCH.Response?>
+    Task<Response?>
         UpdateFamily(
-            MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.Id.PATCH.Request request,
+            WebAPI.Beneficiaries.Endpoints.Families.Id.PATCH.Request request,
             CancellationToken token
         );
 
@@ -89,8 +89,8 @@ public interface IBeneficiariesClient
     /// <param name="request">Parameters</param>
     /// <param name="token">Cancellation token</param>
     /// <returns></returns>
-    Task<MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.Id.GET.Response?>
-        GetFamily(MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.Id.GET.Request request,
+    Task<WebAPI.Beneficiaries.Endpoints.Families.Id.GET.Response?>
+        GetFamily(WebAPI.Beneficiaries.Endpoints.Families.Id.GET.Request request,
             CancellationToken token
         );
 

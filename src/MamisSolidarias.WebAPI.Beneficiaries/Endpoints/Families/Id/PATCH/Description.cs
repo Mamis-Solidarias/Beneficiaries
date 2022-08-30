@@ -1,6 +1,6 @@
 using FastEndpoints;
 
-namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.Id.PATCH;
+namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Families.Id.PATCH;
 
 internal class Description : Summary<Endpoint>
 {
@@ -9,7 +9,6 @@ internal class Description : Summary<Endpoint>
         Summary = "It partially updates a family";
         ExampleRequest = new Request
         {
-            CommunityId = "TXT",
             FamilyId = "TXT-123",
             Address = "Nueva calle falsa 123",
         };
