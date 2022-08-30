@@ -25,6 +25,8 @@ internal class CommunitiesPost
         connection.Open();
         var options = new DbContextOptionsBuilder<BeneficiariesDbContext>()
             .UseSqlite(connection)
+            .EnableSensitiveDataLogging()
+            .EnableDetailedErrors()
             .Options;
         
         _dbContext = new BeneficiariesDbContext(options);
@@ -73,7 +75,6 @@ internal class CommunitiesPost
         var communities = _dataFactory.GetCommunities(3)
             .Select(t=> t.WithId(null).Build())
             .ToArray();
-
         
         // Act
         await _dbAccess.CreateCommunities(communities, default);

@@ -25,6 +25,7 @@ internal class Contact
     public string Title { get; set; } = string.Empty;
 
     public bool IsPreferred { get; set; }
+    
 }
 
 internal class ContactModelBuilder : IEntityTypeConfiguration<Contact>
@@ -49,5 +50,6 @@ internal class ContactModelBuilder : IEntityTypeConfiguration<Contact>
 
         model.Property(t => t.IsPreferred)
             .IsRequired();
+        
     }
 }

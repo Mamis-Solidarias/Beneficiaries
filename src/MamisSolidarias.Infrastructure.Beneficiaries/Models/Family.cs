@@ -47,7 +47,7 @@ internal class FamilyModelBuilder : IEntityTypeConfiguration<Family>
         model.Property(t => t.Name)
             .IsRequired()
             .HasMaxLength(100);
-        
+
 
         model.HasMany(t => t.Contacts);
 
