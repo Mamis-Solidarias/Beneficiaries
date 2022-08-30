@@ -35,18 +35,6 @@ internal class Endpoint : Endpoint<Request,Response>
     private static FamilyResponse Map(Family f)
         => new (f.Id, f.Name, f.Address, f.Details,
             f.Contacts.Select(r =>
-                new ContactResponse(Map(r.Type), r.Content, r.Title, r.IsPreferred))
+                new ContactResponse(r.Type.ToString(), r.Content, r.Title, r.IsPreferred))
         );
-    
-    private static ContactType  Map (MamisSolidarias.Infrastructure.Beneficiaries.Models.ContactType t)
-        => t switch
-        {
-            Infrastructure.Beneficiaries.Models.ContactType.Email => ContactType.Email ,
-            Infrastructure.Beneficiaries.Models.ContactType.Phone => ContactType.Phone,
-            Infrastructure.Beneficiaries.Models.ContactType.Whatsapp => ContactType.Whatsapp,
-            Infrastructure.Beneficiaries.Models.ContactType.Facebook => ContactType.Facebook,
-            Infrastructure.Beneficiaries.Models.ContactType.Other => ContactType.Other,
-            Infrastructure.Beneficiaries.Models.ContactType.Instagram => ContactType.Instagram ,
-            _ => throw new ArgumentOutOfRangeException(nameof(t), t, "Invalid ContactType")
-        };
 }

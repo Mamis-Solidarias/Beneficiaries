@@ -5,7 +5,7 @@ public class Response
     /// <summary>
     /// Array of communities
     /// </summary>
-    public IEnumerable<CommunityResponse> Communities { get; set; } = ArraySegment<CommunityResponse>.Empty;
+    public IEnumerable<CommunityResponse> Communities { get; set; } = new List<CommunityResponse>();
 }
 
 /// <summary>

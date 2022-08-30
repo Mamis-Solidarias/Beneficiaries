@@ -5,5 +5,5 @@ public class Response
     /// <summary>
     /// Set of the IDs of the created communities
     /// </summary>
-    public IEnumerable<string> Communities { get; set; } = ArraySegment<string>.Empty;
+    public IEnumerable<string> Communities { get; set; } = new List<string>();
 }

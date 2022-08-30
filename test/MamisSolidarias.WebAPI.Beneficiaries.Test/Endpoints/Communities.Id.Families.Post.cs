@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -11,7 +10,6 @@ using MamisSolidarias.WebAPI.Beneficiaries.Utils;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using NUnit.Framework;
-using ContactType = MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.POST.ContactType;
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints;
 
@@ -24,8 +22,7 @@ internal class FamiliesPost
     [SetUp]
     public void Setup()
     {
-        _endpoint = EndpointFactory.CreateEndpoint<Endpoint>(null, _mockDb.Object)
-            .Build();
+        _endpoint = EndpointFactory.CreateEndpoint<Endpoint>(null, _mockDb.Object);
     }
 
     [TearDown]
@@ -38,7 +35,7 @@ internal class FamiliesPost
     public async Task WithValidParameters_Succeeds()
     {
         // Arrange
-        var communityId = "XT";
+        const string communityId = "XT";
         var families = _dataFactory.GetFamilies(1)
             .Select(t => t.WithCommunityId(communityId).Build())
             .ToList();
@@ -46,20 +43,7 @@ internal class FamiliesPost
         var request = new Request
         {
             Id = communityId,
-            Families = families.Select(t=>
-                new FamilyRequest(
-                    t.FamilyNumber,
-                    t.Name,
-                    t.Address,
-                    t.Details,
-                    t.Contacts.Select(r=>
-                        new ContactRequest(
-                            MapContactType(r.Type),
-                            r.Content,
-                            r.Title,
-                            r.IsPreferred)
-                    ))
-            )
+            Families = families.Select(Map)
         };
 
         _mockDb.Setup(t =>
@@ -88,20 +72,7 @@ internal class FamiliesPost
         var request = new Request
         {
             Id = communityId,
-            Families = families.Select(t=>
-                new FamilyRequest(
-                    t.FamilyNumber,
-                    t.Name,
-                    t.Address,
-                    t.Details,
-                    t.Contacts.Select(r=>
-                        new ContactRequest(
-                            MapContactType(r.Type),
-                            r.Content,
-                            r.Title,
-                            r.IsPreferred)
-                    ))
-            )
+            Families = families.Select(Map)
         };
 
         _mockDb.Setup(t =>
@@ -131,20 +102,7 @@ internal class FamiliesPost
         var request = new Request
         {
             Id = communityId,
-            Families = families.Select(t=>
-                new FamilyRequest(
-                    t.FamilyNumber,
-                    t.Name,
-                    t.Address,
-                    t.Details,
-                    t.Contacts.Select(r=>
-                        new ContactRequest(
-                            MapContactType(r.Type),
-                            r.Content,
-                            r.Title,
-                            r.IsPreferred)
-                    ))
-            )
+            Families = families.Select(Map)
         };
 
         _mockDb.Setup(t =>
@@ -162,17 +120,20 @@ internal class FamiliesPost
         // Assert
         _endpoint.HttpContext.Response.StatusCode.Should().Be(409);
     }
-    
-    private static ContactType  MapContactType (MamisSolidarias.Infrastructure.Beneficiaries.Models.ContactType t)
-        => t switch
-        {
-            Infrastructure.Beneficiaries.Models.ContactType.Email => ContactType.Email ,
-            Infrastructure.Beneficiaries.Models.ContactType.Phone => ContactType.Phone,
-            Infrastructure.Beneficiaries.Models.ContactType.Whatsapp => ContactType.Whatsapp,
-            Infrastructure.Beneficiaries.Models.ContactType.Facebook => ContactType.Facebook,
-            Infrastructure.Beneficiaries.Models.ContactType.Other => ContactType.Other,
-            Infrastructure.Beneficiaries.Models.ContactType.Instagram => ContactType.Instagram ,
-            _ => throw new ArgumentOutOfRangeException(nameof(t), t, "Invalid ContactType")
-        };
-    
+
+    private static FamilyRequest Map(Family t)
+        => new (
+            t.FamilyNumber,
+            t.Name,
+            t.Address,
+            t.Details,
+            t.Contacts.Select(r =>
+                new ContactRequest(
+                    r.Type.ToString(),
+                    r.Content,
+                    r.Title,
+                    r.IsPreferred)
+            ));
+
+
 }

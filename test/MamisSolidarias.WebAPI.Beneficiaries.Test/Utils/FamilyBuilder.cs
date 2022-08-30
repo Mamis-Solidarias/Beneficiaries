@@ -51,10 +51,10 @@ internal class FamilyBuilder
         return this;
     }
 
-    public FamilyBuilder WithCommunity(Community community)
+    public FamilyBuilder WithCommunity(Community? community)
     {
-        Family.Community = community;
-        Family.CommunityId = community.Id!;
+        Family.Community = community ?? new Community();
+        Family.CommunityId = community?.Id ?? "";
         Family.Id = $"{Family.CommunityId}-{Family.FamilyNumber}";
         return this;
     }

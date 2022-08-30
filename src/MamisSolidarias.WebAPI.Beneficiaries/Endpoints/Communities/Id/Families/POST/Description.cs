@@ -15,12 +15,12 @@ internal class Description : Summary<Endpoint>
                 new FamilyRequest(null, "Garcia", "Calle falsa 123", null,
                     new[]
                     {
-                        new ContactRequest(ContactType.Instagram, "@paula", "Redes Mama", false)
+                        new ContactRequest("Instagram", "@paula", "Redes Mama", false)
 
                     }),
                 new FamilyRequest(
                     123, "Gonzales", "Figueroa Alcorta 1232", "Todo ok",
-                    ArraySegment<ContactRequest>.Empty
+                    new List<ContactRequest>()
                 )
             }
         };
