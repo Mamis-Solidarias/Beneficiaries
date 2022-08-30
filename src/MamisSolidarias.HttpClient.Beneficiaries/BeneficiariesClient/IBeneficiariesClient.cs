@@ -1,4 +1,6 @@
 
+using MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.POST;
+
 namespace MamisSolidarias.HttpClient.Beneficiaries.BeneficiariesClient;
 
 public interface IBeneficiariesClient
@@ -53,7 +55,7 @@ public interface IBeneficiariesClient
     /// <param name="token">Cancellation token</param>
     /// <returns></returns>
     Task CreateFamilies(
-        MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Families.POST.Request request,
+        Request request,
         CancellationToken token
     );
 
@@ -66,6 +68,18 @@ public interface IBeneficiariesClient
     Task<MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.GET.Response?>
         GetFamiliesFromCommunity(
             MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.GET.Request request,
+            CancellationToken token
+        );
+
+    /// <summary>
+    /// It updates a family's data
+    /// </summary>
+    /// <param name="request">Parameters</param>
+    /// <param name="token">Cancellation token</param>
+    /// <returns></returns>
+    Task<MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.Id.PATCH.Response?>
+        UpdateFamily(
+            MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.Id.PATCH.Request request,
             CancellationToken token
         );
 

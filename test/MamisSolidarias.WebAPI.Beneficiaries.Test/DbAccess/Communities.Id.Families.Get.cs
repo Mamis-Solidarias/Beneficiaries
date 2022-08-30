@@ -1,10 +1,7 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
 using MamisSolidarias.Infrastructure.Beneficiaries;
-using MamisSolidarias.Infrastructure.Beneficiaries.Models;
 using MamisSolidarias.WebAPI.Beneficiaries.Utils;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;

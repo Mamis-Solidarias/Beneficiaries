@@ -3,7 +3,6 @@ using System.Linq;
 using Bogus;
 using MamisSolidarias.Infrastructure.Beneficiaries;
 using MamisSolidarias.Infrastructure.Beneficiaries.Models;
-using MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.GET;
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.Utils;
 

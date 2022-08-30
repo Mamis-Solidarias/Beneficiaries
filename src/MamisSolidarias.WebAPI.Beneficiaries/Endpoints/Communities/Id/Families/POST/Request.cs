@@ -1,7 +1,7 @@
 using FastEndpoints;
 using FluentValidation;
 
-namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Families.POST;
+namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.POST;
 
 /// <summary>
 /// Parameters to create a set of families

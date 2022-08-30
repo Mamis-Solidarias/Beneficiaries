@@ -1,23 +1,4 @@
-
-namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.GET;
-
-public class Response
-{
-    /// <summary>
-    /// The requested families
-    /// </summary>
-    public IEnumerable<FamilyResponse> Families { get; set; } = new List<FamilyResponse>();
-
-    /// <summary>
-    /// Current page
-    /// </summary>
-    public int Page { get; set; }
-    
-    /// <summary>
-    /// Total number of pages
-    /// </summary>
-    public int TotalPages { get; set; }
-}
+namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.Id.PATCH;
 
 /// <summary>
 /// Model for a family
@@ -27,7 +8,7 @@ public class Response
 /// <param name="Address">Address of the family</param>
 /// <param name="Details">Additional comments of the family</param>
 /// <param name="Contacts">List of ways to contact the family</param>
-public record FamilyResponse(
+public record Response(
     string Id,
     string Name,
     string Address,
@@ -36,15 +17,7 @@ public record FamilyResponse(
 );
 
 
-public enum ContactType
-{
-    Phone,
-    Email,
-    Whatsapp,
-    Facebook,
-    Instagram,
-    Other
-}
+
 
 /// <summary>
 /// Model explaining how to contact a family
@@ -54,8 +27,8 @@ public enum ContactType
 /// <param name="Title">Name of the contact</param>
 /// <param name="IsPreferred">It defines if this is a preferred method of communication</param>
 public record ContactResponse(
-    ContactType Type,
+    string Type,
     string Content,
     string Title,
     bool IsPreferred
-    );
+);

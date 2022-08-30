@@ -9,7 +9,8 @@ public class Request
     /// <summary>
     /// Id of the community
     /// </summary>
-    [FromRoute] public string Id { get; set; }
+    [FromRoute]
+    public string Id { get; set; } = string.Empty;
     
     /// <summary>
     /// Page number. It has to be 0 or higher

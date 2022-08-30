@@ -1,6 +1,4 @@
 using FastEndpoints;
-using MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Families.POST;
-using Endpoint = MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.POST.Endpoint;
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.POST;
 
