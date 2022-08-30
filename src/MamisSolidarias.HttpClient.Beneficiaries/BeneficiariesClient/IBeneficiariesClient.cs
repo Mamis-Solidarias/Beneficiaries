@@ -71,4 +71,16 @@ public interface IBeneficiariesClient
             CancellationToken token
         );
 
+    /// <summary>
+    /// It updates a family's data
+    /// </summary>
+    /// <param name="request">Parameters</param>
+    /// <param name="token">Cancellation token</param>
+    /// <returns></returns>
+    Task<MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.Id.PATCH.Response?>
+        UpdateFamily(
+            MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.Id.PATCH.Request request,
+            CancellationToken token
+        );
+
 }

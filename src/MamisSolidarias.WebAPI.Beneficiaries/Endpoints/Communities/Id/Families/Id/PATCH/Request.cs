@@ -45,14 +45,12 @@ internal class RequestValidator : Validator<Request>
             .SetValidator(new ContactRequestValidator());
         
         RuleFor(t => t.Address)
-            .NotEmpty().WithMessage("La familia tiene que tener una dirección donde vive")
             .MaximumLength(500).WithMessage("La dirección no puede tener más de 500 caracteres");
 
         RuleFor(t => t.Details)
             .MaximumLength(500).WithMessage("Los comentarios no pueden tener mas de 500 caracteres");
 
         RuleFor(t => t.Name)
-            .NotEmpty().WithMessage("La familia debe tener un nombre")
             .MaximumLength(100).WithMessage("El nombre de familia no puede tener mas de 100 caracteres");
 
         RuleFor(t => t.FamilyId)

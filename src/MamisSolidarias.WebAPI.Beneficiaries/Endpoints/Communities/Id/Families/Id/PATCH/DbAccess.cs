@@ -14,7 +14,9 @@ internal class DbAccess
     public virtual Task<Family?> GetFamily(string id,CancellationToken ct)
     {
         ArgumentNullException.ThrowIfNull(_db);
-        return _db.Families.FirstOrDefaultAsync(t => t.Id == id, ct);
+        return _db.Families
+            .Include(t=> t.Contacts)
+            .FirstOrDefaultAsync(t => t.Id == id, ct);
     }
 
     public virtual Task SaveChanges(CancellationToken ct)

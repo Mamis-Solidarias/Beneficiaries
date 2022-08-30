@@ -6,7 +6,7 @@ public partial class BeneficiariesClient
 {
     public Task CreateFamilies(Request request, CancellationToken token)
     {
-        return CreateRequest(HttpMethod.Post, "families")
+        return CreateRequest(HttpMethod.Post,"communities",request.Id,"families")
             .WithContent(new
             {
                 request.Families
