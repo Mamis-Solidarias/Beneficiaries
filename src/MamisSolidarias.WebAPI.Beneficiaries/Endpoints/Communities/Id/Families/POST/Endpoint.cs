@@ -1,9 +1,11 @@
 using FastEndpoints;
 using MamisSolidarias.Infrastructure.Beneficiaries;
 using MamisSolidarias.Infrastructure.Beneficiaries.Models;
+using MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Families.POST;
 using Microsoft.EntityFrameworkCore;
+using ContactType = MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Families.POST.ContactType;
 
-namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Families.POST;
+namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.POST;
 
 internal class Endpoint : Endpoint<Request>
 {
@@ -15,7 +17,7 @@ internal class Endpoint : Endpoint<Request>
 
     public override void Configure()
     {
-        Post("families");
+        Post("communities/{id}/families");
         Policies(Utils.Security.Policies.CanWrite);
     }
 
@@ -23,7 +25,7 @@ internal class Endpoint : Endpoint<Request>
     {
         try
         {
-            var families = req.Families.Select(Map).ToList();
+            var families = req.Families.Select(t=> Map(t,req.Id)).ToList();
             await _db.CreateFamilies(families, ct);
             await SendAsync(new{},201,ct);
         }
@@ -34,13 +36,13 @@ internal class Endpoint : Endpoint<Request>
         }
     }
 
-    private static Family Map(FamilyRequest f)
+    private static Family Map(FamilyRequest f, string communityId)
         => new()
         {
             FamilyNumber = f.FamilyNumber ?? 0,
             Address = f.Address,
             Details = f.Details,
-            CommunityId = f.CommunityId,
+            CommunityId = communityId,
             Name = f.Name,
             Contacts = f.Contacts.Select(t => new Contact
             {

@@ -8,6 +8,11 @@ namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Families.POST;
 /// </summary>
 public class Request
 {
+
+    /// <summary>
+    /// Community Id
+    /// </summary>
+    public string Id { get; set; } = string.Empty;
     
     /// <summary>
     /// Families to create
@@ -24,6 +29,10 @@ internal class RequestValidator : Validator<Request>
 
         RuleFor(t => t.Families)
             .NotEmpty().WithMessage("Se debe intentar de crear al menos una familia");
+        
+        RuleFor(t => t.Id)
+            .NotEmpty().WithMessage("La familia debe estar asignada a una comunidad")
+            .MaximumLength(5).WithMessage("El identificador de comunidad debe tener como maximo 5 caracteres");
     }
 }
 
@@ -34,14 +43,12 @@ internal class RequestValidator : Validator<Request>
 /// <param name="FamilyNumber">Optional. Allows the possibility of implementing custom IDs</param>
 /// <param name="Name">Name of the family</param>
 /// <param name="Address">Address of the family</param>
-/// <param name="CommunityId">FamilyNumber of the community they live in</param>
 /// <param name="Details">Extra details about the family</param>
 /// <param name="Contacts">A set of ways to contact the family</param>
 public record FamilyRequest(
     int? FamilyNumber,
     string Name,
     string Address,
-    string CommunityId,
     string? Details,
     IEnumerable<ContactRequest> Contacts
 );
@@ -88,10 +95,6 @@ internal class FamilyRequestValidation : Validator<FamilyRequest>
         RuleFor(t => t.Name)
             .NotEmpty().WithMessage("La familia debe tener un nombre")
             .MaximumLength(100).WithMessage("El nombre de familia no puede tener mas de 100 caracteres");
-
-        RuleFor(t => t.CommunityId)
-            .NotEmpty().WithMessage("La familia debe estar asignada a una comunidad")
-            .MaximumLength(5).WithMessage("El identificador de comunidad debe tener como maximo 5 caracteres");
     }
 }
 

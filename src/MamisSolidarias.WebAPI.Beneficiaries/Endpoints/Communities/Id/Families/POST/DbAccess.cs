@@ -1,7 +1,7 @@
 using MamisSolidarias.Infrastructure.Beneficiaries;
 using MamisSolidarias.Infrastructure.Beneficiaries.Models;
 
-namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Families.POST;
+namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.POST;
 
 internal class DbAccess
 {
