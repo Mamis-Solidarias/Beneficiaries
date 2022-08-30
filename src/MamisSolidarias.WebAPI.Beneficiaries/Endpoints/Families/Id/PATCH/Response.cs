@@ -1,4 +1,4 @@
-namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.Id.GET;
+namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Families.Id.PATCH;
 
 /// <summary>
 /// Model for a family

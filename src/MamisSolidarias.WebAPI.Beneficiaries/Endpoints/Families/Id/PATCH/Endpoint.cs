@@ -2,7 +2,7 @@ using FastEndpoints;
 using MamisSolidarias.Infrastructure.Beneficiaries;
 using MamisSolidarias.Infrastructure.Beneficiaries.Models;
 
-namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.Id.PATCH;
+namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Families.Id.PATCH;
 
 internal class Endpoint : Endpoint<Request,Response>
 {
@@ -13,7 +13,7 @@ internal class Endpoint : Endpoint<Request,Response>
 
     public override void Configure()
     {
-        Patch("communities/{CommunityId}/families/{familyId}");
+        Patch("families/{familyId}");
         Policies(Utils.Security.Policies.CanWrite);
     }
 

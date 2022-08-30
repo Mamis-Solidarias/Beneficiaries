@@ -2,15 +2,10 @@ using FastEndpoints;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.Id.PATCH;
+namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Families.Id.PATCH;
 
 public class Request
 {
-    /// <summary>
-    /// Id of the community
-    /// </summary>
-    [FromRoute] public string CommunityId { get; set; } = string.Empty;
-    
     /// <summary>
     /// Id of the family
     /// </summary>
@@ -54,8 +49,7 @@ internal class RequestValidator : Validator<Request>
             .MaximumLength(100).WithMessage("El nombre de familia no puede tener mas de 100 caracteres");
 
         RuleFor(t => t.FamilyId)
-            .Must((t, r) => r.ToUpperInvariant().StartsWith(t.CommunityId.ToUpperInvariant()))
-            .WithMessage("La familia no pertenece a esta comunidad");
+            .NotEmpty().WithMessage("Se debe indicar una familia");
     }
 }
 
@@ -80,7 +74,7 @@ internal class ContactRequestValidator : Validator<ContactRequest>
             .MaximumLength(100).WithMessage("El titulo debe tener como maximo 100 caracteres");
 
         RuleFor(t => t.Type)
-            .IsEnumName(typeof(MamisSolidarias.Infrastructure.Beneficiaries.Models.ContactType), false)
+            .IsEnumName(typeof(MamisSolidarias.Infrastructure.Beneficiaries.Models.ContactType))
             .WithMessage("El tipo de contacto no es valido");
     }
 }

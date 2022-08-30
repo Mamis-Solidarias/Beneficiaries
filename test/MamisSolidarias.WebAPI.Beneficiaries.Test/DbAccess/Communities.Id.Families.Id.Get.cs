@@ -14,7 +14,7 @@ internal class CommunitiesIdFamiliesIdGet
     internal class CommunitiesIdFamiliesIdPatch
     {
         private BeneficiariesDbContext _dbContext = null!;
-        private Endpoints.Communities.Id.Families.Id.GET.DbAccess _dbAccess = null!;
+        private Endpoints.Families.Id.GET.DbAccess _dbAccess = null!;
         private DataFactory _dataFactory = null!;
     
         [SetUp]

@@ -1,7 +1,7 @@
 using FastEndpoints;
 using MamisSolidarias.Infrastructure.Beneficiaries;
 
-namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.Id.GET;
+namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Families.Id.GET;
 
 internal class Endpoint : Endpoint<Request,Response>
 {
@@ -12,7 +12,9 @@ internal class Endpoint : Endpoint<Request,Response>
 
     public override void Configure()
     {
-        Get("communities/{CommunityId}/families/{familyId}");
+        Get(
+            "families/{familyId}"
+            );
         Policies(Utils.Security.Policies.CanRead);
     }
 

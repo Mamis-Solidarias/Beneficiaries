@@ -12,7 +12,7 @@ namespace MamisSolidarias.WebAPI.Beneficiaries.DbAccess;
 internal class CommunitiesIdFamiliesIdPatch
 {
     private BeneficiariesDbContext _dbContext = null!;
-    private Endpoints.Communities.Id.Families.Id.PATCH.DbAccess _dbAccess = null!;
+    private Endpoints.Families.Id.PATCH.DbAccess _dbAccess = null!;
     private DataFactory _dataFactory = null!;
 
     [SetUp]

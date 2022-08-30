@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using MamisSolidarias.Infrastructure.Beneficiaries.Models;
 using MamisSolidarias.Utils.Test;
-using MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.Id.GET;
+using MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Families.Id.GET;
 using MamisSolidarias.WebAPI.Beneficiaries.Utils;
 using Moq;
 using NUnit.Framework;
@@ -14,7 +14,7 @@ namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints;
 internal class CommunitiesIdFamiliesIdGet
 {
     private Endpoint _endpoint = null!;
-    private readonly Mock<Communities.Id.Families.Id.GET.DbAccess> _mockDbAccess = new();
+    private readonly Mock<Families.Id.GET.DbAccess> _mockDbAccess = new();
     private readonly DataFactory _dataFactory = new(null);
 
     [SetUp]
@@ -37,7 +37,6 @@ internal class CommunitiesIdFamiliesIdGet
         Family family = _dataFactory.GetFamily();
         var request = new Request
         {
-            CommunityId = family.CommunityId,
             FamilyId = family.Id
         };
 
@@ -71,7 +70,6 @@ internal class CommunitiesIdFamiliesIdGet
         var request = new Request
         {
             FamilyId = "TXT-123",
-            CommunityId = "TXT"
         };
 
         _mockDbAccess.Setup(t =>
