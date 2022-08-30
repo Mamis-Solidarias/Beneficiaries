@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using MamisSolidarias.Infrastructure.Beneficiaries.Models;
 using MamisSolidarias.Utils.Test;
+using MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.POST;
 using MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Families.POST;
 using MamisSolidarias.WebAPI.Beneficiaries.Utils;
 using Microsoft.EntityFrameworkCore;
@@ -18,8 +19,8 @@ namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints;
 internal class FamiliesPost
 {
     private Endpoint _endpoint = null!;
-    private DataFactory _dataFactory = new(null);
-    private readonly Mock<Families.POST.DbAccess> _mockDb = new();
+    private readonly DataFactory _dataFactory = new(null);
+    private readonly Mock<Communities.Id.Families.POST.DbAccess> _mockDb = new();
     
     [SetUp]
     public void Setup()
@@ -38,18 +39,19 @@ internal class FamiliesPost
     public async Task WithValidParameters_Succeeds()
     {
         // Arrange
+        var communityId = "XT";
         var families = _dataFactory.GetFamilies(1)
-            .Select(t => t.Build())
+            .Select(t => t.WithCommunityId(communityId).Build())
             .ToList();
 
         var request = new Request
         {
+            Id = communityId,
             Families = families.Select(t=>
                 new FamilyRequest(
                     t.FamilyNumber,
                     t.Name,
                     t.Address,
-                    t.CommunityId,
                     t.Details,
                     t.Contacts.Select(r=>
                         new ContactRequest(
@@ -79,17 +81,19 @@ internal class FamiliesPost
     public async Task WithRepeatedFamilies_Fails()
     {
         // Arrange
-        Family fam = _dataFactory.GetFamily();
+        var communityId = "XT";
+        Family fam = _dataFactory.GetFamily()
+            .WithCommunityId(communityId);
         var families = new[] {fam, fam};
 
         var request = new Request
         {
+            Id = communityId,
             Families = families.Select(t=>
                 new FamilyRequest(
                     t.FamilyNumber,
                     t.Name,
                     t.Address,
-                    t.CommunityId,
                     t.Details,
                     t.Contacts.Select(r=>
                         new ContactRequest(
@@ -121,17 +125,18 @@ internal class FamiliesPost
     public async Task IfIdAlreadyExists_Fails()
     {
         // Arrange
-        Family fam = _dataFactory.GetFamily();
+        var communityId = "XT";
+        Family fam = _dataFactory.GetFamily().WithCommunityId(communityId);
         var families = new[] {fam};
 
         var request = new Request
         {
+            Id = communityId,
             Families = families.Select(t=>
                 new FamilyRequest(
                     t.FamilyNumber,
                     t.Name,
                     t.Address,
-                    t.CommunityId,
                     t.Details,
                     t.Contacts.Select(r=>
                         new ContactRequest(

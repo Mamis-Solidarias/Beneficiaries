@@ -1,6 +1,8 @@
 using FastEndpoints;
+using MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Families.POST;
+using Endpoint = MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.POST.Endpoint;
 
-namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Families.POST;
+namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.POST;
 
 internal class Description : Summary<Endpoint>
 {
@@ -9,16 +11,17 @@ internal class Description : Summary<Endpoint>
         Summary = "It creates a set of new families";
         ExampleRequest = new Request
         {
+            Id = "EZE",
             Families = new[]
             {
-                new FamilyRequest(null, "Garcia", "Calle falsa 123", "EZE", null,
+                new FamilyRequest(null, "Garcia", "Calle falsa 123", null,
                     new[]
                     {
                         new ContactRequest(ContactType.Instagram, "@paula", "Redes Mama", false)
 
                     }),
                 new FamilyRequest(
-                    123, "Gonzales", "Figueroa Alcorta 1232", "FG", "Todo ok",
+                    123, "Gonzales", "Figueroa Alcorta 1232", "Todo ok",
                     ArraySegment<ContactRequest>.Empty
                 )
             }
