@@ -7,12 +7,11 @@ using FluentAssertions;
 using MamisSolidarias.Infrastructure.Beneficiaries.Models;
 using MamisSolidarias.Utils.Test;
 using MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.POST;
-using MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Families.POST;
 using MamisSolidarias.WebAPI.Beneficiaries.Utils;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using NUnit.Framework;
-using ContactType = MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Families.POST.ContactType;
+using ContactType = MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.POST.ContactType;
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints;
 

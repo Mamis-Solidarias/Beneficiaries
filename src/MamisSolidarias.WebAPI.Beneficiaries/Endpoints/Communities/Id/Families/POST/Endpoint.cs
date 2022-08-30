@@ -1,9 +1,7 @@
 using FastEndpoints;
 using MamisSolidarias.Infrastructure.Beneficiaries;
 using MamisSolidarias.Infrastructure.Beneficiaries.Models;
-using MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Families.POST;
 using Microsoft.EntityFrameworkCore;
-using ContactType = MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Families.POST.ContactType;
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.POST;
 

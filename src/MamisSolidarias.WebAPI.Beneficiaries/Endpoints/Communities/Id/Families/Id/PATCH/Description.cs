@@ -1,6 +1,6 @@
 using FastEndpoints;
 
-namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.PATCH;
+namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.Id.PATCH;
 
 internal class Description : Summary<Endpoint>
 {

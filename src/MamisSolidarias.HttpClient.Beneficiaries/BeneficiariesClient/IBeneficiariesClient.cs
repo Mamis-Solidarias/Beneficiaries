@@ -1,4 +1,6 @@
 
+using MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.POST;
+
 namespace MamisSolidarias.HttpClient.Beneficiaries.BeneficiariesClient;
 
 public interface IBeneficiariesClient
@@ -53,7 +55,7 @@ public interface IBeneficiariesClient
     /// <param name="token">Cancellation token</param>
     /// <returns></returns>
     Task CreateFamilies(
-        MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Families.POST.Request request,
+        Request request,
         CancellationToken token
     );
 

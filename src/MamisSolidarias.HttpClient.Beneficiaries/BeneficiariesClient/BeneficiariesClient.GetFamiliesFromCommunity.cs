@@ -1,4 +1,3 @@
-using MamisSolidarias.Utils.Http;
 using MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.GET;
 
 namespace MamisSolidarias.HttpClient.Beneficiaries.BeneficiariesClient;

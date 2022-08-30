@@ -2,7 +2,7 @@ using FastEndpoints;
 using MamisSolidarias.Infrastructure.Beneficiaries;
 using MamisSolidarias.Infrastructure.Beneficiaries.Models;
 
-namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.PATCH;
+namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.Id.PATCH;
 
 internal class Endpoint : Endpoint<Request,Response>
 {

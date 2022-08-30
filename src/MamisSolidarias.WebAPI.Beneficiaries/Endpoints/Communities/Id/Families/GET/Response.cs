@@ -1,4 +1,3 @@
-using System.Drawing;
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.GET;
 
@@ -7,7 +6,7 @@ public class Response
     /// <summary>
     /// The requested families
     /// </summary>
-    public IEnumerable<FamilyResponse> Families { get; set; }
+    public IEnumerable<FamilyResponse> Families { get; set; } = new List<FamilyResponse>();
 
     /// <summary>
     /// Current page

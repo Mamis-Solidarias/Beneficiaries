@@ -2,7 +2,7 @@ using MamisSolidarias.Infrastructure.Beneficiaries;
 using MamisSolidarias.Infrastructure.Beneficiaries.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.PATCH;
+namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.Id.PATCH;
 
 internal class DbAccess
 {

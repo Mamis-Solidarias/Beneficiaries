@@ -1,4 +1,4 @@
-using Request = MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Families.POST.Request;
+using Request = MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.POST.Request;
 
 namespace MamisSolidarias.HttpClient.Beneficiaries.BeneficiariesClient;
 

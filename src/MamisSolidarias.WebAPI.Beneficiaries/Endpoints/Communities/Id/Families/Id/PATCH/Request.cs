@@ -2,7 +2,7 @@ using FastEndpoints;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.PATCH;
+namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.Id.PATCH;
 
 public class Request
 {
