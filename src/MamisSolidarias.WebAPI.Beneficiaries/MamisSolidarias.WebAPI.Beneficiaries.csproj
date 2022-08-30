@@ -33,8 +33,4 @@
       <ProjectReference Include="..\MamisSolidarias.Infrastructure.Beneficiaries\MamisSolidarias.Infrastructure.Beneficiaries.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Endpoints\Communities\Id\Families\Id" />
-    </ItemGroup>
-
 </Project>
