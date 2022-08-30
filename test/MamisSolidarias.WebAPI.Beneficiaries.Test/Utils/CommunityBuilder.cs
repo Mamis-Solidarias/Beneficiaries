@@ -11,7 +11,7 @@ internal class CommunityBuilder
 {
     private static readonly Faker<Community> CommunityGenerator = new Faker<Community>()
             .RuleFor(t=> t.Address, f=> f.Address.FullAddress())
-            .RuleFor(t => t.Name, f => f.Address.City())
+            .RuleFor(t => t.Name, f => f.Random.AlphaNumeric(10).ToUpperInvariant())
             .RuleFor(t => t.Id, f => f.Random.AlphaNumeric(4))
             .RuleFor(t=> t.Description,f=> f.Lorem.Lines(1))
         ;
