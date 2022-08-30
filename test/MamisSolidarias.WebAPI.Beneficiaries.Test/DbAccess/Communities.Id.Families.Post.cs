@@ -16,7 +16,7 @@ internal class FamiliesPost
 
     private BeneficiariesDbContext _dbContext = null!;
     private DataFactory _dataFactory = null!;
-    private Endpoints.Communities.Id.Families.POST.DbAccess _dbAccess;
+    private Endpoints.Communities.Id.Families.POST.DbAccess _dbAccess = null!;
 
     [SetUp]
     public void TestWithSqlite()

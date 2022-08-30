@@ -4,7 +4,7 @@ namespace MamisSolidarias.HttpClient.Beneficiaries.BeneficiariesClient;
 
 public partial class BeneficiariesClient
 {
-    public Task<Response?> GetFamiliesFromCommunity(Request request, CancellationToken token)
+    public Task<Response?> GetFamilies(Request request, CancellationToken token)
         => CreateRequest(HttpMethod.Get, "communities", request.Id, "families")
             .WithQuery(
                 ("Page", $"{request.Page}"),
