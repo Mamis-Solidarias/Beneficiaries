@@ -7,7 +7,7 @@ namespace MamisSolidarias.WebAPI.Beneficiaries.Utils;
 internal class ContactBuilder
 {
     private static readonly Faker<Contact> ContactGenerator = new Faker<Contact>()
-            .RuleFor(t=> t.Id, f=> f.IndexFaker)
+            .RuleFor(t=> t.Id, f=> 1+f.IndexFaker)
             .RuleFor(t=> t.Type, f=> f.PickRandom<ContactType>())
             .RuleFor(t=> t.Title, f=> f.Lorem.Word())
             .RuleFor(t=> t.IsPreferred, f => f.Random.Bool())

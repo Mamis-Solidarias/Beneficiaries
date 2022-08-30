@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Bogus;
 using MamisSolidarias.Infrastructure.Beneficiaries;
 using MamisSolidarias.Infrastructure.Beneficiaries.Models;
@@ -47,6 +50,12 @@ internal class CommunityBuilder
     public CommunityBuilder WithDescription(string? description)
     {
         Community.Description = description;
+        return this;
+    }
+
+    public CommunityBuilder WithFamilies(IEnumerable<Family> families)
+    {
+        Community.Families = families.ToList();
         return this;
     }
     
