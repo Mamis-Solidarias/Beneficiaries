@@ -57,4 +57,16 @@ public interface IBeneficiariesClient
         CancellationToken token
     );
 
+    /// <summary>
+    /// It retrieves all the families related to a single community
+    /// </summary>
+    /// <param name="request">Parameters</param>
+    /// <param name="token">Cancellation token</param>
+    /// <returns></returns>
+    Task<MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.GET.Response?>
+        GetFamiliesFromCommunity(
+            MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.GET.Request request,
+            CancellationToken token
+        );
+
 }
