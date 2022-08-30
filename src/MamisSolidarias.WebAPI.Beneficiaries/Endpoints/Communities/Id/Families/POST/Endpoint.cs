@@ -47,19 +47,8 @@ internal class Endpoint : Endpoint<Request>
                 Content = t.Content,
                 IsPreferred = t.IsPreferred,
                 Title = t.Title,
-                Type = MapContactType(t.Type)
+                Type = Enum.Parse<ContactType>(t.Type)
             }).ToList()
         };
-
-    private static MamisSolidarias.Infrastructure.Beneficiaries.Models.ContactType MapContactType (ContactType t)
-        => t switch
-        {
-            ContactType.Email => Infrastructure.Beneficiaries.Models.ContactType.Email,
-            ContactType.Phone => Infrastructure.Beneficiaries.Models.ContactType.Phone,
-            ContactType.Whatsapp => Infrastructure.Beneficiaries.Models.ContactType.Whatsapp,
-            ContactType.Facebook => Infrastructure.Beneficiaries.Models.ContactType.Facebook,
-            ContactType.Other => Infrastructure.Beneficiaries.Models.ContactType.Other,
-            ContactType.Instagram => Infrastructure.Beneficiaries.Models.ContactType.Instagram,
-            _ => throw new ArgumentOutOfRangeException(nameof(t), t, "Invalid ContactType")
-        };
+    
 }

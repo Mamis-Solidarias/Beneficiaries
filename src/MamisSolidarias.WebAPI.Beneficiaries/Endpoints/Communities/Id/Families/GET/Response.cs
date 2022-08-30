@@ -36,15 +36,7 @@ public record FamilyResponse(
 );
 
 
-public enum ContactType
-{
-    Phone,
-    Email,
-    Whatsapp,
-    Facebook,
-    Instagram,
-    Other
-}
+
 
 /// <summary>
 /// Model explaining how to contact a family
@@ -54,7 +46,7 @@ public enum ContactType
 /// <param name="Title">Name of the contact</param>
 /// <param name="IsPreferred">It defines if this is a preferred method of communication</param>
 public record ContactResponse(
-    ContactType Type,
+    string Type,
     string Content,
     string Title,
     bool IsPreferred

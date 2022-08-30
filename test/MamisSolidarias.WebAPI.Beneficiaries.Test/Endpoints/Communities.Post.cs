@@ -73,7 +73,11 @@ internal class CommunitiesPost
                 .Select(t=> new CommunityRequest(t.Name,t.Address,t.Description,null))
         };
 
-        _mockDb.Setup(t => t.CreateCommunities(It.IsAny<IEnumerable<Community>>(), It.IsAny<CancellationToken>()))
+        _mockDb.Setup(t => t.CreateCommunities(
+                It.IsAny<IEnumerable<Community>>(), 
+                It.IsAny<CancellationToken>()
+                )
+            )
             .ReturnsAsync(communities);
         
         // Act

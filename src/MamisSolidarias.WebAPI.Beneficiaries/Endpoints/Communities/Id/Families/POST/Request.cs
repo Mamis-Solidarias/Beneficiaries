@@ -1,5 +1,6 @@
 using FastEndpoints;
 using FluentValidation;
+using MamisSolidarias.Infrastructure.Beneficiaries.Models;
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.POST;
 
@@ -54,15 +55,6 @@ public record FamilyRequest(
 );
 
 
-public enum ContactType
-{
-    Phone,
-    Email,
-    Whatsapp,
-    Facebook,
-    Instagram,
-    Other
-}
 
 /// <summary>
 /// Contact Model
@@ -71,7 +63,7 @@ public enum ContactType
 /// <param name="Content">Content of the contact. For example, a phone number or a instagram username</param>
 /// <param name="Title">The name of the contact</param>
 /// <param name="IsPreferred">If this is a preferred method of reaching out to the family</param>
-public record ContactRequest(ContactType Type, string Content, string Title, bool IsPreferred);
+public record ContactRequest(string Type, string Content, string Title, bool IsPreferred);
 
 
 
@@ -95,6 +87,7 @@ internal class FamilyRequestValidation : Validator<FamilyRequest>
         RuleFor(t => t.Name)
             .NotEmpty().WithMessage("La familia debe tener un nombre")
             .MaximumLength(100).WithMessage("El nombre de familia no puede tener mas de 100 caracteres");
+        
     }
 }
 
@@ -109,5 +102,9 @@ internal class ContactRequestValidator : Validator<ContactRequest>
         RuleFor(t => t.Title)
             .NotEmpty().WithMessage("La forma de contacto debe tener un nombre")
             .MaximumLength(100).WithMessage("El titulo debe tener como maximo 100 caracteres");
+
+        RuleFor(t => t.Type)
+            .IsEnumName(typeof(ContactType))
+            .WithMessage("El tipo de contacto no es valido");
     }
 }
