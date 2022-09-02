@@ -115,4 +115,14 @@ public interface IBeneficiariesClient
             CancellationToken token
         );
 
+    /// <summary>
+    /// It reactivates a previously deleted beneficiary
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="token"></param>
+    /// <returns></returns>
+    Task ReactivateBeneficiary(WebAPI.Beneficiaries.Endpoints.Beneficiaries.Id.POST.Request request,
+        CancellationToken token
+    );
+
 }
