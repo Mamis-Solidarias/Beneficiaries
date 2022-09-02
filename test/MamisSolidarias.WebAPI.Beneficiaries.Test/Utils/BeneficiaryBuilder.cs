@@ -31,7 +31,8 @@ internal class BeneficiaryBuilder
         )
         .RuleFor(t => t.FamilyId, (_, b) => b.Family!.Id)
         .RuleFor(t => t.FirstName, f => f.Person.FirstName)
-        .RuleFor(t => t.LastName, f => f.Person.LastName);
+        .RuleFor(t => t.LastName, f => f.Person.LastName)
+        .RuleFor(t=> t.IsActive, true);
 
     private readonly Beneficiary _beneficiary = Generator.Generate();
     private readonly BeneficiariesDbContext? _dbContext;
@@ -119,6 +120,12 @@ internal class BeneficiaryBuilder
     public BeneficiaryBuilder WithComments(string? comments)
     {
         _beneficiary.Comments = comments;
+        return this;
+    }
+
+    public BeneficiaryBuilder IsActive(bool isActive)
+    {
+        _beneficiary.IsActive = isActive;
         return this;
     }
 
