@@ -13,7 +13,6 @@ namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints;
 internal class CommunitiesIdPatch
 {
     private Endpoint _endpoint = null!;
-    private readonly DataFactory _dataFactory = new(null);
     private readonly Mock<Communities.Id.PATCH.DbAccess> _mockDb = new();
     
     [SetUp]
@@ -33,7 +32,7 @@ internal class CommunitiesIdPatch
     public async Task UpdatingAllParameters_Succeeds()
     {
         // Arrange
-        Community community = _dataFactory.GetCommunity();
+        Community community = DataFactory.GetCommunity();
         var newAddress = "Calle Falsa 123";
         var newDescription = "Nice place!";
         var request = new Request
@@ -64,7 +63,7 @@ internal class CommunitiesIdPatch
     public async Task UpdatingOnlyAddress_Succeeds()
     {
         // Arrange
-        Community community = _dataFactory.GetCommunity();
+        Community community = DataFactory.GetCommunity();
         var newAddress = "Calle Falsa 123";
         var request = new Request
         {
@@ -93,7 +92,7 @@ internal class CommunitiesIdPatch
     public async Task UpdatingOnlyDescription_Succeeds()
     {
         // Arrange
-        Community community = _dataFactory.GetCommunity();
+        Community community = DataFactory.GetCommunity();
         var newDescription = "Nice place!";
         var request = new Request
         {

@@ -45,7 +45,7 @@ internal class FamiliesPost
     public async Task CreateFamilies_Succeeds()
     {
         // Arrange
-        var families = _dataFactory.GetFamilies(5)
+        var families = DataFactory.GetFamilies(5)
             .Select(t => t.Build())
             .ToArray();
 
@@ -64,7 +64,7 @@ internal class FamiliesPost
     public async Task CreateSingleFamily_Succeeds()
     {
         // Arrange
-        Family family = _dataFactory.GetFamily();
+        Family family = DataFactory.GetFamily();
 
         // Act
         await _dbAccess.CreateFamilies(new []{family}, default);

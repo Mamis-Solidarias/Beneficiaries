@@ -15,6 +15,7 @@ internal class Family
     public Community Community { get; set; } = null!;
     public string? Details { get; set; }
     public ICollection<Contact> Contacts { get; set; } = new List<Contact>();
+    public ICollection<Beneficiary> Beneficiaries { get; set; } = new List<Beneficiary>();
 }
 
 internal class FamilyModelBuilder : IEntityTypeConfiguration<Family>
@@ -54,6 +55,11 @@ internal class FamilyModelBuilder : IEntityTypeConfiguration<Family>
         model.HasOne(t => t.Community)
             .WithMany(t => t.Families)
             .HasForeignKey(t => t.CommunityId)
+            .HasPrincipalKey(t => t.Id);
+
+        model.HasMany(t => t.Beneficiaries)
+            .WithOne(t => t.Family)
+            .HasForeignKey(t => t.FamilyId)
             .HasPrincipalKey(t => t.Id);
     }
 }

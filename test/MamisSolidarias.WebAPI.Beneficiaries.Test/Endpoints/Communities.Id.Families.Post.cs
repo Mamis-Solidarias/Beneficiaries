@@ -16,7 +16,6 @@ namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints;
 internal class FamiliesPost
 {
     private Endpoint _endpoint = null!;
-    private readonly DataFactory _dataFactory = new(null);
     private readonly Mock<Communities.Id.Families.POST.DbAccess> _mockDb = new();
     
     [SetUp]
@@ -36,7 +35,7 @@ internal class FamiliesPost
     {
         // Arrange
         const string communityId = "XT";
-        var families = _dataFactory.GetFamilies(1)
+        var families = DataFactory.GetFamilies(1)
             .Select(t => t.WithCommunityId(communityId).Build())
             .ToList();
 
@@ -65,7 +64,7 @@ internal class FamiliesPost
     {
         // Arrange
         var communityId = "XT";
-        Family fam = _dataFactory.GetFamily()
+        Family fam = DataFactory.GetFamily()
             .WithCommunityId(communityId);
         var families = new[] {fam, fam};
 
@@ -96,7 +95,7 @@ internal class FamiliesPost
     {
         // Arrange
         var communityId = "XT";
-        Family fam = _dataFactory.GetFamily().WithCommunityId(communityId);
+        Family fam = DataFactory.GetFamily().WithCommunityId(communityId);
         var families = new[] {fam};
 
         var request = new Request

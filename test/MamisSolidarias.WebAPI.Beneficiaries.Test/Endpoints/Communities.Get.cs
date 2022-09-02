@@ -16,8 +16,7 @@ internal class CommunitiesGet
 {
     private Endpoint _endpoint = null!;
     private readonly Mock<Communities.GET.DbAccess> _mockDbAccess = new();
-    private readonly DataFactory _dataFactory = new(null);
-
+    
     [SetUp]
     public void SetUp()
     {
@@ -36,7 +35,7 @@ internal class CommunitiesGet
     public async Task WithManyCommunities_Succeeds()
     {
         // Arrange
-        var communities = _dataFactory.GetCommunities(3).Select(t=> t.Build()).ToList();
+        var communities = DataFactory.GetCommunities(3).Select(t=> t.Build()).ToList();
         _mockDbAccess.Setup(t => t.GetCommunities(It.IsAny<CancellationToken>()))
             .ReturnsAsync(communities);
         
