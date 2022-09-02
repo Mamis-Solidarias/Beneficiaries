@@ -1,6 +1,5 @@
 using FastEndpoints;
 using MamisSolidarias.Infrastructure.Beneficiaries;
-using MamisSolidarias.Infrastructure.Beneficiaries.Models;
 
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Beneficiaries.Id.POST;
