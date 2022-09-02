@@ -44,25 +44,16 @@ internal class BeneficiariesIdPost
     [Test]
     public async Task GetBeneficiaryById_Succeeds()
     {
-        try
-        {
-            // Arrange
-            // const int id = 123;
-            Beneficiary beneficiary = _dataFactory.GenerateBeneficiary();
+        // Arrange
+        Beneficiary beneficiary = _dataFactory.GenerateBeneficiary();
 
-            // Act
-            var result = await _dbAccess.GetBeneficiary(beneficiary.Id, default);
+        // Act
+        var result = await _dbAccess.GetBeneficiary(beneficiary.Id, default);
 
-            // Assert
-            result.Should().NotBeNull();
-            result?.Id.Should().Be(beneficiary.Id);
-            result?.Dni.Should().Be(beneficiary.Dni);
-        }
-        catch (Exception e)
-        {
-            _dbContext.Beneficiaries.ToList().ForEach(Console.WriteLine);
-            Assert.Fail();
-        }
+        // Assert
+        result.Should().NotBeNull();
+        result?.Id.Should().Be(beneficiary.Id);
+        result?.Dni.Should().Be(beneficiary.Dni);
     }
 
     [Test]

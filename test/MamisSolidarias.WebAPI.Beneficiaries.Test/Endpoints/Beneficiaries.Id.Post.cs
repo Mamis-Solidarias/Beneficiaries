@@ -40,10 +40,10 @@ internal class BeneficiariesIdPost
             It.Is<int>(r => r == id),
             It.IsAny<CancellationToken>()
         )).ReturnsAsync(beneficiary);
-        
+
         // Act
         await _endpoint.HandleAsync(new Request {Id = id}, default);
-        
+
         // Assert
         _endpoint.HttpContext.Response.StatusCode.Should().Be(200);
         beneficiary.IsActive.Should().BeTrue();
@@ -59,10 +59,10 @@ internal class BeneficiariesIdPost
             It.Is<int>(r => r == id),
             It.IsAny<CancellationToken>()
         )).ReturnsAsync((Beneficiary?) null);
-        
+
         // Act
         await _endpoint.HandleAsync(new Request {Id = id}, default);
-        
+
         // Assert
         _endpoint.HttpContext.Response.StatusCode.Should().Be(404);
     }
@@ -78,13 +78,11 @@ internal class BeneficiariesIdPost
             It.Is<int>(r => r == id),
             It.IsAny<CancellationToken>()
         )).ReturnsAsync(beneficiary);
-        
+
         // Act
         await _endpoint.HandleAsync(new Request {Id = id}, default);
 
         // Assert
         _endpoint.HttpContext.Response.StatusCode.Should().Be(400);
     }
-    
-    
 }
