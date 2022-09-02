@@ -21,9 +21,9 @@ internal class BeneficiaryBuilder
         .RuleFor(t => t.Family, new FamilyBuilder().Build())
         .RuleFor(t => t.Gender, f => f.PickRandom<BeneficiaryGender>())
         .RuleFor(t => t.Health, new HealthBuilder().Build())
-        .RuleFor(t => t.Id, f => f.UniqueIndex)
+        .RuleFor(t => t.Id, f => f.Random.Int(1,1000000))
         .RuleFor(t => t.Job, (_, b) =>
-            (DateTime.Now.Year - b.Birthday.Year) > 18 ? new JobBuilder().Build() : null
+            DateTime.Now.Year - b.Birthday.Year > 18 ? new JobBuilder().Build() : null
         )
         .RuleFor(t => t.Likes, f => f.Lorem.Sentence())
         .RuleFor(t => t.Type, (_, b) =>

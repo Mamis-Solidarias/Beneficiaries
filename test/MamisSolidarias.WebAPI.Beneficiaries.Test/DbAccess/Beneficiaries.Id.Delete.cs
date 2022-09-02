@@ -43,12 +43,10 @@ internal class BeneficiariesIdDelete
     public async Task GetBeneficiaryById_Succeeds()
     {
         // Arrange
-        const int id = 123;
-        Beneficiary beneficiary = _dataFactory.GenerateBeneficiary()
-            .WithId(id);
+        Beneficiary beneficiary = _dataFactory.GenerateBeneficiary();
         
         // Act
-        var result = await _dbAccess.GetBeneficiary(id, default);
+        var result = await _dbAccess.GetBeneficiary(beneficiary.Id, default);
         
         // Assert
         result.Should().NotBeNull();
