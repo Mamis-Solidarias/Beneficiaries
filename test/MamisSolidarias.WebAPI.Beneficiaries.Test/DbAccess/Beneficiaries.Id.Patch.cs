@@ -10,10 +10,10 @@ using NUnit.Framework;
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.DbAccess;
 
-internal class BeneficiariesIdDelete
+internal class BeneficiariesIdPatch
 {
     private BeneficiariesDbContext _dbContext = null!;
-    private Endpoints.Beneficiaries.Id.DELETE.DbAccess _dbAccess = null!;
+    private Endpoints.Beneficiaries.Id.PATCH.DbAccess _dbAccess = null!;
     private DataFactory _dataFactory = null!;
 
     [SetUp]
@@ -43,10 +43,12 @@ internal class BeneficiariesIdDelete
     public async Task GetBeneficiaryById_Succeeds()
     {
         // Arrange
-        Beneficiary beneficiary = _dataFactory.GenerateBeneficiary();
+        const int id = 123;
+        Beneficiary beneficiary = _dataFactory.GenerateBeneficiary()
+            .WithId(id);
         
         // Act
-        var result = await _dbAccess.GetBeneficiary(beneficiary.Id, default);
+        var result = await _dbAccess.GetBeneficiary(id, default);
         
         // Assert
         result.Should().NotBeNull();

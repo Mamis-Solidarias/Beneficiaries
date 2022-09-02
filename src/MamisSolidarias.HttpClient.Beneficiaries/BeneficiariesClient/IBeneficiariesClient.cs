@@ -124,5 +124,17 @@ public interface IBeneficiariesClient
     Task ReactivateBeneficiary(WebAPI.Beneficiaries.Endpoints.Beneficiaries.Id.POST.Request request,
         CancellationToken token
     );
+    
+    /// <summary>
+    /// It partially updates a beneficiary
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="token"></param>
+    /// <returns></returns>
+    Task<WebAPI.Beneficiaries.Endpoints.Beneficiaries.Id.PATCH.Response?>
+        UpdateBeneficiary(
+            WebAPI.Beneficiaries.Endpoints.Beneficiaries.Id.PATCH.Request request,
+        CancellationToken token
+    );
 
 }
