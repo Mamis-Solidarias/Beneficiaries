@@ -94,4 +94,15 @@ public interface IBeneficiariesClient
             CancellationToken token
         );
 
+    /// <summary>
+    /// It creates a set of beneficiaries in a given family
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="token"></param>
+    /// <returns></returns>
+    Task<WebAPI.Beneficiaries.Endpoints.Families.Id.Beneficiaries.POST.Response?>
+        CreateBeneficiaries(WebAPI.Beneficiaries.Endpoints.Families.Id.Beneficiaries.POST.Request request,
+            CancellationToken token
+        );
+
 }
