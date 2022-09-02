@@ -104,5 +104,15 @@ public interface IBeneficiariesClient
         CreateBeneficiaries(WebAPI.Beneficiaries.Endpoints.Families.Id.Beneficiaries.POST.Request request,
             CancellationToken token
         );
+    
+    /// <summary>
+    /// It soft deletes a beneficiary
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="token"></param>
+    /// <returns></returns>
+    Task DeleteBeneficiary(WebAPI.Beneficiaries.Endpoints.Beneficiaries.Id.DELETE.Request request,
+            CancellationToken token
+        );
 
 }
