@@ -15,6 +15,7 @@ internal class Beneficiary
     public string? Comments { get; set; }
     public string? Likes { get; set; }
     
+    public bool? IsActive { get; set; }
     public string FamilyId { get; set; } = string.Empty;
     public Family? Family { get; set; }
     public Clothes? Clothes { get; set; }
@@ -56,6 +57,10 @@ internal class BeneficiaryModelBuilder : IEntityTypeConfiguration<Beneficiary>
         
         b.Property(t => t.Comments).HasMaxLength(1000);
         b.Property(t => t.Likes).HasMaxLength(1000);
+
+        b.Property(t => t.IsActive)
+            .HasDefaultValue(true)
+            .IsRequired();
 
         b.HasOne(t => t.Family)
             .WithMany(t => t.Beneficiaries)
