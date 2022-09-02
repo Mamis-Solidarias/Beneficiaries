@@ -60,7 +60,8 @@ internal class BeneficiaryModelBuilder : IEntityTypeConfiguration<Beneficiary>
         b.HasOne(t => t.Family)
             .WithMany(t => t.Beneficiaries)
             .HasForeignKey(t => t.FamilyId)
-            .HasPrincipalKey(t => t.Id);
+            .HasPrincipalKey(t => t.Id)
+            .IsRequired();
 
         b.HasOne(t => t.Clothes);
 

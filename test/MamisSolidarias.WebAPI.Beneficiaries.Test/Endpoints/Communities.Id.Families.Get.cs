@@ -15,7 +15,6 @@ internal class CommunitiesIdFamiliesGet
 {
     private Endpoint _endpoint = null!;
     private readonly Mock<Communities.Id.Families.GET.DbAccess> _mockDbAccess = new();
-    private readonly DataFactory _dataFactory = new(null);
 
     [SetUp]
     public void SetUp()
@@ -37,8 +36,8 @@ internal class CommunitiesIdFamiliesGet
         // Arrange
         var pageSize = 10;
         var page = 2;
-        Community community = _dataFactory.GetCommunity();
-        var families = _dataFactory.GetFamilies(pageSize)
+        Community community = DataFactory.GetCommunity();
+        var families = DataFactory.GetFamilies(pageSize)
             .Select(t => t.WithCommunity(community).Build())
             .ToList();
 

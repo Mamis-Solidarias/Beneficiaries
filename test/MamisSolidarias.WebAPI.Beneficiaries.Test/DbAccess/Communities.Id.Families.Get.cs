@@ -45,13 +45,13 @@ internal class CommunitiesIdFamiliesGet
         // Arrange
         _dataFactory.GenerateCommunity()
             .WithId("XT")
-            .WithFamilies(_dataFactory.GetFamilies(15)
+            .WithFamilies(DataFactory.GetFamilies(15)
                 .Select(t => t.WithCommunityId("XT").Build()))
             .Build();
         
         _dataFactory.GenerateCommunity()
             .WithId("MMM")
-            .WithFamilies(_dataFactory.GetFamilies(5)
+            .WithFamilies(DataFactory.GetFamilies(5)
                 .Select(t => t.WithCommunityId("MMM").Build()))
             .Build();
         
@@ -69,7 +69,7 @@ internal class CommunitiesIdFamiliesGet
 
         _dataFactory.GenerateCommunity()
             .WithId("MMM")
-            .WithFamilies(_dataFactory.GetFamilies(5)
+            .WithFamilies(DataFactory.GetFamilies(5)
                 .Select(t => t.WithCommunityId("MMM").Build()))
             .Build();
 

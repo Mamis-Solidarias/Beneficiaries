@@ -11,11 +11,10 @@ using NUnit.Framework;
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints;
 
-internal class CommunitiesIdFamiliesIdGet
+internal class FamiliesIdGet
 {
     private Endpoint _endpoint = null!;
     private readonly Mock<Families.Id.GET.DbAccess> _mockDbAccess = new();
-    private readonly DataFactory _dataFactory = new(null);
 
     [SetUp]
     public void SetUp()
@@ -34,7 +33,7 @@ internal class CommunitiesIdFamiliesIdGet
     public async Task WithValidParameters_Succeeds()
     {
         // Arrange
-        Family family = _dataFactory.GetFamily();
+        Family family = DataFactory.GetFamily();
         var request = new Request
         {
             FamilyId = family.Id

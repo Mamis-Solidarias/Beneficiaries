@@ -1,3 +1,4 @@
+using EntityFramework.Exceptions.PostgreSQL;
 using MamisSolidarias.Infrastructure.Beneficiaries.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,8 +10,13 @@ internal class BeneficiariesDbContext : DbContext
     public DbSet<Family> Families { get; set; }
     
     public DbSet<Beneficiary> Beneficiaries { get; set; }
-    
-    public BeneficiariesDbContext(DbContextOptions<BeneficiariesDbContext> options) : base(options) { }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseExceptionProcessor();
+    }
+    public BeneficiariesDbContext(DbContextOptions<BeneficiariesDbContext> options) : base(options)
+    { }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

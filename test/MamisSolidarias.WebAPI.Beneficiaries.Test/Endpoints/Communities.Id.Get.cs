@@ -14,7 +14,6 @@ internal class CommunitiesIdGet
 {
     private Endpoint _endpoint = null!;
     private readonly Mock<Communities.Id.GET.DbAccess> _mockDbAccess = new();
-    private readonly DataFactory _dataFactory = new(null);
 
     [SetUp]
     public void SetUp()
@@ -34,7 +33,7 @@ internal class CommunitiesIdGet
     public async Task WithValidParameters_Succeeds()
     {
         // Arrange
-        Community community = _dataFactory.GetCommunity();
+        Community community = DataFactory.GetCommunity();
         var request = new Request {Id = community.Id!};
 
         _mockDbAccess.Setup(t =>

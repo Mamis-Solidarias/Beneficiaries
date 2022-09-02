@@ -25,12 +25,6 @@ internal static class ServiceRegistrator
             tracerProviderBuilder
                 .AddConsoleExporter()
                 .AddJaegerExporter()
-                // .AddOtlpExporter(opt =>
-                // {
-                //     opt.Endpoint = new Uri("https://otlp.nr-data.net");
-                //     opt.Headers["api-key"] = "";
-                //     opt.Protocol = OtlpExportProtocol.HttpProtobuf;
-                // })
                 .AddSource(builder.Configuration["Service:Name"])
                 .SetResourceBuilder(
                     ResourceBuilder.CreateDefault()
@@ -39,6 +33,7 @@ internal static class ServiceRegistrator
                 .AddAspNetCoreInstrumentation(t=> t.RecordException = true)
                 .AddEntityFrameworkCoreInstrumentation(t=> t.SetDbStatementForText = true);
         });        
+        
         builder.Services.AddFastEndpoints();
         builder.Services.AddAuthenticationJWTBearer(builder.Configuration["JWT:Key"]);
         builder.Services.AddAuthorization(t =>
@@ -50,6 +45,7 @@ internal static class ServiceRegistrator
             t => 
                 t.UseNpgsql(connectionString, r=> r.MigrationsAssembly("MamisSolidarias.WebAPI.Beneficiaries"))
                     .EnableSensitiveDataLogging(!builder.Environment.IsProduction())
+                    
         );
 
         if (!builder.Environment.IsProduction())

@@ -7,7 +7,7 @@ internal class Clothes
 {
     public int Id { get; set; }
 
-    public int? ShoeSize { get; set; }
+    public string? ShoeSize { get; set; }
     public string? ShirtSize { get; set; }
     public string? PantsSize { get; set; }
 }
@@ -20,9 +20,9 @@ internal class ClothesModelBuidler : IEntityTypeConfiguration<Clothes>
         builder.Property(t => t.Id).ValueGeneratedOnAdd();
         
         builder.Property(t => t.ShirtSize).HasMaxLength(50);
+        builder.Property(t => t.ShoeSize).HasMaxLength(50);
         builder.Property(t => t.PantsSize).HasMaxLength(50);
     }
     
 }
 
-public record ClothesRequest(int? Shoes, string? Shirt, string? Pants);

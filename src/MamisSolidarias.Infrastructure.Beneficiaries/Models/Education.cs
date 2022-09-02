@@ -30,7 +30,7 @@ internal class EducationModelBuilder : IEntityTypeConfiguration<Education>
             .ValueGeneratedOnAdd();
         
         builder.Property(t => t.Year)
-            .HasMaxLength(10);
+            .HasMaxLength(50);
         builder.Property(t => t.School)
             .HasMaxLength(100);
         builder.Property(t => t.TransportationMethod)

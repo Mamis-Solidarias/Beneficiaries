@@ -9,7 +9,7 @@ using NUnit.Framework;
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.DbAccess;
 
-internal class CommunitiesIdFamiliesIdGet
+internal class FamiliesIdGet
 {
     internal class CommunitiesIdFamiliesIdPatch
     {

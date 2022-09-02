@@ -11,10 +11,9 @@ using NUnit.Framework;
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints;
 
-internal class CommunitiesIdFamiliesIdPatch
+internal class FamiliesIdPatch
 {
     private Endpoint _endpoint = null!;
-    private readonly DataFactory _dataFactory = new(null);
     private readonly Mock<Families.Id.PATCH.DbAccess> _mockDb = new();
     
     [SetUp]
@@ -33,7 +32,7 @@ internal class CommunitiesIdFamiliesIdPatch
     public async Task WithAllParameters_Succeeds()
     {
         // Arrange
-        Family family = _dataFactory.GetFamily();
+        Family family = DataFactory.GetFamily();
         
         _mockDb.Setup(t => t.GetFamily(
             It.Is<string>(r => r == family.Id),
@@ -66,7 +65,7 @@ internal class CommunitiesIdFamiliesIdPatch
     public async Task WithOnlyAddress_Succeeds()
     {
         // Arrange
-        Family family = _dataFactory.GetFamily();
+        Family family = DataFactory.GetFamily();
         
         _mockDb.Setup(t => t.GetFamily(
             It.Is<string>(r => r == family.Id),
@@ -96,7 +95,7 @@ internal class CommunitiesIdFamiliesIdPatch
     public async Task WithOnlyName_Succeeds()
     {
         // Arrange
-        Family family = _dataFactory.GetFamily();
+        Family family = DataFactory.GetFamily();
         
         _mockDb.Setup(t => t.GetFamily(
             It.Is<string>(r => r == family.Id),
@@ -126,7 +125,7 @@ internal class CommunitiesIdFamiliesIdPatch
     public async Task WithOnlyDetails_Succeeds()
     {
         // Arrange
-        Family family = _dataFactory.GetFamily();
+        Family family = DataFactory.GetFamily();
         
         _mockDb.Setup(t => t.GetFamily(
             It.Is<string>(r => r == family.Id),
@@ -156,7 +155,7 @@ internal class CommunitiesIdFamiliesIdPatch
     public async Task WithOnlyContacts_Succeeds()
     {
         // Arrange
-        Family family = _dataFactory.GetFamily();
+        Family family = DataFactory.GetFamily();
         
         _mockDb.Setup(t => t.GetFamily(
             It.Is<string>(r => r == family.Id),

@@ -16,14 +16,12 @@ namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints;
 internal class CommunitiesPost
 {
     private Endpoint _endpoint = null!;
-    private DataFactory _dataFactory = new(null);
     private readonly Mock<Communities.POST.DbAccess> _mockDb = new();
     
     [SetUp]
     public void Setup()
     {
         _endpoint = EndpointFactory.CreateEndpoint<Endpoint>(null, _mockDb.Object);
-        
     }
 
     [TearDown]
@@ -36,7 +34,7 @@ internal class CommunitiesPost
     public async Task WithValidParameters_WithGeneratedIds_Succeeds()
     {
         // Arrange
-        var communities = _dataFactory.GetCommunities(2)
+        var communities = DataFactory.GetCommunities(2)
             .Select(t=> t.Build())
             .ToArray();
         
@@ -63,7 +61,7 @@ internal class CommunitiesPost
     public async Task WithValidParameters_WithoutIds_Succeeds()
     {
         // Arrange
-        var communities = _dataFactory.GetCommunities(2)
+        var communities = DataFactory.GetCommunities(2)
             .Select(t=> t.Build())
             .ToArray();
 
@@ -94,7 +92,7 @@ internal class CommunitiesPost
     public async Task WithInvalidParameters_RepeatedIds_Fails()
     {
         // Arrange
-        var communities = _dataFactory.GetCommunities(2)
+        var communities = DataFactory.GetCommunities(2)
             .Select(t=>t.Build())
             .ToArray();
 
