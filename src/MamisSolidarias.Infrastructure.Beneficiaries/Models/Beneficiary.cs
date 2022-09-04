@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace MamisSolidarias.Infrastructure.Beneficiaries.Models;
 
-internal class Beneficiary
+public class Beneficiary
 {
     public int Id { get; set; }
     public string FirstName { get; set; } = string.Empty;
@@ -24,13 +24,13 @@ internal class Beneficiary
     public Job? Job { get; set; }
 }
 
-internal enum BeneficiaryType
+public enum BeneficiaryType
 {
     Child,
     Adult
 }
 
-internal enum BeneficiaryGender
+public enum BeneficiaryGender
 {
     Male,
     Female,

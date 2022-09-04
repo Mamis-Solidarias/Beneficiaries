@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace MamisSolidarias.Infrastructure.Beneficiaries.Models;
 
-internal class Clothes
+public class Clothes
 {
     public int Id { get; set; }
 

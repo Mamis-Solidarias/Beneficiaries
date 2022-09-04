@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace MamisSolidarias.Infrastructure.Beneficiaries.Models;
 
-internal class Family
+public class Family
 {
 
     internal int InternalId { get; set; }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace MamisSolidarias.Infrastructure.Beneficiaries.Models;
 
-internal enum TransportationMethod
+public enum TransportationMethod
 {
     Walking,
     Car,
@@ -13,7 +13,7 @@ internal enum TransportationMethod
     Other
 }
 
-internal class Education
+public class Education
 {
     public int Id { get; set; }
     public string? Year { get; set; }

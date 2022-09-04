@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace MamisSolidarias.Infrastructure.Beneficiaries.Models;
 
-internal enum ContactType
+public enum ContactType
 {
     Phone,
     Email,
@@ -14,7 +14,7 @@ internal enum ContactType
     Other
 }
 
-internal class Contact
+public class Contact
 {
     internal int Id { get; set; }
     

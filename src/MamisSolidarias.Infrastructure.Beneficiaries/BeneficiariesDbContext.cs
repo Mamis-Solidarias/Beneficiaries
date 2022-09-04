@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MamisSolidarias.Infrastructure.Beneficiaries;
 #pragma warning disable CS8618
-internal class BeneficiariesDbContext : DbContext
+public class BeneficiariesDbContext : DbContext
 {
     public DbSet<Community> Communities { get; set; }
     public DbSet<Family> Families { get; set; }

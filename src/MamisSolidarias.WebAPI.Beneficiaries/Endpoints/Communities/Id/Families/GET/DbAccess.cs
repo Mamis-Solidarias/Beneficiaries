@@ -27,7 +27,41 @@ internal class DbAccess
         ArgumentNullException.ThrowIfNull(_db);
         return _db.Families
             .CountAsync(t => t.CommunityId == communityId,ct);
-            
-
+        
+    }
+    
+    // retrieve all families from the database
+    public virtual Task<List<Family>> GetFamilies(CancellationToken ct)
+    {
+        ArgumentNullException.ThrowIfNull(_db);
+        return _db.Families.AsNoTracking()
+            .Include(t => t.Contacts)
+            .ToListAsync(ct);
+    }
+    
+    // retrieve all families from the database without contacts
+    public virtual Task<List<Family>> GetFamiliesWithoutContacts(CancellationToken ct)
+    {
+        ArgumentNullException.ThrowIfNull(_db);
+        return _db.Families.AsNoTracking()
+            .ToListAsync(ct);
+    }
+    
+    // update a single family and retrieve all communities
+    public virtual async Task<List<Community>> UpdateFamily(Family family, CancellationToken ct)
+    {
+        ArgumentNullException.ThrowIfNull(_db);
+        _db.Families.Update(family);
+        await _db.SaveChangesAsync(ct);
+        return await _db.Communities.AsNoTracking().ToListAsync(ct);
+    }
+    
+    // update a single family and retrieve all communities tracking them
+    public virtual async Task<List<Community>> UpdateFamilyTracking(Family family, CancellationToken ct)
+    {
+        ArgumentNullException.ThrowIfNull(_db);
+        _db.Families.Update(family);
+        await _db.SaveChangesAsync(ct);
+        return await _db.Communities.ToListAsync(ct);
     }
 }
