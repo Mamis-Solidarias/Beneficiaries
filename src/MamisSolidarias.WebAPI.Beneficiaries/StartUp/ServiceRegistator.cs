@@ -1,6 +1,7 @@
 using FastEndpoints;
 using FastEndpoints.Security;
 using FastEndpoints.Swagger;
+using HotChocolate.Diagnostics;
 using MamisSolidarias.Infrastructure.Beneficiaries;
 using MamisSolidarias.Utils.Security;
 using Microsoft.EntityFrameworkCore;
@@ -28,10 +29,12 @@ internal static class ServiceRegistrator
                 .AddSource(builder.Configuration["Service:Name"])
                 .SetResourceBuilder(
                     ResourceBuilder.CreateDefault()
-                        .AddService(serviceName: builder.Configuration["Service:Name"], serviceVersion: builder.Configuration["Service:Version"]))
+                        .AddService(serviceName: builder.Configuration["Service:Name"],
+                            serviceVersion: builder.Configuration["Service:Version"]))
                 .AddHttpClientInstrumentation()
-                .AddAspNetCoreInstrumentation(t=> t.RecordException = true)
-                .AddEntityFrameworkCoreInstrumentation(t=> t.SetDbStatementForText = true);
+                .AddHotChocolateInstrumentation()
+                .AddAspNetCoreInstrumentation(t => t.RecordException = true)
+                .AddEntityFrameworkCoreInstrumentation(t => t.SetDbStatementForText = true);
         });        
         
         builder.Services.AddFastEndpoints();
@@ -47,8 +50,26 @@ internal static class ServiceRegistrator
                     .EnableSensitiveDataLogging(!builder.Environment.IsProduction())
                     
         );
+        
+        
+        builder.Services.AddGraphQLServer()
+            .AddQueryType<Queries.Beneficiaries>()
+            .AddInstrumentation(t =>
+            {
+                t.Scopes = ActivityScopes.All;
+                t.IncludeDocument = true;
+                t.RequestDetails = RequestDetails.All; 
+                t.IncludeDataLoaderKeys = true;
+            })
+            .AddAuthorization()
+            .AddProjections()
+            .AddFiltering()
+            .AddSorting()
+            .RegisterDbContext<BeneficiariesDbContext>();
 
         if (!builder.Environment.IsProduction())
-            builder.Services.AddSwaggerDoc();
+            builder.Services.AddSwaggerDoc(t=> t.Title = "Beneficiaries");
+
+        builder.Services.AddCors();
     }
 }

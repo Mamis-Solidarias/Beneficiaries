@@ -10,6 +10,13 @@ internal static class MiddlewareRegistrator
 {
     public static void Register(WebApplication app)
     {
+        app.UseCors(t =>
+        {
+            t.AllowAnyHeader();
+            t.AllowAnyOrigin();
+            t.AllowAnyMethod();
+        });
+        
         app.UseDefaultExceptionHandler();
         app.UseAuthentication();
         app.UseAuthorization();
@@ -17,6 +24,8 @@ internal static class MiddlewareRegistrator
         {
             t.Serializer.Options.Converters.Add(new DateOnlyJsonConverter());
         });
+        
+        app.MapGraphQL();
         
         using (var scope = app.Services.CreateScope())
         {
@@ -31,3 +40,5 @@ internal static class MiddlewareRegistrator
         }
     }
 }
+
+

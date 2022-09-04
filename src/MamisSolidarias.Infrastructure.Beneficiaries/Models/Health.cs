@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace MamisSolidarias.Infrastructure.Beneficiaries.Models;
 
 
-internal class Health
+public class Health
 {
     public int Id { get; set; }
     public bool? HasCovidVaccine { get; set; }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace MamisSolidarias.Infrastructure.Beneficiaries.Models;
 
-internal class Job
+public class Job
 {
     public int Id { get; set; }
     public string Title { get; set; } = string.Empty;

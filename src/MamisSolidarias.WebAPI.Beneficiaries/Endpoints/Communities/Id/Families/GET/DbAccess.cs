@@ -26,8 +26,7 @@ internal class DbAccess
     {
         ArgumentNullException.ThrowIfNull(_db);
         return _db.Families
-            .CountAsync(t => t.CommunityId == communityId,ct);
-            
-
+            .CountAsync(t => t.CommunityId == communityId, ct);
     }
+
 }
