@@ -24,8 +24,6 @@ internal static class ServiceRegistrator
         builder.Services.AddOpenTelemetryTracing(tracerProviderBuilder =>
         {
             tracerProviderBuilder
-                .AddConsoleExporter()
-                .AddJaegerExporter()
                 .AddSource(builder.Configuration["Service:Name"])
                 .SetResourceBuilder(
                     ResourceBuilder.CreateDefault()
@@ -35,6 +33,13 @@ internal static class ServiceRegistrator
                 .AddHotChocolateInstrumentation()
                 .AddAspNetCoreInstrumentation(t => t.RecordException = true)
                 .AddEntityFrameworkCoreInstrumentation(t => t.SetDbStatementForText = true);
+            
+            if (!builder.Environment.IsProduction())
+            {
+                tracerProviderBuilder
+                    .AddConsoleExporter()
+                    .AddJaegerExporter();
+            }
         });        
         
         builder.Services.AddFastEndpoints();
@@ -50,8 +55,7 @@ internal static class ServiceRegistrator
                     .EnableSensitiveDataLogging(!builder.Environment.IsProduction())
                     
         );
-        
-        
+
         builder.Services.AddGraphQLServer()
             .AddQueryType<Queries.Beneficiaries>()
             .AddInstrumentation(t =>
