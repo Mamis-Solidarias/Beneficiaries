@@ -14,10 +14,7 @@ internal class DbAccess
     {
         ArgumentNullException.ThrowIfNull(_dbContext);
         
-        foreach (var family in families)
-        {
-            await _dbContext.Families.AddAsync(family,ct);
-        }
+        await _dbContext.Families.AddRangeAsync(families,ct);
         
         await _dbContext.SaveChangesAsync(ct);
     }

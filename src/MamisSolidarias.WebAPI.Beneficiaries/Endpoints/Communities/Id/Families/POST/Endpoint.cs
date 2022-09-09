@@ -37,6 +37,8 @@ internal class Endpoint : Endpoint<Request>
     private static Family Map(FamilyRequest f, string communityId)
         => new()
         {
+            // To be overwritten by postgres using triggers
+            Id = Guid.NewGuid().ToString(),
             FamilyNumber = f.FamilyNumber ?? 0,
             Address = f.Address,
             Details = f.Details,
