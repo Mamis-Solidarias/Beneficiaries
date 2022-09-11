@@ -45,6 +45,6 @@ internal class Endpoint : Endpoint<Request,Response>
             Description = req.Description,
             Address = req.Address,
             Name = req.Name,
-            Id = req.CommunityCode
+            Id = req.CommunityCode?.Trim() == string.Empty ? null : req.CommunityCode?.Trim()
         };
 }
