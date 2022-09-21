@@ -6,7 +6,7 @@ internal class Description : Summary<Endpoint>
 {
     public Description()
     {
-        Summary = "It retireves a single community by its ID";
+        Summary = "DEPRECATED: Use GraphQL.\nIt retireves a single community by its ID";
         ExampleRequest = new Request()
         {
             Id = "MI"

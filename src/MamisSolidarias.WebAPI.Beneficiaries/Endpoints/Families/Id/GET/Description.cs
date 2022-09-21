@@ -6,7 +6,7 @@ internal class Description : Summary<Endpoint>
 {
     public Description()
     {
-        Summary = "It retrieves a single family";
+        Summary = "DEPRECATED: Use GraphQL.\nIt retrieves a single family";
         ExampleRequest = new Request
         {
             FamilyId = "TXT-123"
