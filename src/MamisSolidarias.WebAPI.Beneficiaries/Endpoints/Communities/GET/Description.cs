@@ -6,7 +6,7 @@ internal class Description : Summary<Endpoint>
 {
     public Description()
     {
-        Summary = "It retrieves all the created communities";
+        Summary = "DEPRECATED: Use GraphQL.\nIt retrieves all the created communities";
         Response<Response>();
         Response(401, "The user is not authenticated");
         Response(403, "The user does not have the required permissions");
