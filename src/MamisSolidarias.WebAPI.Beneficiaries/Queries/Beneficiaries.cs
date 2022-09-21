@@ -16,4 +16,21 @@ public class Beneficiaries
     [HotChocolate.Data.UseSorting]
     public IQueryable<Beneficiary> GetBeneficiaries([FromServices] BeneficiariesDbContext dbContext) =>
         dbContext.Beneficiaries;
+    
+    [Authorize(Policy = "CanRead")]
+    [UsePaging]
+    [UseProjection]
+    [HotChocolate.Data.UseFiltering]
+    [HotChocolate.Data.UseSorting]
+    public IQueryable<Family> GetFamilies([FromServices] BeneficiariesDbContext dbContext) =>
+        dbContext.Families;
+    
+    [Authorize(Policy = "CanRead")]
+    [UsePaging]
+    [UseProjection]
+    [HotChocolate.Data.UseFiltering]
+    [HotChocolate.Data.UseSorting]
+    public IQueryable<Community> GetCommunities([FromServices] BeneficiariesDbContext dbContext) =>
+        dbContext.Communities;
+    
 }
