@@ -12,7 +12,7 @@ internal static class ServiceRegistrator
     {
         builder.Services.SetUpOpenTelemetry(builder.Configuration,!builder.Environment.IsProduction());
         
-        builder.Services.AddFastEndpoints();
+        builder.Services.AddFastEndpoints(t=> t.SourceGeneratorDiscoveredTypes = DiscoveredTypes.All);
         builder.Services.AddAuthenticationJWTBearer(builder.Configuration["JWT:Key"]);
         builder.Services.AddAuthorization(t => t.ConfigurePolicies(Services.Beneficiaries));
         
