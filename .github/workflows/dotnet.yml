@@ -3,6 +3,12 @@ name: .NET
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - .github/workflows/dotnet.yml
+      - MamisSolidarias.Beneficiaries.sln
+      - src/**
+      - test/**
+      
   pull_request:
     branches: [ "main" ]
     paths:
