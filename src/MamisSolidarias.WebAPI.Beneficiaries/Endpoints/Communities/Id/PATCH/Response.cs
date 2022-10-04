@@ -1,8 +1,6 @@
 namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.PATCH;
 
-/// <summary>
-/// 
-/// </summary>
+
 /// <param name="Community">Requested community</param>
 public record Response(CommunityResponse Community);
 

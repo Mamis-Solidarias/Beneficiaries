@@ -33,7 +33,7 @@ internal class RequestValidator : Validator<Request>
 }
 
 /// 
-public class BeneficiaryRequest
+public record BeneficiaryRequest
 {
     /// <summary>First name of the beneficiary</summary>
     public string? FirstName { get; init; }
@@ -70,22 +70,6 @@ public class BeneficiaryRequest
 
     /// <summary>Job information for parents or tutors</summary>
     public JobRequest? Job { get; init; }
-
-    public void Deconstruct(out string? firstName, out string? lastName, out string? type, out string? gender, out DateOnly? birthday, out string? dni, out string? comments, out string? likes, out ClothesRequest? clothes, out EducationRequest? education, out HealthRequest? health, out JobRequest? job)
-    {
-        firstName = FirstName;
-        lastName = LastName;
-        type = Type;
-        gender = Gender;
-        birthday = Birthday;
-        dni = Dni;
-        comments = Comments;
-        likes = Likes;
-        clothes = Clothes;
-        education = Education;
-        health = Health;
-        job = Job;
-    }
 }
 
 internal class BeneficiaryRequestValidator : Validator<BeneficiaryRequest>
