@@ -1,17 +1,26 @@
-using MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.PATCH;
+using MamisSolidarias.HttpClient.Beneficiaries.Models;
 
 namespace MamisSolidarias.HttpClient.Beneficiaries.BeneficiariesClient;
 
-public partial class BeneficiariesClient
+partial class BeneficiariesClient
 {
-    public Task<Response?> UpdateCommunity(Request request, CancellationToken token)
+    /// <inheritdoc />
+    public Task<UpdateCommunityResponse?> UpdateCommunity(int id, UpdateCommunityRequest request, CancellationToken token)
     {
-        return CreateRequest(HttpMethod.Patch, $"communities/{request.Id}")
+        return CreateRequest(HttpMethod.Patch, $"communities/{id}")
             .WithContent(new
             {
                 request.Address,
                 request.Description
             })
-            .ExecuteAsync<Response>(token);
+            .ExecuteAsync<UpdateCommunityResponse>(token);
     }
+    
+
+    /// <param name="Address">Optional. New address of the community</param>
+    /// <param name="Description">Optional. New description of the community</param>
+    public sealed record UpdateCommunityRequest(string? Address, string? Description);
+    
+    /// <param name="Community">Requested community</param>
+    public sealed record UpdateCommunityResponse(Community Community);
 }

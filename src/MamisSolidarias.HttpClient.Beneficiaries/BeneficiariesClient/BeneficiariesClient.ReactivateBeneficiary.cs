@@ -1,10 +1,9 @@
-using MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Beneficiaries.Id.POST;
-
 namespace MamisSolidarias.HttpClient.Beneficiaries.BeneficiariesClient;
 
 public partial class BeneficiariesClient
 {
-    public Task ReactivateBeneficiary(Request request, CancellationToken token)
-        => CreateRequest(HttpMethod.Post, "beneficiaries", $"{request.Id}")
+    /// <inheritdoc />
+    public Task ReactivateBeneficiary(int id, CancellationToken token)
+        => CreateRequest(HttpMethod.Post, "beneficiaries", $"{id}")
             .ExecuteAsync(token);
 }
