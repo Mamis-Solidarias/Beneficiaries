@@ -3,7 +3,7 @@ on:
   push:
     branches: ["main"] 
     paths:
-      - src/MamisSolidarias.HttpClient.Users/**
+      - src/MamisSolidarias.HttpClient.Beneficiaries/**
       - .github/workflows/nuget.yml
   workflow_dispatch:
 jobs:
@@ -19,7 +19,7 @@ jobs:
         uses: alirezanet/publish-nuget@v3.0.4
         with:
           # Filepath of the project to be packaged, relative to root of repository
-          PROJECT_FILE_PATH: src/MamisSolidarias.HttpClient.Users/MamisSolidarias.HttpClient.Users.csproj
+          PROJECT_FILE_PATH: src/MamisSolidarias.HttpClient.Beneficiaries/MamisSolidarias.HttpClient.Beneficiaries.csproj
 
           # Regex pattern to extract version info in a capturing group
           VERSION_REGEX: ^\s*<PackageVersion>(.*)<\/PackageVersion>\s*$
