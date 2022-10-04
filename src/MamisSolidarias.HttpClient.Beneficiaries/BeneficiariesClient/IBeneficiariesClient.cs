@@ -2,6 +2,9 @@ using MamisSolidarias.HttpClient.Beneficiaries.Models;
 
 namespace MamisSolidarias.HttpClient.Beneficiaries.BeneficiariesClient;
 
+/// <summary>
+/// Interface for the Beneficiaries Client
+/// </summary>
 public interface IBeneficiariesClient
 {
     /// <summary>

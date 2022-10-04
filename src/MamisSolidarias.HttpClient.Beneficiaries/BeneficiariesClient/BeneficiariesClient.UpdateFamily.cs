@@ -2,6 +2,7 @@ namespace MamisSolidarias.HttpClient.Beneficiaries.BeneficiariesClient;
 
 partial class BeneficiariesClient
 {
+    /// <inheritdoc />
     public Task<UpdateFamilyResponse?> UpdateFamily(string familyId,UpdateFamilyRequest request, CancellationToken token)
         => CreateRequest(HttpMethod.Patch,  "families", familyId)
             .WithContent(new

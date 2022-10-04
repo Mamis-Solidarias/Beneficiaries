@@ -1,5 +1,6 @@
 namespace MamisSolidarias.HttpClient.Beneficiaries.Models;
 
+/// <param name="Id">Id of the beneficiary</param>
 /// <param name="FirstName">First name of the beneficiary</param>
 /// <param name="LastName">Last name of the beneficiary</param>
 /// <param name="Type">Type of the beneficiary</param>

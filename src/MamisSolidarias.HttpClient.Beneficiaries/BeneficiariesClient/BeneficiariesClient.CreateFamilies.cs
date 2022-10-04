@@ -2,6 +2,7 @@ namespace MamisSolidarias.HttpClient.Beneficiaries.BeneficiariesClient;
 
 partial class BeneficiariesClient
 {
+    /// <inheritdoc />
     public Task CreateFamilies(string communityId, CreateFamiliesRequest request, CancellationToken token)
     {
         return CreateRequest(HttpMethod.Post,"communities",communityId,"families")
@@ -12,6 +13,8 @@ partial class BeneficiariesClient
             .ExecuteAsync(token);
     }
 
+
+    /// <param name="Families">Families to add</param>
     public sealed record CreateFamiliesRequest(IEnumerable<FamilyRequest> Families);
     
     /// <summary>

@@ -4,6 +4,7 @@ namespace MamisSolidarias.HttpClient.Beneficiaries.BeneficiariesClient;
 
 partial class BeneficiariesClient
 {
+    /// <inheritdoc />
     public Task<Beneficiary?> UpdateBeneficiary(int id,UpdateBeneficiaryRequest request, CancellationToken token)
         => CreateRequest(HttpMethod.Patch, "beneficiaries", $"{id}")
             .WithContent(new
@@ -12,7 +13,8 @@ partial class BeneficiariesClient
             })
             .ExecuteAsync<Beneficiary>(token);
 
-
+    
+    /// <param name="Beneficiary">Beneficiary data</param>
     public sealed record UpdateBeneficiaryRequest(UpdateBeneficiaryRequestModel Beneficiary);
 
     /// <param name="FirstName">First name of the beneficiary</param>

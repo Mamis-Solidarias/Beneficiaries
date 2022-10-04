@@ -8,6 +8,9 @@ using Polly;
 
 namespace MamisSolidarias.HttpClient.Beneficiaries;
 
+/// <summary>
+/// Extension methods for setting up HttpClient services in an <see cref="IServiceCollection" />.
+/// </summary>
 public static class ServiceCollectionExtensions
 {
     /// <summary>

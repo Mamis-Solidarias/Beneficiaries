@@ -5,6 +5,7 @@ namespace MamisSolidarias.HttpClient.Beneficiaries.BeneficiariesClient;
 
 partial class BeneficiariesClient
 {
+    /// <inheritdoc />
     public Task<CreateBeneficiariesResponse?> CreateBeneficiaries(string familyId,CreateBeneficiariesRequest request, CancellationToken token)
         => CreateRequest(HttpMethod.Post, "families", familyId, "beneficiaries")
             .WithContent(new

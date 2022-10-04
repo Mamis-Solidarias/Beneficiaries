@@ -2,6 +2,7 @@ namespace MamisSolidarias.HttpClient.Beneficiaries.BeneficiariesClient;
 
 partial class BeneficiariesClient
 {
+    /// <inheritdoc />
     public Task<CreateCommunitiesResponse?> CreateCommunities(CreateCommunitiesRequest request, CancellationToken token)
     {
         return CreateRequest(HttpMethod.Post, "communities")
