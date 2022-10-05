@@ -5,7 +5,7 @@ namespace MamisSolidarias.WebAPI.Beneficiaries.CustomJsonConverters;
 
 internal class DateOnlyJsonConverter : System.Text.Json.Serialization.JsonConverter<DateOnly>
 {
-    private const string Format = "dd/MM/yyyy";
+    private const string Format = "yyyy-MM-dd";
 
     public override DateOnly Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
