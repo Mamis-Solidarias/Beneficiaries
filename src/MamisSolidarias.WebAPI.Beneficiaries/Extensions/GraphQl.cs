@@ -1,5 +1,6 @@
 using HotChocolate.Diagnostics;
 using MamisSolidarias.Infrastructure.Beneficiaries;
+using MamisSolidarias.Utils.Security;
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.Extensions;
 
@@ -21,6 +22,7 @@ internal static class GraphQl
             .AddProjections()
             .AddFiltering()
             .AddSorting()
-            .RegisterDbContext<BeneficiariesDbContext>();
+            .RegisterDbContext<BeneficiariesDbContext>()
+            .PublishSchemaDefinition(t => t.SetName($"{Services.Beneficiaries}gql"));
     }
 }
