@@ -10,12 +10,16 @@ internal static class OpenTelemetry
         services.AddOpenTelemetryTracing(tracerProviderBuilder =>
         {
             tracerProviderBuilder
-                .AddSource(configuration["Service:Name"])
+                .AddSource(configuration["OpenTelemetry:Service:Name"])
                 .SetResourceBuilder(
                     ResourceBuilder.CreateDefault()
-                        .AddService(serviceName:configuration["Service:Name"],
-                            serviceVersion: configuration["Service:Version"]))
-                .AddHttpClientInstrumentation()
+                        .AddService(serviceName:configuration["OpenTelemetry:Service:Name"],
+                            serviceVersion: configuration["OpenTelemetry:Service:Version"]))
+                .AddHttpClientInstrumentation(t =>
+                {
+                    t.RecordException = true;
+                    t.SetHttpFlavor = true;
+                })
                 .AddHotChocolateInstrumentation()
                 .AddAspNetCoreInstrumentation(t => t.RecordException = true)
                 .AddEntityFrameworkCoreInstrumentation(t => t.SetDbStatementForText = true);
@@ -24,7 +28,12 @@ internal static class OpenTelemetry
             {
                 tracerProviderBuilder
                     .AddConsoleExporter()
-                    .AddJaegerExporter();
+                    .AddJaegerExporter(t =>
+                    {
+                        var jaegerHost = configuration["OpenTelemetry:Jaeger:Host"];
+                        if (jaegerHost is not null)
+                            t.Endpoint = new Uri($"{jaegerHost}/api/traces");
+                    });
             }
         });        
     }
