@@ -27,7 +27,7 @@ internal sealed class FamiliesQuery
     [UseProjection]
     [UseFiltering]
     [UseSorting]
-    public IQueryable<Family?> GetFilteredFamilies([FromServices] BeneficiariesDbContext dbContext, FamilyFilter filter)
+    public IQueryable<Family?> GetFilteredFamilies([FromServices] BeneficiariesDbContext dbContext, FamiliesFilter filter)
     {
         var query = dbContext.Families.AsQueryable();
 
@@ -40,7 +40,7 @@ internal sealed class FamiliesQuery
         return query;
     }
 
-    internal sealed record FamilyFilter(string? CommunityId, string? Name);
+    public record FamiliesFilter(string? CommunityId, string? Name);
 }
 
 
