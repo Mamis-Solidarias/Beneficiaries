@@ -1,6 +1,7 @@
 using FastEndpoints;
 using MamisSolidarias.Infrastructure.Beneficiaries;
 using MamisSolidarias.Infrastructure.Beneficiaries.Models;
+using MamisSolidarias.WebAPI.Beneficiaries.Extensions;
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Beneficiaries.Id.PATCH;
 
@@ -82,7 +83,7 @@ internal class Endpoint : Endpoint<Request, Response>
         => h is null ? null : new HealthResponse(h.HasCovidVaccine, h.HasMandatoryVaccines, h.Observations);
 
     private static EducationResponse? Map(Education? e)
-        => e is null ? null : new EducationResponse(e.Year, e.School, e.TransportationMethod?.ToString());
+        => e is null ? null : new EducationResponse(e.Year.ToString(),e.Cycle.ToString(), e.School, e.TransportationMethod?.ToString());
 
     private static ClothesResponse? Map(Clothes? c)
         => c is null ? null : new ClothesResponse(c.ShoeSize, c.ShirtSize, c.PantsSize);
@@ -106,10 +107,9 @@ internal class Endpoint : Endpoint<Request, Response>
             : new Education
             {
                 School = t.School,
-                Year = t.Year,
-                TransportationMethod = t.TransportationMethod is null ? 
-                    null :
-                    Enum.Parse<TransportationMethod>(t.TransportationMethod)
+                Year = t.Year.Parse<SchoolYear>(),
+                Cycle = t.Year.Parse<SchoolYear>().ToSchoolCycle(),
+                TransportationMethod = t.TransportationMethod.Parse<TransportationMethod>()
             };
     
     private static Clothes? Map(ClothesRequest? t)
