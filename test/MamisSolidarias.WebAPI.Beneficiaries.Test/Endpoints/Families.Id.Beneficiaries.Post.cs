@@ -142,7 +142,7 @@ internal class FamiliesIdBeneficiariesPost
     private static EducationRequest? Map(Education? education) =>
         education is null ? 
             null : 
-            new EducationRequest(education.Year, education.School, education.TransportationMethod?.ToString());
+            new EducationRequest(education.Year?.ToString(), education.School, education.TransportationMethod?.ToString());
 
     private static ClothesRequest? Map(Clothes? clothes) =>
         clothes is null ? 
