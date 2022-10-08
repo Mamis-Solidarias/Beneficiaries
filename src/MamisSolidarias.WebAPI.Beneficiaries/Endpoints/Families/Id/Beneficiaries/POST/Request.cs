@@ -132,7 +132,7 @@ internal class EducationRequestValidator : Validator<EducationRequest>
     public EducationRequestValidator()
     {
         RuleFor(t => t.Year)
-            .MaximumLength(50).WithMessage("El año escolar puede tener como maximo 50 caracteres");
+            .IsEnumName(typeof(SchoolYear)).WithMessage("El año escolar no es valido");
 
         RuleFor(t => t.School)
             .MaximumLength(100).WithMessage("El nombre de la escuela debe tener menos de 100 caracteres");

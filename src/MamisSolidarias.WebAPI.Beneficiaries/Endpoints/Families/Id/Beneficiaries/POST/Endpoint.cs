@@ -2,6 +2,7 @@ using EntityFramework.Exceptions.Common;
 using FastEndpoints;
 using MamisSolidarias.Infrastructure.Beneficiaries;
 using MamisSolidarias.Infrastructure.Beneficiaries.Models;
+using MamisSolidarias.WebAPI.Beneficiaries.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Families.Id.Beneficiaries.POST;
@@ -37,7 +38,7 @@ internal class Endpoint : Endpoint<Request,Response>
                     Type = Enum.Parse<BeneficiaryType>(t.Type),
                     Gender = Enum.Parse<BeneficiaryGender>(t.Gender),
                     Birthday = t.Birthday,
-                    Dni = t.Dni.Replace(".",""),
+                    Dni = t.Dni.Replace(".","").Trim(),
                     Comments = t.Comments?.Trim(),
                     Likes = t.Likes?.Trim(),
                     FamilyId = req.FamilyId,
@@ -87,11 +88,10 @@ internal class Endpoint : Endpoint<Request,Response>
 
         return new Education
         {
-            Year = e.Year,
+            Year = e.Year.Parse<SchoolYear>(),
+            Cycle = e.Year.Parse<SchoolYear>().ToSchoolCycle(),
             School = e.School,
-            TransportationMethod = e.TransportationMethod is null
-                ? null
-                : Enum.Parse<TransportationMethod>(e.TransportationMethod)
+            TransportationMethod = e.TransportationMethod.Parse<TransportationMethod>()
         };
     }
 

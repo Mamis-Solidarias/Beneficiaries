@@ -8,7 +8,7 @@ internal class EducationBuilder
     private static readonly Faker<Education> Generator = new Faker<Education>()
         .RuleFor(t => t.Id, f => f.UniqueIndex)
         .RuleFor(t => t.School, f => f.Address.City())
-        .RuleFor(t => t.Year, f => f.Lorem.Word())
+        .RuleFor(t => t.Year, r=> r.PickRandom<SchoolYear>())
         .RuleFor(t => t.TransportationMethod, f => f.PickRandom<TransportationMethod>())
         ;
     private readonly Education _education = Generator.Generate();
@@ -28,7 +28,7 @@ internal class EducationBuilder
         return this;
     }
 
-    public EducationBuilder WithYear(string? year)
+    public EducationBuilder WithYear(SchoolYear? year)
     {
         _education.Year = year;
         return this;
