@@ -32,7 +32,7 @@ internal static class OpenTelemetry
                     {
                         var jaegerHost = configuration["OpenTelemetry:Jaeger:Endpoint"];
                         if (jaegerHost is not null)
-                            t.Endpoint = new Uri(jaegerHost);
+                            t.AgentHost = jaegerHost;
                     });
             }
         });        
