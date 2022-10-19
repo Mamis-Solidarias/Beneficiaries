@@ -15,11 +15,7 @@ internal static class OpenTelemetry
                     ResourceBuilder.CreateDefault()
                         .AddService(serviceName:configuration["OpenTelemetry:Name"],
                             serviceVersion: configuration["OpenTelemetry:Version"]))
-                .AddHttpClientInstrumentation(t =>
-                {
-                    t.RecordException = true;
-                    t.SetHttpFlavor = true;
-                })
+                .AddHttpClientInstrumentation(t => t.RecordException = true)
                 .AddHotChocolateInstrumentation()
                 .AddAspNetCoreInstrumentation(t => t.RecordException = true)
                 .AddEntityFrameworkCoreInstrumentation(t => t.SetDbStatementForText = true);
