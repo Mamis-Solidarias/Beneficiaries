@@ -4,11 +4,11 @@ internal static class EnumExtensions
 {
     public static T? Parse<T>(this string? value, bool ignoreCase = true) where T : struct
     {
-        if (string.IsNullOrEmpty(value))
+        if (string.IsNullOrWhiteSpace(value))
         {
             return null;
         }
 
-        return Enum.Parse<T>(value, ignoreCase);
+        return Enum.TryParse<T>(value, ignoreCase, out var result) ? result : null;
     }
 }

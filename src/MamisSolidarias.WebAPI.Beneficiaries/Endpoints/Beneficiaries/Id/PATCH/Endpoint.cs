@@ -36,16 +36,16 @@ internal class Endpoint : Endpoint<Request, Response>
         if (req.Beneficiary.Clothes is not null)
             b.Clothes = Map(req.Beneficiary.Clothes);
 
-        if (req.Beneficiary.Comments is not null)
-            b.Comments = req.Beneficiary.Comments;
+        if (!string.IsNullOrWhiteSpace(req.Beneficiary.Comments))
+            b.Comments = req.Beneficiary.Comments.Trim();
 
-        if (req.Beneficiary.Dni is not null)
-            b.Dni = req.Beneficiary.Dni;
+        if (!string.IsNullOrWhiteSpace(req.Beneficiary.Dni))
+            b.Dni = req.Beneficiary.Dni.Trim();
 
         if (req.Beneficiary.Education is not null)
             b.Education = Map(req.Beneficiary.Education);
 
-        if (req.Beneficiary.Gender is not null)
+        if (!string.IsNullOrWhiteSpace(req.Beneficiary.Gender))
             b.Gender = Enum.Parse<BeneficiaryGender>(req.Beneficiary.Gender);
 
         if (req.Beneficiary.Health is not null)
@@ -54,16 +54,16 @@ internal class Endpoint : Endpoint<Request, Response>
         if (req.Beneficiary.Job is not null)
             b.Job = Map(req.Beneficiary.Job);
 
-        if (req.Beneficiary.Likes is not null)
+        if (!string.IsNullOrWhiteSpace(req.Beneficiary.Likes))
             b.Likes = req.Beneficiary.Likes;
 
-        if (req.Beneficiary.Type is not null)
+        if (!string.IsNullOrWhiteSpace(req.Beneficiary.Type))
             b.Type = Enum.Parse<BeneficiaryType>(req.Beneficiary.Type);
 
-        if (req.Beneficiary.FirstName is not null)
+        if (!string.IsNullOrWhiteSpace(req.Beneficiary.FirstName))
             b.FirstName = req.Beneficiary.FirstName;
 
-        if (req.Beneficiary.LastName is not null)
+        if (!string.IsNullOrWhiteSpace(req.Beneficiary.LastName))
             b.LastName = req.Beneficiary.LastName;
 
         await _db.SaveChanges(ct);
@@ -89,31 +89,50 @@ internal class Endpoint : Endpoint<Request, Response>
         => c is null ? null : new ClothesResponse(c.ShoeSize, c.ShirtSize, c.PantsSize);
 
     private static Job? Map(JobRequest? t)
-        => t is null ? null : new Job {Title = t.Title};
+    {
+        if (t is null || string.IsNullOrWhiteSpace(t.Title))
+            return null;
+        
+        return new Job { Title = t.Title.Trim() };
+    }
 
     private static Health? Map(HealthRequest? t)
-        => t is null
-            ? null
-            : new Health
-            {
-                HasCovidVaccine = t.HasCovidVaccine,
-                HasMandatoryVaccines = t.HasMandatoryVaccines,
-                Observations = t.Observations
-            };
+    {
+        if (t is null || (string.IsNullOrWhiteSpace(t.Observations) && t.HasCovidVaccine is null && t.HasMandatoryVaccines is null))
+            return null;
+        
+        return new Health
+        {
+            HasCovidVaccine = t.HasCovidVaccine,
+            HasMandatoryVaccines = t.HasMandatoryVaccines,
+            Observations = string.IsNullOrWhiteSpace(t.Observations) ? null : t.Observations
+        };
+    }
 
     private static Education? Map(EducationRequest? t)
-        => t is null
-            ? null
-            : new Education
-            {
-                School = t.School,
-                Year = t.Year.Parse<SchoolYear>(),
-                Cycle = t.Year.Parse<SchoolYear>().ToSchoolCycle(),
-                TransportationMethod = t.TransportationMethod.Parse<TransportationMethod>()
-            };
-    
-    private static Clothes? Map(ClothesRequest? t)
-        => t is null ? null : new Clothes {PantsSize = t.Pants, ShirtSize = t.Shirt, ShoeSize = t.Shoes};
-    
+    {
+        if (t is null || (string.IsNullOrWhiteSpace(t.School) && string.IsNullOrWhiteSpace(t.Year) && string.IsNullOrWhiteSpace(t.TransportationMethod)))
+            return null;
+        
+        return new Education
+        {
+            School = string.IsNullOrWhiteSpace(t.School) ? null : t.School.Trim(),
+            Year = t.Year.Parse<SchoolYear>(),
+            Cycle = t.Year.Parse<SchoolYear>().ToSchoolCycle(),
+            TransportationMethod = t.TransportationMethod.Parse<TransportationMethod>()
+        };
+    }
 
+    private static Clothes? Map(ClothesRequest? t)
+    {
+        if (t is null || (string.IsNullOrWhiteSpace(t.Shirt) && string.IsNullOrWhiteSpace(t.Pants) && string.IsNullOrWhiteSpace(t.Shoes)))
+            return null;
+        
+        return new Clothes
+        {
+            PantsSize = string.IsNullOrWhiteSpace(t.Pants) ? null : t.Pants, 
+            ShirtSize = string.IsNullOrWhiteSpace(t.Shirt) ? null : t.Shirt, 
+            ShoeSize = string.IsNullOrWhiteSpace(t.Shoes)? null : t.Shoes
+        };
+    }
 }

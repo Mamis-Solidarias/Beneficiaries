@@ -20,19 +20,18 @@ internal class Endpoint : Endpoint<Request,Response>
     public override async Task HandleAsync(Request req, CancellationToken ct)
     {
         var community = await _db.GetCommunityById(req.Id, ct);
-
         if (community is null)
         {
             await SendNotFoundAsync(ct);
             return;
         }
 
-        if (req.Description is not null)
-            community.Description = req.Description;
+        if (!string.IsNullOrWhiteSpace(req.Description))
+            community.Description = req.Description.Trim();
 
-        if (req.Address is not null)
-            community.Address = req.Address;
-
+        if (!string.IsNullOrWhiteSpace(req.Address))
+            community.Address = req.Address.Trim();
+        
         await _db.SaveChanges(ct);
 
         await SendOkAsync(new Response(Map(community)), ct);
