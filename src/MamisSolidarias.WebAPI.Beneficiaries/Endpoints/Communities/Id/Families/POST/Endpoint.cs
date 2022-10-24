@@ -40,15 +40,15 @@ internal class Endpoint : Endpoint<Request>
             // To be overwritten by postgres using triggers
             Id = Guid.NewGuid().ToString(),
             FamilyNumber = f.FamilyNumber ?? 0,
-            Address = f.Address,
-            Details = f.Details,
-            CommunityId = communityId,
-            Name = f.Name,
+            Address = f.Address.Trim(),
+            Details = string.IsNullOrWhiteSpace(f.Details) ? null : f.Details.Trim(),
+            CommunityId = communityId.Trim(),
+            Name = f.Name.Trim(),
             Contacts = f.Contacts.Select(t => new Contact
             {
-                Content = t.Content,
+                Content = t.Content.Trim(),
                 IsPreferred = t.IsPreferred,
-                Title = t.Title,
+                Title = t.Title.Trim(),
                 Type = Enum.Parse<ContactType>(t.Type)
             }).ToList()
         };

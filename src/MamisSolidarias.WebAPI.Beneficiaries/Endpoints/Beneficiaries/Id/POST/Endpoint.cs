@@ -29,7 +29,7 @@ internal class Endpoint : Endpoint<Request>
             return;
         }
 
-        if (beneficiary.IsActive == true)
+        if (beneficiary.IsActive is true)
         {
             AddError("El beneficiario no esta inactivo");
             await SendErrorsAsync(cancellation:ct);

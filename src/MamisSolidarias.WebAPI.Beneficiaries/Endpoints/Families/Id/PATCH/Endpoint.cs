@@ -27,16 +27,16 @@ internal class Endpoint : Endpoint<Request,Response>
             return;
         }
 
-        if (req.Address is not null)
+        if (!string.IsNullOrWhiteSpace(req.Address))
             family.Address = req.Address;
         
         if (req.Contacts is not null)
             family.Contacts = req.Contacts.Select(Map).ToList();
 
-        if (req.Details is not null)
+        if (!string.IsNullOrWhiteSpace(req.Details))
             family.Details = req.Details;
 
-        if (req.Name is not null)
+        if (!string.IsNullOrWhiteSpace(req.Name))
             family.Name = req.Name;
 
         await _db.SaveChanges(ct);
@@ -49,8 +49,8 @@ internal class Endpoint : Endpoint<Request,Response>
         => new()
         {
             Type = Enum.Parse<ContactType>(t.Type),
-            Content = t.Content,
-            Title = t.Title,
+            Content = t.Content.Trim(),
+            Title = t.Title.Trim(),
             IsPreferred = t.IsPreferred,
         };
     

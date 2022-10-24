@@ -27,7 +27,7 @@ internal class Endpoint : Endpoint<Request,Response>
             var mappedCommunities = req.Communities.Select(Map);
             var communities = await _db.CreateCommunities(mappedCommunities, ct);
 
-            await SendAsync(new()
+            await SendAsync(new Response
             {
                 Communities = communities.Select(t => t.Id).OfType<string>()
             }, 201, ct);
@@ -42,9 +42,9 @@ internal class Endpoint : Endpoint<Request,Response>
     private static Community Map(CommunityRequest req)
         => new()
         {
-            Description = req.Description,
-            Address = req.Address,
-            Name = req.Name,
-            Id = req.CommunityCode?.Trim() == string.Empty ? null : req.CommunityCode?.Trim()
+            Description = string.IsNullOrWhiteSpace(req.Description) ? null : req.Description.Trim(),
+            Address = req.Address.Trim(),
+            Name = req.Name.Trim(),
+            Id = string.IsNullOrWhiteSpace(req.CommunityCode) ? null : req.CommunityCode.Trim()
         };
 }
