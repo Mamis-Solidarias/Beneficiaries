@@ -10,7 +10,7 @@ internal static class ServiceRegistrator
 {
     public static void Register(WebApplicationBuilder builder)
     {
-        builder.Services.SetUpOpenTelemetry(builder.Configuration,!builder.Environment.IsProduction());
+        builder.Services.SetUpOpenTelemetry(builder.Configuration,builder.Logging);
         builder.Services.AddDataProtection(builder.Configuration);
         builder.Services.AddFastEndpoints(t=> t.SourceGeneratorDiscoveredTypes = DiscoveredTypes.All);
         builder.Services.AddAuthenticationJWTBearer(
