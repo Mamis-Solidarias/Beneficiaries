@@ -13,28 +13,6 @@ public class Request
     /// </summary>
     [FromRoute] public int Id { get; set; }
     
-    /// <summary>
-    /// Parameters to update
-    /// </summary>
-    public BeneficiaryRequest Beneficiary { get; set; } = null!;
-}
-
-internal class RequestValidator : Validator<Request>
-{
-    public RequestValidator()
-    {
-        RuleFor(t => t.Beneficiary)
-            .SetValidator(new BeneficiaryRequestValidator());
-
-        RuleFor(t => t.Id)
-            .NotEmpty().WithMessage("Se debe indicar el Id de un beneficiario")
-            .GreaterThan(0).WithMessage("El Id debe ser valido");
-    }
-}
-
-/// 
-public record BeneficiaryRequest
-{
     /// <summary>First name of the beneficiary</summary>
     public string? FirstName { get; init; }
 
@@ -72,12 +50,17 @@ public record BeneficiaryRequest
     public JobRequest? Job { get; init; }
 }
 
-internal class BeneficiaryRequestValidator : Validator<BeneficiaryRequest>
+internal class RequestValidator : Validator<Request>
 {
     private readonly Regex _dniPattern = new(@"^[1-9]\d{0,2}(\.?\d{3}){2}$",
         RegexOptions.Compiled | RegexOptions.Multiline);
-    public BeneficiaryRequestValidator()
+    public RequestValidator()
     {
+        
+        RuleFor(t => t.Id)
+            .NotEmpty().WithMessage("Se debe indicar el Id de un beneficiario")
+            .GreaterThan(0).WithMessage("El Id debe ser valido");
+        
         RuleFor(t => t.FirstName)
             .MaximumLength(100).WithMessage("El nombre debe tener menos de 100 caracteres")
             .When(t => t.FirstName is not null);
@@ -129,6 +112,7 @@ internal class BeneficiaryRequestValidator : Validator<BeneficiaryRequest>
         RuleFor(t => t.Job)
             .SetValidator(new JobRequestValidator()!)
             .When(t => t.Job is not null);
+       
     }
 }
 
@@ -188,7 +172,7 @@ internal class HealthRequestValidator : Validator<HealthRequest>
 }
 
 /// <param name="Title">Job title</param>
-public record JobRequest(string Title);
+public record JobRequest(string? Title);
 internal class JobRequestValidator : Validator<JobRequest>
 {
     public JobRequestValidator()
