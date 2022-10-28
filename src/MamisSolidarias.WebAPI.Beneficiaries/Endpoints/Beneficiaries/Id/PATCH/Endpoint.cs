@@ -30,41 +30,41 @@ internal class Endpoint : Endpoint<Request, Response>
             return;
         }
 
-        if (req.Beneficiary.Birthday is not null)
-            b.Birthday = req.Beneficiary.Birthday.Value;
+        if (req.Birthday is not null)
+            b.Birthday = req.Birthday.Value;
 
-        if (req.Beneficiary.Clothes is not null)
-            b.Clothes = Map(req.Beneficiary.Clothes);
+        if (req.Clothes is not null)
+            b.Clothes = Map(req.Clothes);
 
-        if (!string.IsNullOrWhiteSpace(req.Beneficiary.Comments))
-            b.Comments = req.Beneficiary.Comments.Trim();
+        if (!string.IsNullOrWhiteSpace(req.Comments))
+            b.Comments = req.Comments.Trim();
 
-        if (!string.IsNullOrWhiteSpace(req.Beneficiary.Dni))
-            b.Dni = req.Beneficiary.Dni.Trim();
+        if (!string.IsNullOrWhiteSpace(req.Dni))
+            b.Dni = req.Dni.Trim();
 
-        if (req.Beneficiary.Education is not null)
-            b.Education = Map(req.Beneficiary.Education);
+        if (req.Education is not null)
+            b.Education = Map(req.Education);
 
-        if (!string.IsNullOrWhiteSpace(req.Beneficiary.Gender))
-            b.Gender = Enum.Parse<BeneficiaryGender>(req.Beneficiary.Gender);
+        if (!string.IsNullOrWhiteSpace(req.Gender))
+            b.Gender = Enum.Parse<BeneficiaryGender>(req.Gender);
 
-        if (req.Beneficiary.Health is not null)
-            b.Health = Map(req.Beneficiary.Health);
+        if (req.Health is not null)
+            b.Health = Map(req.Health);
 
-        if (req.Beneficiary.Job is not null)
-            b.Job = Map(req.Beneficiary.Job);
+        if (req.Job is not null)
+            b.Job = Map(req.Job);
 
-        if (!string.IsNullOrWhiteSpace(req.Beneficiary.Likes))
-            b.Likes = req.Beneficiary.Likes;
+        if (!string.IsNullOrWhiteSpace(req.Likes))
+            b.Likes = req.Likes;
 
-        if (!string.IsNullOrWhiteSpace(req.Beneficiary.Type))
-            b.Type = Enum.Parse<BeneficiaryType>(req.Beneficiary.Type);
+        if (!string.IsNullOrWhiteSpace(req.Type))
+            b.Type = Enum.Parse<BeneficiaryType>(req.Type);
 
-        if (!string.IsNullOrWhiteSpace(req.Beneficiary.FirstName))
-            b.FirstName = req.Beneficiary.FirstName;
+        if (!string.IsNullOrWhiteSpace(req.FirstName))
+            b.FirstName = req.FirstName;
 
-        if (!string.IsNullOrWhiteSpace(req.Beneficiary.LastName))
-            b.LastName = req.Beneficiary.LastName;
+        if (!string.IsNullOrWhiteSpace(req.LastName))
+            b.LastName = req.LastName;
 
         await _db.SaveChanges(ct);
         await SendOkAsync(Map(b), ct);

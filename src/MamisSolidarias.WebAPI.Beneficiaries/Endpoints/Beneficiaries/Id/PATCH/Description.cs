@@ -10,11 +10,8 @@ internal class Description : Summary<Endpoint>
         ExampleRequest = new Request
         {
             Id = 123,
-            Beneficiary = new BeneficiaryRequest()
-            {
-                FirstName = "Carlitos",
-                LastName = "Bala"
-            }
+            FirstName = "Carlitos",
+            LastName = "Bala"
         };
         Response();
         Response(400, "The Id is not valid");
