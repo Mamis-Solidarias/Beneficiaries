@@ -132,13 +132,13 @@ internal class EducationRequestValidator : Validator<EducationRequest>
     public EducationRequestValidator()
     {
         RuleFor(t => t.Year)
-            .IsEnumName(typeof(SchoolYear)).WithMessage("El año escolar no es valido");
+            .IsEnumName(typeof(SchoolYear),false).WithMessage("El año escolar no es valido");
 
         RuleFor(t => t.School)
             .MaximumLength(100).WithMessage("El nombre de la escuela debe tener menos de 100 caracteres");
 
         RuleFor(t => t.TransportationMethod)
-            .IsEnumName(typeof(TransportationMethod)).WithMessage("El modo de transporte no es valido");
+            .IsEnumName(typeof(TransportationMethod),false).WithMessage("El modo de transporte no es valido");
     }
 }
 

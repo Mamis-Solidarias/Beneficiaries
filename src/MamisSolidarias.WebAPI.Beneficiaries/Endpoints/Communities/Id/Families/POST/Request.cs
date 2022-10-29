@@ -104,7 +104,7 @@ internal class ContactRequestValidator : Validator<ContactRequest>
             .MaximumLength(100).WithMessage("El titulo debe tener como maximo 100 caracteres");
 
         RuleFor(t => t.Type)
-            .IsEnumName(typeof(ContactType))
+            .IsEnumName(typeof(ContactType),false)
             .WithMessage("El tipo de contacto no es valido");
     }
 }

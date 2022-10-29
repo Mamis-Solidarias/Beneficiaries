@@ -74,7 +74,7 @@ internal class ContactRequestValidator : Validator<ContactRequest>
             .MaximumLength(100).WithMessage("El titulo debe tener como maximo 100 caracteres");
 
         RuleFor(t => t.Type)
-            .IsEnumName(typeof(MamisSolidarias.Infrastructure.Beneficiaries.Models.ContactType))
+            .IsEnumName(typeof(MamisSolidarias.Infrastructure.Beneficiaries.Models.ContactType),false)
             .WithMessage("El tipo de contacto no es valido");
     }
 }
