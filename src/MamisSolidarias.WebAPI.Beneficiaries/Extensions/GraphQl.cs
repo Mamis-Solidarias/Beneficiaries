@@ -1,13 +1,16 @@
 using HotChocolate.Diagnostics;
 using MamisSolidarias.Infrastructure.Beneficiaries;
 using MamisSolidarias.Utils.Security;
+using StackExchange.Redis;
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.Extensions;
 
 internal static class GraphQl
 {
-    public static void SetUpGraphQl(this IServiceCollection services)
+    public static void SetUpGraphQl(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddSingleton(ConnectionMultiplexer.Connect($"{configuration["Redis:Host"]}:{configuration["Redis:Port"]}"));
+        
         services.AddGraphQLServer()
             .AddBeneficiariesTypes()
             .AddQueryType(t=> t.Name("Query"))
@@ -23,6 +26,13 @@ internal static class GraphQl
             .AddFiltering()
             .AddSorting()
             .RegisterDbContext<BeneficiariesDbContext>()
-            .PublishSchemaDefinition(t => t.SetName($"{Services.Beneficiaries}gql"));
+            .InitializeOnStartup()
+            .PublishSchemaDefinition(t =>
+            {
+                t.SetName($"{Services.Beneficiaries}gql");
+                t.PublishToRedis(configuration["GraphQl:GlobalSchemaName"],
+                    sp => sp.GetRequiredService<ConnectionMultiplexer>()
+                );
+            });
     }
 }
