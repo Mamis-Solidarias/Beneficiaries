@@ -21,7 +21,7 @@ internal static class ServiceRegistrator
         
         builder.Services.SetUpEntityFramework(builder.Configuration,builder.Environment);
 
-        builder.Services.SetUpGraphQl();
+        builder.Services.SetUpGraphQl(builder.Configuration);
 
         if (!builder.Environment.IsProduction())
             builder.Services.AddSwaggerDoc(t=> t.Title = "Beneficiaries");
