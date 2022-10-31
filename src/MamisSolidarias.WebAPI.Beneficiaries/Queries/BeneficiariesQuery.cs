@@ -1,7 +1,6 @@
 using HotChocolate.AspNetCore.Authorization;
 using MamisSolidarias.Infrastructure.Beneficiaries;
 using MamisSolidarias.Infrastructure.Beneficiaries.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.Queries;
@@ -15,13 +14,13 @@ internal sealed class BeneficiariesQuery
     [UseProjection]
     [UseFiltering]
     [UseSorting]
-    public IQueryable<Beneficiary> GetBeneficiaries([FromServices] BeneficiariesDbContext dbContext) =>
+    public IQueryable<Beneficiary> GetBeneficiaries(BeneficiariesDbContext dbContext) =>
         dbContext.Beneficiaries;
     
     [UseFirstOrDefault]
     [Authorize(Policy = "CanRead")]
     [UseProjection]
-    public IQueryable<Beneficiary?> GetBeneficiary([FromServices] BeneficiariesDbContext dbContext, int id) =>
+    public IQueryable<Beneficiary?> GetBeneficiary(BeneficiariesDbContext dbContext, int id) =>
         dbContext.Beneficiaries.Where(t=> t.Id == id);
 
 
@@ -29,7 +28,7 @@ internal sealed class BeneficiariesQuery
     [UsePaging]
     [UseProjection]
     [UseSorting]
-    public IQueryable<Beneficiary> GetFilteredBeneficiaries([FromServices] BeneficiariesDbContext dbContext,FilterParams filter)
+    public IQueryable<Beneficiary> GetFilteredBeneficiaries(BeneficiariesDbContext dbContext,FilterParams filter)
     {
         var query = dbContext.Beneficiaries.AsQueryable();
 
