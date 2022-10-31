@@ -9,7 +9,6 @@ internal static class GraphQl
 {
     public static void SetUpGraphQl(this IServiceCollection services, IConfiguration configuration)
     {
-        Console.WriteLine($"{configuration["Redis:Host"]}:{configuration["Redis:Port"]}");
         services.AddSingleton(ConnectionMultiplexer.Connect($"{configuration["Redis:Host"]}:{configuration["Redis:Port"]}"));
         
         services.AddGraphQLServer()
