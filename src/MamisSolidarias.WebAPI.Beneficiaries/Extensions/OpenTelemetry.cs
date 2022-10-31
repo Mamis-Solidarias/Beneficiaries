@@ -69,13 +69,12 @@ internal static class OpenTelemetry
         });
     }
 
-    private static OpenTelemetryLoggerOptions AddNewRelicExporter(this OpenTelemetryLoggerOptions builder,
+    private static void AddNewRelicExporter(this OpenTelemetryLoggerOptions builder,
         NewRelicOptions? newRelicOptions)
     {
-        if (string.IsNullOrWhiteSpace(newRelicOptions?.Url) || string.IsNullOrWhiteSpace(newRelicOptions.ApiKey))
-            return builder;
+        if (string.IsNullOrWhiteSpace(newRelicOptions?.Url) || string.IsNullOrWhiteSpace(newRelicOptions.ApiKey)) return;
 
-        return builder.AddOtlpExporter(t =>
+        builder.AddOtlpExporter(t =>
         {
             t.Endpoint = new Uri(newRelicOptions.Url);
             t.Headers = $"api-key={newRelicOptions.ApiKey}";
@@ -115,8 +114,8 @@ internal static class OpenTelemetry
     // ReSharper disable once ClassNeverInstantiated.Local
     private sealed class NewRelicOptions
     {
-        public string? ApiKey { get; init; }
-        public string? Url { get; init; }
+        public string? ApiKey { get; init; } = null;
+        public string? Url { get; init; } = null;
     }
 
     // ReSharper disable once ClassNeverInstantiated.Local

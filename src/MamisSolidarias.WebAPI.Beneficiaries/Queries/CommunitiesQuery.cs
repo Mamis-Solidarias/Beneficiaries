@@ -1,7 +1,6 @@
 using HotChocolate.AspNetCore.Authorization;
 using MamisSolidarias.Infrastructure.Beneficiaries;
 using MamisSolidarias.Infrastructure.Beneficiaries.Models;
-using Microsoft.AspNetCore.Mvc;
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.Queries;
 
@@ -13,12 +12,12 @@ internal sealed class CommunitiesQuery
     [UseProjection]
     [UseFiltering]
     [UseSorting]
-    public IQueryable<Community> GetCommunities([FromServices] BeneficiariesDbContext dbContext) =>
+    public IQueryable<Community> GetCommunities(BeneficiariesDbContext dbContext) =>
         dbContext.Communities;
 
     [UseFirstOrDefault]
     [Authorize(Policy = "CanRead")]
     [UseProjection]
-    public IQueryable<Community?> GetCommunity([FromServices] BeneficiariesDbContext dbContext,string id) =>
+    public IQueryable<Community?> GetCommunity(BeneficiariesDbContext dbContext,string id) =>
         dbContext.Communities.Where(t=> t.Id == id);
 }
