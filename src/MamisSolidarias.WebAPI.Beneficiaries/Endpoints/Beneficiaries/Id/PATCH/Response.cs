@@ -23,7 +23,7 @@ public record Response(
 /// <param name="Shoes">Shoe size</param>
 /// <param name="Shirt">Shirt size</param>
 /// <param name="Pants">Pants size</param>
-public record ClothesResponse(string? Shoes, string? Shirt, string? Pants);
+public record ClothesResponse(int? Shoes, string? Shirt, string? Pants);
 
 /// <param name="Year">In which year the student is in</param>
 /// <param name="Cycle">In which cycle the student is in</param>

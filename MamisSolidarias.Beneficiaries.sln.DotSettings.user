@@ -3,6 +3,7 @@
 	<s:String x:Key="/Default/CodeInspection/Highlighting/SweaWarningsMode/@EntryValue">ShowAndRun</s:String>
 	
 	<s:String x:Key="/Default/Environment/ContinuousTesting/TriggerMode/@EntryValue">OnSave</s:String>
+	<s:String x:Key="/Default/Environment/Highlighting/HighlightingSourceSnapshotLocation/@EntryValue">/Users/ldellisola/.jetbrains/rider/system/resharper-host/temp/Rider/vAny/CoverageData/_MamisSolidarias.Beneficiaries.-1814383899/Snapshot/snapshot.utdcvr</s:String>
 	
 	
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=1c3c00c8_002Dcda6_002D4d98_002D86f7_002D54739186b32f/@EntryIndexedValue">&lt;SessionState ContinuousTestingIsOn="True" ContinuousTestingMode="3" Name="All tests from Solution" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;

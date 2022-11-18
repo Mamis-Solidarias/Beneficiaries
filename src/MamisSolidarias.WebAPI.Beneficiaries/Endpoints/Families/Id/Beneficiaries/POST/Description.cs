@@ -29,7 +29,7 @@ internal class Description : Summary<Endpoint>
                     "37.123.934",
                     "Es el padre",
                     "Las computadoras",
-                    new ClothesRequest("45", "L", "M 35"),
+                    new ClothesRequest(45, "L", "M 35"),
                     null,
                     new HealthRequest(true, true, "Fat"),
                     new JobRequest("Electricista")
@@ -43,7 +43,7 @@ internal class Description : Summary<Endpoint>
                     "50.667.335",
                     "Vive con el papa",
                     "Los autos",
-                    new ClothesRequest("45", "L", "M 35"),
+                    new ClothesRequest(45, "L", "M 35"),
                     new EducationRequest("primer grado", "Euskal Echea", TransportationMethod.Car.ToString()),
                     new HealthRequest(true, true, "Fat"),
                     null

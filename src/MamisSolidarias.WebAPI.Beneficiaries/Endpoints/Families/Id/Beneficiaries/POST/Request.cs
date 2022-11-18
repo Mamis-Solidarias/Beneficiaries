@@ -105,7 +105,7 @@ internal class BeneficiaryRequestValidator : Validator<BeneficiaryRequest>
 /// <param name="Shoes">Shoe size</param>
 /// <param name="Shirt">Shirt size</param>
 /// <param name="Pants">Pants size</param>
-public record ClothesRequest(string? Shoes, string? Shirt, string? Pants);
+public record ClothesRequest(int? Shoes, string? Shirt, string? Pants);
 
 internal class ClothesRequestValidator : Validator<ClothesRequest>
 {
@@ -118,7 +118,8 @@ internal class ClothesRequestValidator : Validator<ClothesRequest>
             .MaximumLength(50).WithMessage("El tamaño de remeras no puede tener mas de 50 caracteres");
         
         RuleFor(t => t.Shoes)
-            .MaximumLength(50).WithMessage("El tamaño de zapatillas no puede tener mas de 50 caracteres");
+            .GreaterThan(10).WithMessage("El tamaño de calzado no puede ser menor a 10")
+            .LessThan(50).WithMessage("El tamaño de calzado no puede ser mayor a 45");
     }
 }
 

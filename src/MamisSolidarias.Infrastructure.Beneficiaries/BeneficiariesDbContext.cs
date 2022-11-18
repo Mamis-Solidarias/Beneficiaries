@@ -25,7 +25,7 @@ public class BeneficiariesDbContext : DbContext
         new ContactModelBuilder().Configure(modelBuilder.Entity<Contact>());
         
         new EducationModelBuilder().Configure(modelBuilder.Entity<Education>());
-        new ClothesModelBuidler().Configure(modelBuilder.Entity<Clothes>());
+        new ClothesModelBuilder().Configure(modelBuilder.Entity<Clothes>());
         new JobModelBuilder().Configure(modelBuilder.Entity<Job>());
         new HealthModelBuilder().Configure(modelBuilder.Entity<Health>());
         new BeneficiaryModelBuilder().Configure(modelBuilder.Entity<Beneficiary>());

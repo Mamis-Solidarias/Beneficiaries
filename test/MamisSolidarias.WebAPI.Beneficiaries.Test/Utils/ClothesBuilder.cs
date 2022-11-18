@@ -9,7 +9,7 @@ internal class ClothesBuilder
         .RuleFor(t => t.Id, f => f.UniqueIndex)
         .RuleFor(t => t.PantsSize, f => $"{f.Random.Number(3, 70)}")
         .RuleFor(t => t.ShirtSize, f => $"{f.Random.Number(3, 70)}")
-        .RuleFor(t => t.ShoeSize, f => $"{f.Random.Int(1, 50)}");
+        .RuleFor(t => t.ShoeSize, f =>f.Random.Int(11, 50));
 
     private readonly Clothes _clothes = Generator.Generate();
 
@@ -28,7 +28,7 @@ internal class ClothesBuilder
         return this;
     }
     
-    public ClothesBuilder WithShoeSize(string? shoes)
+    public ClothesBuilder WithShoeSize(int? shoes)
     {
         _clothes.ShoeSize = shoes;
         return this;
