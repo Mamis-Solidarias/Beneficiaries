@@ -100,12 +100,12 @@ internal class Endpoint : Endpoint<Request,Response>
 
     private static Clothes? Map(ClothesRequest? c)
     {
-        if (c is null || (string.IsNullOrWhiteSpace(c.Pants) && string.IsNullOrWhiteSpace(c.Shirt) && string.IsNullOrWhiteSpace(c.Shoes)))
+        if (c is null || (string.IsNullOrWhiteSpace(c.Pants) && string.IsNullOrWhiteSpace(c.Shirt) && c.Shoes is null))
             return null;
         
         return new Clothes
         {
-            ShoeSize =string.IsNullOrWhiteSpace(c.Shoes) ? null : c.Shoes.Trim(),
+            ShoeSize = c.Shoes,
             ShirtSize = string.IsNullOrWhiteSpace(c.Shirt) ? null : c.Shirt.Trim(),
             PantsSize = string.IsNullOrWhiteSpace(c.Pants) ? null : c.Pants.Trim()
         };
