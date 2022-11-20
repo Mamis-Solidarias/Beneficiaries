@@ -14,7 +14,7 @@
         <PackageReference Include="EntityFrameworkCore.Exceptions.Sqlite" Version="6.0.3" />
         <PackageReference Include="FluentAssertions" Version="6.8.0" />
         <PackageReference Include="MamisSolidarias.Utils" Version="1.4.2" />
-        <PackageReference Include="Microsoft.Data.Sqlite" Version="6.0.10" />
+        <PackageReference Include="Microsoft.Data.Sqlite" Version="7.0.0" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.10" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Core" Version="6.0.10" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
