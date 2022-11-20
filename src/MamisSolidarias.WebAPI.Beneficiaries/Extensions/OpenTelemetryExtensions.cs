@@ -6,7 +6,7 @@ using OpenTelemetry.Trace;
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.Extensions;
 
-internal static class OpenTelemetry
+internal static class OpenTelemetryExtensions
 {
     public static void SetUpOpenTelemetry(this IServiceCollection services, IConfiguration configuration, ILoggingBuilder logging)
     {

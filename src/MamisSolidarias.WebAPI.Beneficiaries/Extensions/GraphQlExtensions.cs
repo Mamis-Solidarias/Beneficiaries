@@ -5,7 +5,7 @@ using StackExchange.Redis;
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.Extensions;
 
-internal static class GraphQl
+internal static class GraphQlExtensions
 {
     public static void SetUpGraphQl(this IServiceCollection services, IConfiguration configuration)
     {

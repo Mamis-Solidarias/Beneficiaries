@@ -6,7 +6,7 @@ using MamisSolidarias.WebAPI.Beneficiaries.Extensions;
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.StartUp;
 
-internal static class ServiceRegistrator
+internal static class ServiceRegistrar
 {
     public static void Register(WebApplicationBuilder builder)
     {
@@ -26,6 +26,5 @@ internal static class ServiceRegistrator
         if (!builder.Environment.IsProduction())
             builder.Services.AddSwaggerDoc(t=> t.Title = "Beneficiaries");
 
-        builder.Services.AddCors();
     }
 }
