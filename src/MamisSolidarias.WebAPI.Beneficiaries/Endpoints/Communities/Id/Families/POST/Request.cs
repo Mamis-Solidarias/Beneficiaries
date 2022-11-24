@@ -1,6 +1,7 @@
 using FastEndpoints;
 using FluentValidation;
 using MamisSolidarias.Infrastructure.Beneficiaries.Models;
+using PhoneNumbers;
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.POST;
 
@@ -95,10 +96,6 @@ internal class ContactRequestValidator : Validator<ContactRequest>
 {
     public ContactRequestValidator()
     {
-        RuleFor(t => t.Content)
-            .NotEmpty().WithMessage("El contenido no puede estar vacio")
-            .MaximumLength(100).WithMessage("El contenido no tener mas de 100 caracteres");
-
         RuleFor(t => t.Title)
             .NotEmpty().WithMessage("La forma de contacto debe tener un nombre")
             .MaximumLength(100).WithMessage("El titulo debe tener como maximo 100 caracteres");
@@ -106,5 +103,23 @@ internal class ContactRequestValidator : Validator<ContactRequest>
         RuleFor(t => t.Type)
             .IsEnumName(typeof(ContactType),false)
             .WithMessage("El tipo de contacto no es valido");
+        
+        RuleFor(t => t.Content)
+            .NotEmpty().WithMessage("El contenido no puede estar vacio")
+            .Must(t =>
+            {
+                var phoneNumberValidator = PhoneNumberUtil.GetInstance();
+                var phoneNumber = phoneNumberValidator.Parse(t, "AR");
+                return phoneNumberValidator.IsValidNumber(phoneNumber) && PhoneNumberType.MOBILE == phoneNumberValidator.GetNumberType(phoneNumber);
+            }).WithMessage("El número de teléfono no es valido")
+            .When(t=> t.Type.Equals(ContactType.Whatsapp.ToString(),StringComparison.InvariantCultureIgnoreCase))
+            .Must(t =>
+            {
+                var phoneNumberValidator = PhoneNumberUtil.GetInstance();
+                var phoneNumber = phoneNumberValidator.Parse(t, "AR");
+                return phoneNumberValidator.IsValidNumber(phoneNumber) && PhoneNumberType.FIXED_LINE == phoneNumberValidator.GetNumberType(phoneNumber);
+            }).WithMessage("El número de teléfono fijo no es valido")
+            .When(t=>  t.Type.Equals(ContactType.Phone.ToString(),StringComparison.InvariantCultureIgnoreCase))
+            .MaximumLength(100).WithMessage("El contenido no tener mas de 100 caracteres");
     }
 }
