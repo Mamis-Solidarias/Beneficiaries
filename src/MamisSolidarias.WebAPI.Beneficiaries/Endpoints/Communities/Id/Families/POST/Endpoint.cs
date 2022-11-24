@@ -1,6 +1,7 @@
 using FastEndpoints;
 using MamisSolidarias.Infrastructure.Beneficiaries;
 using MamisSolidarias.Infrastructure.Beneficiaries.Models;
+using MamisSolidarias.WebAPI.Beneficiaries.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Communities.Id.Families.POST;
@@ -46,10 +47,14 @@ internal class Endpoint : Endpoint<Request>
             Name = f.Name.Trim(),
             Contacts = f.Contacts.Select(t => new Contact
             {
-                Content = t.Content.Trim(),
+                Content = t.Type.Parse<ContactType>() switch {
+                    ContactType.Phone => t.Content.ParsePhoneNumber(),
+                    ContactType.Whatsapp => t.Content.ParsePhoneNumber(),
+                    _ => t.Content.Trim()
+                },
                 IsPreferred = t.IsPreferred,
                 Title = t.Title.Trim(),
-                Type = Enum.Parse<ContactType>(t.Type)
+                Type = t.Type.Parse<ContactType>() ?? ContactType.Other,
             }).ToList()
         };
     

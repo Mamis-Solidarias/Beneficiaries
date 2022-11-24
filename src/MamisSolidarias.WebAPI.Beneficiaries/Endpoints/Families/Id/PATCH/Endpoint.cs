@@ -1,6 +1,7 @@
 using FastEndpoints;
 using MamisSolidarias.Infrastructure.Beneficiaries;
 using MamisSolidarias.Infrastructure.Beneficiaries.Models;
+using MamisSolidarias.WebAPI.Beneficiaries.Extensions;
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Families.Id.PATCH;
 
@@ -48,8 +49,13 @@ internal class Endpoint : Endpoint<Request,Response>
     private static Contact Map(ContactRequest t)
         => new()
         {
-            Type = Enum.Parse<ContactType>(t.Type),
-            Content = t.Content.Trim(),
+            Type = t.Type.Parse<ContactType>() ?? ContactType.Other,
+            Content = t.Type.Parse<ContactType>() switch
+            {
+                ContactType.Phone => t.Content.ParsePhoneNumber(),
+                ContactType.Whatsapp => t.Content.ParsePhoneNumber(),
+                _ => t.Content.Trim()
+            },
             Title = t.Title.Trim(),
             IsPreferred = t.IsPreferred,
         };

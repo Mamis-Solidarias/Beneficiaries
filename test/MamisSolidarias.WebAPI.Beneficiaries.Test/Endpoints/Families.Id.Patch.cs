@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
@@ -168,7 +169,7 @@ internal class FamiliesIdPatch
             Contacts = new []
             {
                 new ContactRequest("Facebook","carlos","Facebook Profile",false),
-                new ContactRequest("Whatsapp","+5491198233456","Whatsapp Madre",true)
+                new ContactRequest("Whatsapp","+5491158233456","Whatsapp Madre",true)
             }
         };
         
@@ -180,7 +181,17 @@ internal class FamiliesIdPatch
         var response = _endpoint.Response;
 
         response.Address.Should().Be(family.Address);
-        response.Contacts.Should().BeEquivalentTo(request.Contacts);
+        response.Contacts.Should().HaveSameCount(request.Contacts);
+        for (var i = 0; i < request.Contacts.Count(); i++)
+        {
+            var reqContact = request.Contacts.ToArray()[i];
+            var respContact= response.Contacts.ToArray()[i];
+
+            respContact.Content.Should().BeEquivalentTo(reqContact.Content.Trim('+'));
+            respContact.Title.Should().BeEquivalentTo(reqContact.Title);
+            respContact.IsPreferred.Should().Be(reqContact.IsPreferred);
+            respContact.Type.Should().BeEquivalentTo(reqContact.Type);
+        }
         response.Details.Should().Be(family.Details);
         response.Name.Should().Be(family.Name);
     }
