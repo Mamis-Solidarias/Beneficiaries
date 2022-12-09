@@ -30,7 +30,7 @@ internal static class GraphQlExtensions
             .PublishSchemaDefinition(t =>
             {
                 t.SetName($"{Services.Beneficiaries}gql");
-                t.PublishToRedis(configuration["GraphQl:GlobalSchemaName"],
+                t.PublishToRedis(configuration["GraphQl:GlobalSchemaName"] ?? throw new ArgumentException("GraphQl:GlobalSchemaName"),
                     sp => sp.GetRequiredService<ConnectionMultiplexer>()
                 );
             });
