@@ -8,9 +8,18 @@ namespace MamisSolidarias.WebAPI.Beneficiaries.Extensions;
 
 internal static class OpenTelemetryExtensions
 {
-    public static void SetUpOpenTelemetry(this IServiceCollection services, IConfiguration configuration, ILoggingBuilder logging)
+    private static ILogger? _logger;
+    public static void SetUpOpenTelemetry(this IServiceCollection services, IConfiguration configuration,
+        ILoggingBuilder logging, ILoggerFactory loggerFactory)
     {
+        _logger = loggerFactory.CreateLogger("OpenTelemetry");
         var options = configuration.GetSection("OpenTelemetry").Get<OpenTelemetryOptions>();
+
+        if (options is null)
+        {
+            _logger.LogWarning("OpenTelemetry options not found");
+            return;
+        }
 
         var resourceBuilder = ResourceBuilder
             .CreateDefault()
@@ -60,7 +69,10 @@ internal static class OpenTelemetryExtensions
         NewRelicOptions? newRelicOptions)
     {
         if (string.IsNullOrWhiteSpace(newRelicOptions?.Url) || string.IsNullOrWhiteSpace(newRelicOptions.ApiKey))
+        {
+            _logger?.LogWarning("NewRelic trace options not found");
             return builder;
+        }
         
         return builder.AddOtlpExporter(t =>
         {
@@ -72,7 +84,11 @@ internal static class OpenTelemetryExtensions
     private static void AddNewRelicExporter(this OpenTelemetryLoggerOptions builder,
         NewRelicOptions? newRelicOptions)
     {
-        if (string.IsNullOrWhiteSpace(newRelicOptions?.Url) || string.IsNullOrWhiteSpace(newRelicOptions.ApiKey)) return;
+        if (string.IsNullOrWhiteSpace(newRelicOptions?.Url) || string.IsNullOrWhiteSpace(newRelicOptions.ApiKey))
+        {
+            _logger?.LogWarning("NewRelic log options not found");
+            return;
+        }
 
         builder.AddOtlpExporter(t =>
         {
@@ -85,7 +101,10 @@ internal static class OpenTelemetryExtensions
         NewRelicOptions? newRelicOptions)
     {
         if (string.IsNullOrWhiteSpace(newRelicOptions?.Url) || string.IsNullOrWhiteSpace(newRelicOptions.ApiKey))
+        {
+            _logger?.LogWarning("NewRelic metric options not found");
             return builder;
+        }
 
         return builder.AddOtlpExporter((t, m) =>
         {
@@ -99,7 +118,10 @@ internal static class OpenTelemetryExtensions
         JaegerOptions? jaegerOptions)
     {
         if (jaegerOptions is null || string.IsNullOrWhiteSpace(jaegerOptions.Url))
+        {
+            _logger?.LogWarning("Jaeger options not found");
             return builder;
+        }
 
         return builder.AddJaegerExporter(t => t.AgentHost = jaegerOptions.Url);
     }
@@ -111,14 +133,12 @@ internal static class OpenTelemetryExtensions
         return builder;
     }
     
-    // ReSharper disable once ClassNeverInstantiated.Local
     private sealed class NewRelicOptions
     {
         public string? ApiKey { get; init; } = null;
         public string? Url { get; init; } = null;
     }
 
-    // ReSharper disable once ClassNeverInstantiated.Local
     private sealed class JaegerOptions
     {
         public string? Url { get; init; } = string.Empty;

@@ -13,6 +13,7 @@ internal static class MiddlewareRegistrar
         app.UseAuthentication();
         app.UseAuthorization();
         app.UseFastEndpoints(t => t.Serializer.Options.Converters.Add(new DateOnlyJsonConverter()));
+        // app.UseFastEndpoints();
         app.MapGraphQL();
         app.RunMigrations();
 
