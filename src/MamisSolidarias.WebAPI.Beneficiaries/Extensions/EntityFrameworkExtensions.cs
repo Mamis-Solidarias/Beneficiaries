@@ -5,14 +5,17 @@ namespace MamisSolidarias.WebAPI.Beneficiaries.Extensions;
 
 internal static class EntityFrameworkExtensions
 {
-    public static void SetUpEntityFramework(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment env)
+    public static void SetUpEntityFramework(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment env, ILoggerFactory loggerFactory)
     {
-
-        var connectionString = env.EnvironmentName.ToLower() switch
+        var logger = loggerFactory.CreateLogger("EntityFramework");
+        
+        var connectionString = configuration.GetConnectionString("BeneficiariesDb");
+        
+        if (connectionString is null)
         {
-            "production" => configuration.GetConnectionString("Production"),
-            _ => configuration.GetConnectionString("Development")
-        };
+            logger.LogError("Connection string not found");
+            throw new ArgumentNullException(connectionString,"Connection string not found");
+        }
         
         services.AddDbContext<BeneficiariesDbContext>(
             t => 

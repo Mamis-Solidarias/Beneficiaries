@@ -7,18 +7,21 @@ namespace MamisSolidarias.WebAPI.Beneficiaries.Extensions;
 
 internal static class GraphQlExtensions
 {
-    public static void SetUpGraphQl(this IServiceCollection services, IConfiguration configuration)
+    private sealed record GraphQlOptions(string GlobalSchemaName);
+
+    public static void SetUpGraphQl(this IServiceCollection services, IConfiguration configuration,
+        ILoggerFactory loggerFactory)
     {
-        services.AddSingleton(ConnectionMultiplexer.Connect($"{configuration["Redis:Host"]}:{configuration["Redis:Port"]}"));
-        
-        services.AddGraphQLServer()
+        var logger = loggerFactory.CreateLogger("GraphQL");
+
+        var builder = services.AddGraphQLServer()
             .AddBeneficiariesTypes()
-            .AddQueryType(t=> t.Name("Query"))
+            .AddQueryType(t => t.Name("Query"))
             .AddInstrumentation(t =>
             {
                 t.Scopes = ActivityScopes.All;
                 t.IncludeDocument = true;
-                t.RequestDetails = RequestDetails.All; 
+                t.RequestDetails = RequestDetails.All;
                 t.IncludeDataLoaderKeys = true;
             })
             .AddAuthorization()
@@ -26,13 +29,22 @@ internal static class GraphQlExtensions
             .AddFiltering()
             .AddSorting()
             .RegisterDbContext<BeneficiariesDbContext>()
-            .InitializeOnStartup()
-            .PublishSchemaDefinition(t =>
-            {
-                t.SetName($"{Services.Beneficiaries}gql");
-                t.PublishToRedis(configuration["GraphQl:GlobalSchemaName"],
-                    sp => sp.GetRequiredService<ConnectionMultiplexer>()
-                );
-            });
+            .InitializeOnStartup();
+        
+        var options = configuration.GetSection("GraphQl").Get<GraphQlOptions>();
+
+        if (options is null)
+        {
+            logger.LogWarning("GraphQl gateway options not found");
+            return;
+        }
+
+        builder.PublishSchemaDefinition(t =>
+        {
+            t.SetName($"{Services.Beneficiaries}gql");
+            t.PublishToRedis(options.GlobalSchemaName,
+                sp => sp.GetRequiredService<ConnectionMultiplexer>()
+            );
+        });
     }
 }
