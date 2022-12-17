@@ -1,4 +1,5 @@
 using Npgsql;
+using OpenTelemetry;
 using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
@@ -9,6 +10,7 @@ namespace MamisSolidarias.WebAPI.Beneficiaries.Extensions;
 internal static class OpenTelemetryExtensions
 {
     private static ILogger? _logger;
+
     public static void SetUpOpenTelemetry(this IServiceCollection services, IConfiguration configuration,
         ILoggingBuilder logging, ILoggerFactory loggerFactory)
     {
@@ -26,29 +28,29 @@ internal static class OpenTelemetryExtensions
             .AddService(options.Name, "MamisSolidarias", options.Version)
             .AddTelemetrySdk();
 
-        services.AddOpenTelemetryTracing(tracerProviderBuilder =>
-        {
-            tracerProviderBuilder
-                .SetResourceBuilder(resourceBuilder)
-                .AddNewRelicExporter(options.NewRelic)
-                .AddConsoleExporter(options.UseConsole)
-                .AddJaegerExporter(options.Jaeger)
-                .AddHttpClientInstrumentation(t => t.RecordException = true)
-                .AddAspNetCoreInstrumentation(t => t.RecordException = true)
-                .AddEntityFrameworkCoreInstrumentation(t => t.SetDbStatementForText = true)
-                .AddHotChocolateInstrumentation()
-                .AddNpgsql();
-        });
 
-        services.AddOpenTelemetryMetrics(meterProviderBuilder =>
-        {
-            meterProviderBuilder
-                .SetResourceBuilder(resourceBuilder)
-                .AddNewRelicExporter(options.NewRelic)
-                .AddRuntimeInstrumentation()
-                .AddAspNetCoreInstrumentation()
-                .AddHttpClientInstrumentation();
-        });
+        services.AddOpenTelemetry().WithTracing(tracerProviderBuilder =>
+            {
+                tracerProviderBuilder
+                    .SetResourceBuilder(resourceBuilder)
+                    .AddNewRelicExporter(options.NewRelic)
+                    .AddConsoleExporter(options.UseConsole)
+                    .AddJaegerExporter(options.Jaeger)
+                    .AddHttpClientInstrumentation(t => t.RecordException = true)
+                    .AddAspNetCoreInstrumentation(t => t.RecordException = true)
+                    .AddEntityFrameworkCoreInstrumentation(t => t.SetDbStatementForText = true)
+                    .AddHotChocolateInstrumentation()
+                    .AddNpgsql();
+            })
+            .WithMetrics(meterProviderBuilder =>
+            {
+                meterProviderBuilder
+                    .SetResourceBuilder(resourceBuilder)
+                    .AddNewRelicExporter(options.NewRelic)
+                    .AddRuntimeInstrumentation()
+                    .AddAspNetCoreInstrumentation()
+                    .AddHttpClientInstrumentation();
+            });
 
         // Configure the OpenTelemetry SDK for logs
         logging.ClearProviders();
@@ -64,8 +66,8 @@ internal static class OpenTelemetryExtensions
                 .AddNewRelicExporter(options.NewRelic);
         });
     }
-    
-        private static TracerProviderBuilder AddNewRelicExporter(this TracerProviderBuilder builder,
+
+    private static TracerProviderBuilder AddNewRelicExporter(this TracerProviderBuilder builder,
         NewRelicOptions? newRelicOptions)
     {
         if (string.IsNullOrWhiteSpace(newRelicOptions?.Url) || string.IsNullOrWhiteSpace(newRelicOptions.ApiKey))
@@ -73,7 +75,7 @@ internal static class OpenTelemetryExtensions
             _logger?.LogWarning("NewRelic trace options not found");
             return builder;
         }
-        
+
         return builder.AddOtlpExporter(t =>
         {
             t.Endpoint = new Uri(newRelicOptions.Url);
@@ -132,16 +134,16 @@ internal static class OpenTelemetryExtensions
             builder.AddConsoleExporter();
         return builder;
     }
-    
+
     private sealed class NewRelicOptions
     {
-        public string? ApiKey { get; init; } = null;
-        public string? Url { get; init; } = null;
+        public string? ApiKey { get; } = null;
+        public string? Url { get; } = null;
     }
 
     private sealed class JaegerOptions
     {
-        public string? Url { get; init; } = string.Empty;
+        public string? Url { get; } = string.Empty;
     }
 
     private sealed class OpenTelemetryOptions
