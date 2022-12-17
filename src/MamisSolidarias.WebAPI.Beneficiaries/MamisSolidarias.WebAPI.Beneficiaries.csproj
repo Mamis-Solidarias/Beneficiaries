@@ -24,11 +24,11 @@
         <PackageReference Include="HotChocolate.Types.Analyzers" Version="12.15.2" />
         <PackageReference Include="libphonenumber-csharp" Version="8.13.2" />
         <PackageReference Include="MamisSolidarias.Utils" Version="1.4.3" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.0">
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.1">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.1" />
         <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.0" />
         <PackageReference Include="Npgsql.OpenTelemetry" Version="7.0.1" />
         <PackageReference Include="OpenTelemetry" Version="1.4.0-rc.1" />
