@@ -31,9 +31,8 @@ internal static class ServiceRegistrar
         builder.Services.SetUpEntityFramework(builder.Configuration,builder.Environment,loggerFactory);
         builder.Services.AddRedis(builder.Configuration,loggerFactory);
         builder.Services.SetUpGraphQl(builder.Configuration,loggerFactory);
-
-        if (!builder.Environment.IsProduction())
-            builder.Services.AddSwaggerDoc(t=> t.Title = "Beneficiaries");
+        builder.Services.AddSwaggerDoc(t=> t.Title = "Beneficiaries");
+        builder.Services.AddMassTransit();
 
     }
 }
