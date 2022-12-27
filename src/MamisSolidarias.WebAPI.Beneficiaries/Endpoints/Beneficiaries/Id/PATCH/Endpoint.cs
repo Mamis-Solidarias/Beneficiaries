@@ -1,16 +1,20 @@
 using FastEndpoints;
 using MamisSolidarias.Infrastructure.Beneficiaries;
 using MamisSolidarias.Infrastructure.Beneficiaries.Models;
+using MamisSolidarias.Messages;
 using MamisSolidarias.WebAPI.Beneficiaries.Extensions;
+using MassTransit;
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.Endpoints.Beneficiaries.Id.PATCH;
 
 internal class Endpoint : Endpoint<Request, Response>
 {
     private readonly DbAccess _db;
+    private readonly IBus _bus;
 
-    public Endpoint(BeneficiariesDbContext dbContext, DbAccess? dbAccess = null)
+    public Endpoint(IBus bus,BeneficiariesDbContext dbContext, DbAccess? dbAccess = null)
     {
+        _bus = bus;
         _db = dbAccess ?? new DbAccess(dbContext);
     }
 
@@ -67,6 +71,8 @@ internal class Endpoint : Endpoint<Request, Response>
             b.LastName = req.LastName;
 
         await _db.SaveChanges(ct);
+        await _bus.Publish(new BeneficiaryUpdated(b.Id),ct);
+        
         await SendOkAsync(Map(b), ct);
     }
 
