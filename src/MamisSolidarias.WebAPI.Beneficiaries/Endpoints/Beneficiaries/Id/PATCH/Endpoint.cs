@@ -44,7 +44,7 @@ internal class Endpoint : Endpoint<Request, Response>
             b.Comments = req.Comments.Trim();
 
         if (!string.IsNullOrWhiteSpace(req.Dni))
-            b.Dni = req.Dni.Trim();
+            b.Dni = req.Dni.Replace(".","").Trim();
 
         if (req.Education is not null)
             b.Education = Map(req.Education);
