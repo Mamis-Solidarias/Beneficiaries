@@ -187,7 +187,7 @@ internal class FamiliesIdPatch
             var reqContact = request.Contacts.ToArray()[i];
             var respContact= response.Contacts.ToArray()[i];
 
-            respContact.Content.Should().BeEquivalentTo(reqContact.Content.Trim('+'));
+            respContact.Content.Should().BeEquivalentTo(reqContact.Content);
             respContact.Title.Should().BeEquivalentTo(reqContact.Title);
             respContact.IsPreferred.Should().Be(reqContact.IsPreferred);
             respContact.Type.Should().BeEquivalentTo(reqContact.Type);
