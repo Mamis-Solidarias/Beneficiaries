@@ -84,6 +84,7 @@ internal class RequestValidator : Validator<Request>
             .When(t => t.Birthday is not null);
 
         RuleFor(t => t.Dni)
+            .Matches(@"^\d{1,2}(\.\d{3}\.\d{3}|\d{6})$").WithMessage("El DNI no es valido")
             .MaximumLength(12).WithMessage("El DNI no puede tener mas de 12 caracteres")
             .When(t => t.Dni is not null)
             .Must(t => _dniPattern.IsMatch(t)).WithMessage("El DNI no es valido.")

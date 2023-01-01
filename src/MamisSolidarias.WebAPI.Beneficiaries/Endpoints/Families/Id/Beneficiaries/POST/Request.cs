@@ -51,8 +51,6 @@ public record BeneficiaryRequest(
 
 internal class BeneficiaryRequestValidator : Validator<BeneficiaryRequest>
 {
-    private readonly Regex _dniPattern = new(@"^[1-9]\d{0,2}(\.?\d{3}){2}$",
-        RegexOptions.Compiled | RegexOptions.Multiline);
     public BeneficiaryRequestValidator()
     {
         RuleFor(t => t.FirstName)
@@ -76,9 +74,9 @@ internal class BeneficiaryRequestValidator : Validator<BeneficiaryRequest>
             .NotEmpty().WithMessage("El cumpleaños no puede esar vacio");
 
         RuleFor(t => t.Dni)
+            .Matches(@"^\d{1,2}(\.\d{3}\.\d{3}|\d{6})$").WithMessage("El DNI no es valido")
             .NotEmpty().WithMessage("El DNI no puede estar vacio")
-            .MaximumLength(12).WithMessage("El DNI no puede tener mas de 12 caracteres")
-            .Must(t => _dniPattern.IsMatch(t)).WithMessage("El DNI no es valido.");
+            .MaximumLength(12).WithMessage("El DNI no puede tener mas de 12 caracteres");
 
         RuleFor(t => t.Comments)
             .MaximumLength(1000).WithMessage("Los comentarios no pueden tener mas de 1000 caracteres");
