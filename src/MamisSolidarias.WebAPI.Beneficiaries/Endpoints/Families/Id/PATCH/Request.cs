@@ -81,16 +81,8 @@ internal class ContactRequestValidator : Validator<ContactRequest>
             {
                 var phoneNumberValidator = PhoneNumberUtil.GetInstance();
                 var phoneNumber = phoneNumberValidator.Parse(t, "AR");
-                return phoneNumberValidator.IsValidNumber(phoneNumber) && PhoneNumberType.MOBILE == phoneNumberValidator.GetNumberType(phoneNumber);
+                return phoneNumberValidator.IsValidNumber(phoneNumber);
             }).WithMessage("El número de teléfono no es valido")
-            .When(t=> t.Type.Equals(ContactType.Whatsapp.ToString(),StringComparison.InvariantCultureIgnoreCase))
-            .Must(t =>
-            {
-                var phoneNumberValidator = PhoneNumberUtil.GetInstance();
-                var phoneNumber = phoneNumberValidator.Parse(t, "AR");
-                return phoneNumberValidator.IsValidNumber(phoneNumber) && PhoneNumberType.FIXED_LINE == phoneNumberValidator.GetNumberType(phoneNumber);
-            }).WithMessage("El número de teléfono fijo no es valido")
-            .When(t=>  t.Type.Equals(ContactType.Phone.ToString(),StringComparison.InvariantCultureIgnoreCase))
             .MaximumLength(100).WithMessage("El contenido no tener mas de 100 caracteres");
 
     }
