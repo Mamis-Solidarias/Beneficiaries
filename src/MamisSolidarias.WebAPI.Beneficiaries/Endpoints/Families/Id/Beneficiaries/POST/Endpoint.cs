@@ -33,8 +33,8 @@ internal class Endpoint : Endpoint<Request,Response>
             var people = req.Beneficiaries
                 .Select(t => new Beneficiary
                 {
-                    FirstName = t.FirstName.Trim(),
-                    LastName = t.LastName.Trim(),
+                    FirstName = t.FirstName.Trim().Capitalize(),
+                    LastName = t.LastName.Trim().Capitalize(),
                     Type = Enum.Parse<BeneficiaryType>(t.Type),
                     Gender = Enum.Parse<BeneficiaryGender>(t.Gender),
                     Birthday = t.Birthday,

@@ -65,10 +65,10 @@ internal class Endpoint : Endpoint<Request, Response>
             b.Type = Enum.Parse<BeneficiaryType>(req.Type);
 
         if (!string.IsNullOrWhiteSpace(req.FirstName))
-            b.FirstName = req.FirstName;
+            b.FirstName = req.FirstName.Trim().Capitalize();
 
         if (!string.IsNullOrWhiteSpace(req.LastName))
-            b.LastName = req.LastName;
+            b.LastName = req.LastName.Trim().Capitalize();
 
         await _db.SaveChanges(ct);
         await _bus.Publish(new BeneficiaryUpdated(b.Id),ct);
