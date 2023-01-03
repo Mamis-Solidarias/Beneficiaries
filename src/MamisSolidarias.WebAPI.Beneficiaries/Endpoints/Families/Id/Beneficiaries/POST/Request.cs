@@ -1,4 +1,3 @@
-using System.Text.RegularExpressions;
 using FastEndpoints;
 using FluentValidation;
 using MamisSolidarias.Infrastructure.Beneficiaries.Models;
