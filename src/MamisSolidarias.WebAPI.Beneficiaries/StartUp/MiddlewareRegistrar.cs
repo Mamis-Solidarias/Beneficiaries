@@ -1,6 +1,5 @@
 using FastEndpoints;
 using FastEndpoints.Swagger;
-using MamisSolidarias.WebAPI.Beneficiaries.CustomJsonConverters;
 using MamisSolidarias.WebAPI.Beneficiaries.Extensions;
 
 namespace MamisSolidarias.WebAPI.Beneficiaries.StartUp;
@@ -12,8 +11,7 @@ internal static class MiddlewareRegistrar
         app.UseDefaultExceptionHandler();
         app.UseAuthentication();
         app.UseAuthorization();
-        app.UseFastEndpoints(t => t.Serializer.Options.Converters.Add(new DateOnlyJsonConverter()));
-        // app.UseFastEndpoints();
+        app.UseFastEndpoints();
         app.MapGraphQL();
         app.RunMigrations();
 

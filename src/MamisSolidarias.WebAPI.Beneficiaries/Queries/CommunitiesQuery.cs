@@ -1,4 +1,5 @@
 using HotChocolate.AspNetCore.Authorization;
+using HotChocolate.Types;
 using MamisSolidarias.Infrastructure.Beneficiaries;
 using MamisSolidarias.Infrastructure.Beneficiaries.Models;
 
