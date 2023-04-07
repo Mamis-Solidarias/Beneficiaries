@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
         <Authors>MamisSolidarias</Authors>
         <PackageProjectUrl>https://github.com/Mamis-Solidarias/Beneficiaries</PackageProjectUrl>
-        <PackageVersion>1.1.6</PackageVersion>
+        <PackageVersion>1.1.7</PackageVersion>
         <RepositoryUrl>https://github.com/Mamis-Solidarias/Beneficiaries</RepositoryUrl>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <LangVersion>default</LangVersion>
