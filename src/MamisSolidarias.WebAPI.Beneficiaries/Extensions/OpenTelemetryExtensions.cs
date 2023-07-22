@@ -134,16 +134,9 @@ internal static class OpenTelemetryExtensions
         return builder;
     }
 
-    private sealed class NewRelicOptions
-    {
-        public string? ApiKey { get; } = null;
-        public string? Url { get; } = null;
-    }
+    private sealed record NewRelicOptions(string? Url, string? ApiKey);
 
-    private sealed class JaegerOptions
-    {
-        public string? Url { get; } = string.Empty;
-    }
+    private sealed record JaegerOptions(string? Url);
 
     private sealed class OpenTelemetryOptions
     {
