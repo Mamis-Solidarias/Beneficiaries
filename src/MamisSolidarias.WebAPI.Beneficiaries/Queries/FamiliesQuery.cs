@@ -14,7 +14,8 @@ internal sealed class FamiliesQuery
     [UseFiltering]
     [UseSorting]
     public IQueryable<Family> GetFamilies(BeneficiariesDbContext dbContext) =>
-        dbContext.Families;
+        dbContext.Families
+            .OrderBy(t=> t.Id);
     
     [UseFirstOrDefault]
     [Authorize(Policy = "CanRead")]
@@ -29,7 +30,9 @@ internal sealed class FamiliesQuery
     [UseSorting]
     public IQueryable<Family?> GetFilteredFamilies(BeneficiariesDbContext dbContext, FamiliesFilter filter)
     {
-        var query = dbContext.Families.AsQueryable();
+        var query = dbContext.Families
+            .OrderBy(t=> t.Id)
+            .AsQueryable();
 
         if (filter.CommunityId is not null)
             query = query.Where(t => t.CommunityId == filter.CommunityId);
