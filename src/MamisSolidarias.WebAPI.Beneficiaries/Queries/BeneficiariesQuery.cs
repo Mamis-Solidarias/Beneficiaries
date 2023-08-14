@@ -16,7 +16,8 @@ internal sealed class BeneficiariesQuery
     [UseFiltering]
     [UseSorting]
     public IQueryable<Beneficiary> GetBeneficiaries(BeneficiariesDbContext dbContext) =>
-        dbContext.Beneficiaries;
+        dbContext.Beneficiaries
+            .OrderBy(t=> t.Id);
     
     [UseFirstOrDefault]
     [Authorize(Policy = "CanRead")]
@@ -31,7 +32,9 @@ internal sealed class BeneficiariesQuery
     [UseSorting]
     public IQueryable<Beneficiary> GetFilteredBeneficiaries(BeneficiariesDbContext dbContext,FilterParams filter)
     {
-        var query = dbContext.Beneficiaries.AsQueryable();
+        var query = dbContext.Beneficiaries
+            .OrderBy(t=> t.Id)
+            .AsQueryable();
 
         if (filter.AgeStart is not null)
         {

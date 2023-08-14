@@ -14,7 +14,8 @@ internal sealed class CommunitiesQuery
     [UseFiltering]
     [UseSorting]
     public IQueryable<Community> GetCommunities(BeneficiariesDbContext dbContext) =>
-        dbContext.Communities;
+        dbContext.Communities
+            .OrderBy(t=> t.Id);
 
     [UseFirstOrDefault]
     [Authorize(Policy = "CanRead")]
