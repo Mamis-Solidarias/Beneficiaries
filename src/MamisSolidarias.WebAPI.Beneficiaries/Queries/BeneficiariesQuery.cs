@@ -11,7 +11,7 @@ internal sealed class BeneficiariesQuery
 {
     
     [Authorize(Policy = "CanRead")]
-    [UsePaging]
+    [UsePaging(IncludeTotalCount = true, MaxPageSize = 500)]
     [UseProjection]
     [UseFiltering]
     [UseSorting]
@@ -27,7 +27,7 @@ internal sealed class BeneficiariesQuery
 
 
     [Authorize(Policy = "CanRead")]
-    [UsePaging]
+    [UsePaging(IncludeTotalCount = true, MaxPageSize = 500)]
     [UseProjection]
     [UseSorting]
     public IQueryable<Beneficiary> GetFilteredBeneficiaries(BeneficiariesDbContext dbContext,FilterParams filter)

@@ -9,7 +9,7 @@ namespace MamisSolidarias.WebAPI.Beneficiaries.Queries;
 internal sealed class CommunitiesQuery
 {
     [Authorize(Policy = "CanRead")]
-    [UsePaging]
+    [UsePaging(IncludeTotalCount = true, MaxPageSize = 500)]
     [UseProjection]
     [UseFiltering]
     [UseSorting]
