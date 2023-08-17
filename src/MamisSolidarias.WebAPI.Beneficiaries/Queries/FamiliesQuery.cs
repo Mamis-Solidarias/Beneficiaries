@@ -9,7 +9,7 @@ namespace MamisSolidarias.WebAPI.Beneficiaries.Queries;
 internal sealed class FamiliesQuery
 {
     [Authorize(Policy = "CanRead")]
-    [UsePaging]
+    [UsePaging(IncludeTotalCount = true, MaxPageSize = 500)]
     [UseProjection]
     [UseFiltering]
     [UseSorting]
@@ -24,7 +24,7 @@ internal sealed class FamiliesQuery
         dbContext.Families.Where(t=> t.Id == id);
 
     [Authorize(Policy = "CanRead")]
-    [UsePaging]
+    [UsePaging(IncludeTotalCount = true, MaxPageSize = 500)]
     [UseProjection]
     [UseFiltering]
     [UseSorting]
